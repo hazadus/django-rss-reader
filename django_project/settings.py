@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Local apps
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -119,4 +121,5 @@ STATIC_URL = "static/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+AUTH_USER_MODEL = "users.CustomUser"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

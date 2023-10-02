@@ -8,6 +8,7 @@ idna==3.4
 isort==5.12.0
 marshmallow==3.20.1
 packaging==23.2
+Pillow==10.0.1
 python-dotenv==1.0.0
 requests==2.31.0
 sgmllib3k==1.0.0
