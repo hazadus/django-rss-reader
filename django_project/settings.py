@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 
 from environs import Env
+import coloredlogs, logging
 
 env = Env()
 env.read_env()
@@ -35,12 +36,16 @@ LOGGING = {
         "basic": {
             "format": "%(asctime)s | %(levelname)s | %(name)s | %(message)s",
             "datefmt": "%Y-%m-%d %H:%M:%S",
-        }
+        },
+        "colored": {
+            "()": "coloredlogs.ColoredFormatter",
+            "format": "%(asctime)s %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+        },
     },
     "handlers": {
         "console_dev": {
             "class": "logging.StreamHandler",
-            "formatter": "basic",
+            "formatter": "colored",
             "filters": ["require_debug"],
         },
         "django_file": {
