@@ -27,6 +27,47 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG", False)
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "filters": {"require_debug": {"()": "django.utils.log.RequireDebugTrue"}},
+    "formatters": {
+        "basic": {
+            "format": "%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        }
+    },
+    "handlers": {
+        "console_dev": {
+            "class": "logging.StreamHandler",
+            "formatter": "basic",
+            "filters": ["require_debug"],
+        },
+        "django_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "django_debug.log",
+            "maxBytes": 1024 * 1024 * 10,
+            "backupCount": 10,
+            "formatter": "basic",
+        },
+        "server_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "server_debug.log",
+            "maxBytes": 1024 * 1024 * 10,
+            "backupCount": 10,
+            "formatter": "basic",
+        },
+    },
+    "loggers": {
+        "": {"handlers": ["console_dev", "django_file"], "level": "DEBUG"},
+        "django.server": {
+            "handlers": ["console_dev", "server_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
 ALLOWED_HOSTS = []
 
 
@@ -109,7 +150,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_TZ = True
 
