@@ -8,6 +8,7 @@
 - [environs](https://pypi.org/project/environs/): environs is a Python library for parsing environment variables. 
 - [coloredlogs](https://coloredlogs.readthedocs.io/en/latest/index.html): The coloredlogs package enables colored terminal output for Python’s logging module.
 - [dateutil](https://pypi.org/project/python-dateutil/): he dateutil module provides powerful extensions to the standard datetime module, available in Python.
+- [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/) – best debugging tool for Django.
 
 ## References
 
