@@ -42,6 +42,7 @@ FEED_URLS = [
     "http://stopgame.ru/rss/rss_news.xml",
     "https://dtf.ru/rss/all",
     "http://feeds.howtogeek.com/HowToGeek",
+    "http://disgustingmen.com/feed/",
 ]
 
 

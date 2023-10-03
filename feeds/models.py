@@ -171,7 +171,7 @@ class Entry(models.Model):
     updated = models.DateTimeField(verbose_name="updated at", auto_now=True)
 
     class Meta:
-        ordering = ["-created"]
+        ordering = ["-pub_date"]
         verbose_name = "entry"
         verbose_name_plural = "entries"
 

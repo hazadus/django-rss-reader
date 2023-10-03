@@ -1,13 +1,15 @@
-from io import BytesIO
 import logging
+from datetime import datetime
+from io import BytesIO
 
 import feedparser
 import requests
+from dateutil import parser as date_parser
 from feedparser import FeedParserDict
 
 from users.models import CustomUser
 
-from .models import Feed, Folder
+from .models import Entry, Feed, Folder, Tag
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +25,9 @@ def get_parsed_feed_from_url(url: str) -> FeedParserDict | None:
     try:
         response = requests.get(url, timeout=5.0)
     except requests.exceptions.ConnectTimeout:
+        logger.warning("Timeout when connecting to %s", url)
+        return None
+    except requests.exceptions.ReadTimeout:
         logger.warning("Timeout when reading RSS %s", url)
         return None
     except requests.exceptions.ConnectionError:
@@ -109,3 +114,136 @@ def feed_subscribe(
             logger.warning("Title and url not found in %s", feed_url)
 
     return feed_instance
+
+
+def tag_get_or_create(title: str) -> Tag:
+    """
+    Get or create Tag with capitalized `title` (trimming spaces and removing commas).
+
+    :param str title: title of the tag.
+    :return: Tag instance.
+    """
+    title = title.replace(",", "").lstrip().rstrip().capitalize()
+    queryset = Tag.objects.filter(title=title)
+    if queryset.exists():
+        return queryset.first()
+    else:
+        return Tag.objects.create(title=title)
+
+
+def entry_exists(feed: Feed, url: str) -> bool:
+    return Entry.objects.filter(feed=feed, url=url).exists()
+
+
+def entry_create(
+    feed: Feed,
+    title: str,
+    url: str,
+    author: str | None,
+    image_url: str | None,
+    description: str | None,
+    summary: str | None,
+    content: str | None,
+    pub_date: datetime,
+    upd_date: datetime,
+) -> Entry | None:
+    """
+    Create and return Entry instance using passed parameters.
+
+    :return: created Entry instance.
+    """
+    return Entry.objects.create(
+        feed=feed,
+        title=title,
+        url=url,
+        author=author,
+        image_url=image_url,
+        description=description,
+        summary=summary,
+        content=content,
+        pub_date=pub_date,
+        upd_date=upd_date,
+    )
+
+
+def entry_create_from_data_if_not_exists(feed: Feed, entry_data: dict) -> Entry | None:
+    """
+    Create Entry instance from data parsed by `feedparser`. Add all tags (if present) for the Entry.
+    Tags will be created, if necessary.
+
+    :return: created `Entry` or `None`
+    """
+    entry_instance = None
+    title = entry_data.get("title")
+    link = entry_data.get("link")
+    if title and link and not entry_exists(feed=feed, url=link):
+        logger.info(" -- Adding new Entry: %s", title)
+        pub_date = (
+            date_parser.parse(entry_data.get("published"))
+            if entry_data.get("published")
+            else None
+        )
+        upd_date = (
+            date_parser.parse(entry_data.get("updated"))
+            if entry_data.get("updated")
+            else None
+        )
+        entry_instance = entry_create(
+            feed=feed,
+            title=title,
+            url=link,
+            author=entry_data.get("author", None),
+            image_url=None,
+            description=entry_data.get("description", None),
+            summary=entry_data.get("summary", None),
+            content=entry_data.get("content", None),
+            pub_date=pub_date,
+            upd_date=upd_date,
+        )
+
+        # Add tags to entry instance
+        if tags := entry_data.get("tags"):
+            for tag_item in tags:
+                if term := tag_item["term"]:
+                    entry_instance.tags.add(tag_get_or_create(term))
+
+    return entry_instance
+
+
+def feed_update(feed: Feed):
+    """
+    Fetch entries for the feed using `feedparser`, then create new Entry instance for each fetched entry
+    if there's no entry with the same link already.
+
+    :param Feed feed: feed to update.
+    """
+    logger.info("Updating feed: %s", feed)
+    feed_content = get_parsed_feed_from_url(feed.url)
+    entries = feed_content.entries if feed_content else None
+
+    if not entries:
+        logger.warning("No 'entries' fetched from %s", feed.url)
+        return
+
+    logger.info(" - Number of entries: %s", len(entries))
+
+    # For each entry in feed_content.entries, try to get Entry from the database by `url`
+    # If not exists, create one.
+    new_entry_count = 0
+    for entry_data in entries:
+        if entry_create_from_data_if_not_exists(feed=feed, entry_data=entry_data):
+            new_entry_count += 1
+
+    logger.info(" -- Created %s new Entries in %s", new_entry_count, feed.title)
+
+
+def update_all_feeds():
+    """
+    Fetch new entries for all feeds in the database.
+    """
+    feeds = Feed.objects.all()
+    logger.info("Feeds to update: %s", feeds.count())
+
+    # Call feed_update() for each feed
+    for feed in feeds:
+        feed_update(feed)
