@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Tag, Folder, Feed, Entry
+from .models import Entry, Feed, Folder, Tag
 
 
 @admin.register(Tag)

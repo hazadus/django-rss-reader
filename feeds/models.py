@@ -67,6 +67,10 @@ class Feed(models.Model):
         verbose_name="Feed URL",
         max_length=1024,
     )
+    site_url = models.URLField(
+        verbose_name="Site URL",
+        max_length=1024,
+    )
     image_url = models.URLField(
         verbose_name="Feed image URL",
         max_length=1024,
