@@ -56,6 +56,13 @@
     <b>Summary:</b>
     {{ entry.summary|safe }}
   </div>
+
+  <div>
+    {% if entry.image_url %}
+      <img src="{{ entry.image_url }}" alt="{{ entry.title }}" style="max-width: 500px;">
+    {% endif %}
+  </div>
+
   <div>
     <b>Content:</b>
     {{ entry.content|safe }}
