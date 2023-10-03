@@ -10,7 +10,15 @@
   </h1>
 
   <p>
-    <a href="{% url 'feeds:entry_list_all' %}">All entries</a>
+    <a href="{% url 'feeds:entry_list' 'all' %}">All entries</a>
+    &middot;
+    <a href="{% url 'feeds:entry_list' 'today' %}">Today</a>
+    &middot;
+    <a href="{% url 'feeds:entry_list' 'unread' %}">Unread</a>
+    &middot;
+    <a href="{% url 'feeds:entry_list' 'read' %}">Read</a>
+    &middot;
+    <a href="{% url 'feeds:entry_list' 'favorites' %}">Favorites</a>
     &middot;
     <a href="{{ entry.url }}">Read full article</a>
   </p>
@@ -37,14 +45,14 @@
     <ul>
       <li>
         {% if previous_entry %}
-          Previous: <a href="{% url 'feeds:entry_detail' previous_entry.pk %}">{{ previous_entry }}</a>
+          Previous: <a href="{% url 'feeds:entry_detail' view previous_entry.pk %}">{{ previous_entry }}</a>
         {% else %}
           No previous entry
         {% endif %}
       </li>
       <li>
         {% if next_entry %}
-          Next: <a href="{% url 'feeds:entry_detail' next_entry.pk %}">{{ next_entry }}</a>
+          Next: <a href="{% url 'feeds:entry_detail' view next_entry.pk %}">{{ next_entry }}</a>
         {% else %}
           No next entry
         {% endif %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Entries list</title>
+</head>
+<body>
+  <h1>Entries list: {{ view }} ({{ entry_count }})</h1>
+
+    <p>
+    <a href="{% url 'feeds:entry_list' 'all' %}">All entries</a>
+    &middot;
+    <a href="{% url 'feeds:entry_list' 'today' %}">Today</a>
+    &middot;
+    <a href="{% url 'feeds:entry_list' 'unread' %}">Unread</a>
+    &middot;
+    <a href="{% url 'feeds:entry_list' 'read' %}">Read</a>
+    &middot;
+    <a href="{% url 'feeds:entry_list' 'favorites' %}">Favorites</a>
+  </p>
+
+  <ul>
+    {% for entry in entries %}
+      <li>
+        {% if entry.is_read %}✅{% else %}⚡️{% endif %}
+        {% if entry.is_favorite %}❤️{% endif %}
+        <a href="{% url 'feeds:entry_detail' view entry.pk %}">
+          {{ entry }}
+        </a>
+        &middot;
+        in {{ entry.feed.title }}
+        &middot;
+        {{ entry.pub_date|timesince }} ago
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

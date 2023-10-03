@@ -1,9 +1,11 @@
 from django.urls import path
 
-from feeds.views import AllEntriesListView, EntryDetailView
+from feeds.views import EntriesListView, EntryDetailView
 
 app_name = "feeds"
 urlpatterns = [
-    path("entries/all/", AllEntriesListView.as_view(), name="entry_list_all"),
-    path("entries/<int:pk>/", EntryDetailView.as_view(), name="entry_detail"),
+    path("entries/<str:view>/", EntriesListView.as_view(), name="entry_list"),
+    path(
+        "entries/<str:view>/<int:pk>/", EntryDetailView.as_view(), name="entry_detail"
+    ),
 ]
