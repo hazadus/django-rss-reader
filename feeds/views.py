@@ -29,9 +29,9 @@ class EntriesListView(ListView):
         view = self.kwargs.get("view", None)
 
         if view in VIEW_QUERYSETS.keys():
-            return VIEW_QUERYSETS.get(view)
+            queryset = VIEW_QUERYSETS.get(view)
 
-        return queryset
+        return queryset.select_related("feed").prefetch_related("tags")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
