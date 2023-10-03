@@ -1,8 +1,9 @@
 from datetime import datetime
 
+from django.db.models import Count
 from django.views.generic import DetailView, ListView
 
-from feeds.models import Entry
+from feeds.models import Entry, Tag
 from feeds.selectors import get_next_entry, get_previous_entry
 
 VIEW_QUERYSETS = {
@@ -70,3 +71,14 @@ class EntryDetailView(DetailView):
             entry=entry, queryset=VIEW_QUERYSETS[view]
         )
         return context
+
+
+class TagListView(ListView):
+    model = Tag
+    queryset = (
+        Tag.objects.all()
+        .annotate(num_entries=Count("entries"))
+        .order_by("-num_entries")
+    )
+    template_name = "feeds/tag_list.html"
+    context_object_name = "tags"
