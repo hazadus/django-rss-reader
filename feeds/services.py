@@ -166,6 +166,23 @@ def entry_create(
     )
 
 
+def get_content_from_entry_data(entry_data: dict) -> str | None:
+    """
+    Retrieve `text/html` content from entry data parsed by `feedparser` from feed url.
+
+    :return: text/html content, if found, else None.
+    """
+    content = None
+
+    if content_list := entry_data.get("content", None):
+        for item in content_list:
+            if item.get("type", None) == "text/html":
+                content = item.get("value", None)
+                break
+
+    return content
+
+
 def entry_create_from_data_if_not_exists(feed: Feed, entry_data: dict) -> Entry | None:
     """
     Create Entry instance from data parsed by `feedparser`. Add all tags (if present) for the Entry.
@@ -196,7 +213,7 @@ def entry_create_from_data_if_not_exists(feed: Feed, entry_data: dict) -> Entry 
             image_url=None,
             description=entry_data.get("description", None),
             summary=entry_data.get("summary", None),
-            content=entry_data.get("content", None),
+            content=get_content_from_entry_data(entry_data=entry_data),
             pub_date=pub_date,
             upd_date=upd_date,
         )

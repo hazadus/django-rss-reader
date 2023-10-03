@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All entries</title>
+</head>
+<body>
+  <h1>All entries</h1>
+  <ul>
+    {% for entry in entries %}
+      <li>
+        {% if entry.is_read %}✅{% else %}⚡️{% endif %}
+        <a href="{% url 'feeds:entry_detail' entry.pk %}">
+          {{ entry }}
+        </a>
+        &middot;
+        in {{ entry.feed.title }}
+        &middot;
+        {{ entry.pub_date|timesince }} ago
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
