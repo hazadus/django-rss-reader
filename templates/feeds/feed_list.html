@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Feed list</title>
-</head>
-<body>
-  <h1>Feed List</h1>
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="text-3xl">Feed List</h1>
 
   {% include "feeds/menu.html" %}
 
@@ -18,5 +14,4 @@
       </li>
     {% endfor %}
   </ul>
-</body>
-</html>
+{% endblock content %}
