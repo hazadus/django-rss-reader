@@ -12,7 +12,9 @@
   <ul>
     {% for feed in feeds %}
       <li>
-        {{ feed.title }} ({{ feed.entries.count }})
+        <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ feed.pk }}">
+          {{ feed.title }} ({{ feed.entries.count }})
+        </a>
       </li>
     {% endfor %}
   </ul>

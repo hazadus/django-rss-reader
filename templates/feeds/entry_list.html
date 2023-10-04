@@ -14,7 +14,7 @@
       <li>
         {% if entry.is_read %}✅{% else %}⚡️{% endif %}
         {% if entry.is_favorite %}❤️{% endif %}
-        <a href="{% url 'feeds:entry_detail' mode entry.pk %}">
+        <a href="{% url 'feeds:entry_detail' mode entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
           {{ entry }}
         </a>
         &middot;

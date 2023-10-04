@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db.models import Count
 from django.views.generic import DetailView, ListView
 
-from feeds.models import Entry, Tag, Feed
+from feeds.models import Entry, Feed, Tag
 from feeds.selectors import get_next_entry, get_previous_entry
 
 MODE_QUERYSETS = {
@@ -28,9 +28,13 @@ class EntriesListView(ListView):
     def get_queryset(self):
         queryset = Entry.objects.all()
         mode = self.kwargs.get("mode", None)
+        in_feed = self.request.GET.get("in_feed", None)
 
         if mode in MODE_QUERYSETS.keys():
             queryset = MODE_QUERYSETS.get(mode)
+
+        if in_feed:
+            queryset = queryset.filter(feed=in_feed)
 
         return queryset.select_related("feed").prefetch_related("tags")
 
@@ -38,6 +42,7 @@ class EntriesListView(ListView):
         context = super().get_context_data(**kwargs)
         context["mode"] = self.kwargs.get("mode", "all")
         context["entry_count"] = self.get_queryset().count()
+        context["in_feed"] = self.request.GET.get("in_feed", None)
         return context
 
 
@@ -59,17 +64,22 @@ class EntryDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         entry = self.get_object()
         mode = self.kwargs.get("mode", "all")
+        in_feed = self.request.GET.get("in_feed", None)
 
         if mode not in MODE_QUERYSETS.keys():
             mode = "all"
 
+        entry_queryset = MODE_QUERYSETS[mode]
+
+        if in_feed:
+            entry_queryset = entry_queryset.filter(feed=in_feed)
+            context["in_feed"] = in_feed
+
         context["mode"] = mode
         context["previous_entry"] = get_previous_entry(
-            entry=entry, queryset=MODE_QUERYSETS[mode]
+            entry=entry, queryset=entry_queryset
         )
-        context["next_entry"] = get_next_entry(
-            entry=entry, queryset=MODE_QUERYSETS[mode]
-        )
+        context["next_entry"] = get_next_entry(entry=entry, queryset=entry_queryset)
         return context
 
 
