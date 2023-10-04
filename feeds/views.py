@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db.models import Count
 from django.views.generic import DetailView, ListView
 
-from feeds.models import Entry, Tag
+from feeds.models import Entry, Tag, Feed
 from feeds.selectors import get_next_entry, get_previous_entry
 
 VIEW_QUERYSETS = {
@@ -82,3 +82,10 @@ class TagListView(ListView):
     )
     template_name = "feeds/tag_list.html"
     context_object_name = "tags"
+
+
+class FeedListView(ListView):
+    model = Feed
+    queryset = Feed.objects.all().prefetch_related("entries")
+    template_name = "feeds/feed_list.html"
+    context_object_name = "feeds"

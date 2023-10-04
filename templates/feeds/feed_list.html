@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feed list</title>
+</head>
+<body>
+  <h1>Feed List</h1>
+
+  {% include "feeds/menu.html" %}
+
+  <ul>
+    {% for feed in feeds %}
+      <li>
+        {{ feed.title }} ({{ feed.entries.count }})
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
