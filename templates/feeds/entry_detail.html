@@ -9,19 +9,7 @@
     {{ entry.title }}
   </h1>
 
-  <p>
-    <a href="{% url 'feeds:entry_list' 'all' %}">All entries</a>
-    &middot;
-    <a href="{% url 'feeds:entry_list' 'today' %}">Today</a>
-    &middot;
-    <a href="{% url 'feeds:entry_list' 'unread' %}">Unread</a>
-    &middot;
-    <a href="{% url 'feeds:entry_list' 'read' %}">Read</a>
-    &middot;
-    <a href="{% url 'feeds:entry_list' 'favorites' %}">Favorites</a>
-    &middot;
-    <a href="{{ entry.url }}">Read full article</a>
-  </p>
+  {% include "feeds/menu.html" %}
 
   <p>
     {% if entry.author %}
@@ -30,6 +18,8 @@
     in <a href="{{ entry.feed.site_url }}">{{ entry.feed.title }}</a>
     &middot;
     {{ entry.pub_date|timesince }} ago
+    &middot;
+    <a href="{{ entry.url }}">Read full article</a>
   </p>
 
   {% if entry.tags.count %}
