@@ -6,7 +6,7 @@ from django.views.generic import DetailView, ListView
 from feeds.models import Entry, Tag, Feed
 from feeds.selectors import get_next_entry, get_previous_entry
 
-VIEW_QUERYSETS = {
+MODE_QUERYSETS = {
     "all": Entry.objects.all(),
     "today": Entry.objects.filter(
         pub_date__day=datetime.today().day,
@@ -27,16 +27,16 @@ class EntriesListView(ListView):
 
     def get_queryset(self):
         queryset = Entry.objects.all()
-        view = self.kwargs.get("view", None)
+        mode = self.kwargs.get("mode", None)
 
-        if view in VIEW_QUERYSETS.keys():
-            queryset = VIEW_QUERYSETS.get(view)
+        if mode in MODE_QUERYSETS.keys():
+            queryset = MODE_QUERYSETS.get(mode)
 
         return queryset.select_related("feed").prefetch_related("tags")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["view"] = self.kwargs.get("view", "all")
+        context["mode"] = self.kwargs.get("mode", "all")
         context["entry_count"] = self.get_queryset().count()
         return context
 
@@ -58,17 +58,17 @@ class EntryDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         entry = self.get_object()
-        view = self.kwargs.get("view", "all")
+        mode = self.kwargs.get("mode", "all")
 
-        if view not in VIEW_QUERYSETS.keys():
-            view = "all"
+        if mode not in MODE_QUERYSETS.keys():
+            mode = "all"
 
-        context["view"] = view
+        context["mode"] = mode
         context["previous_entry"] = get_previous_entry(
-            entry=entry, queryset=VIEW_QUERYSETS[view]
+            entry=entry, queryset=MODE_QUERYSETS[mode]
         )
         context["next_entry"] = get_next_entry(
-            entry=entry, queryset=VIEW_QUERYSETS[view]
+            entry=entry, queryset=MODE_QUERYSETS[mode]
         )
         return context
 

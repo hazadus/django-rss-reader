@@ -5,7 +5,7 @@
   <title>Entries list</title>
 </head>
 <body>
-  <h1>Entries list: {{ view }} ({{ entry_count }})</h1>
+  <h1>Entries list: {{ mode }} ({{ entry_count }})</h1>
 
   {% include "feeds/menu.html" %}
 
@@ -14,7 +14,7 @@
       <li>
         {% if entry.is_read %}✅{% else %}⚡️{% endif %}
         {% if entry.is_favorite %}❤️{% endif %}
-        <a href="{% url 'feeds:entry_detail' view entry.pk %}">
+        <a href="{% url 'feeds:entry_detail' mode entry.pk %}">
           {{ entry }}
         </a>
         &middot;
