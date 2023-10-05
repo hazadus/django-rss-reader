@@ -1,24 +1,32 @@
 <!-- Entries column header (fixed) -->
-<div class="h-16 p-2 flex flex-col flex-shrink-0 bg-gray-300 shadow-sm justify-center">
-  <!-- Feed title -->
-  <div class="block text-sm font-semibold text-gray-800 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-  {% if entries %}
-    {% if in_feed and feed %}
-      {{ feed }}
-    {% elif mode %}
-      {{ mode|capfirst }}
-    {% endif %}
-  {% endif %}
+<div class="h-16 p-2 flex flex-shrink-0 bg-gray-300 shadow-sm items-center">
+  <!-- Buttons (mobile only) -->
+  <div class="flex md:hidden mx-2 h-[24px]">
+    <a href="{% url 'feeds:feed_list' %}">
+      {% include "feeds/includes/icons/icon_home.html" with size="24" color="#6b7280" %}
+    </a>
   </div>
-  <!-- Number of entries in the feed -->
-  <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-  {% if entries %}
-    {% if in_feed and feed %}
-      {{ entry_count }} entries
-    {% elif mode %}
-      {{ entries.count }} entries
+  <!-- Feed title -->
+  <div class="flex flex-col flex-1 justify-center">
+    <div class="block text-sm font-semibold text-gray-800 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+    {% if entries %}
+      {% if in_feed and feed %}
+        {{ feed }}
+      {% elif mode %}
+        {{ mode|capfirst }}
+      {% endif %}
     {% endif %}
-  {% endif %}
+    </div>
+    <!-- Number of entries in the feed -->
+    <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+    {% if entries %}
+      {% if in_feed and feed %}
+        {{ entry_count }} entries
+      {% elif mode %}
+        {{ entries.count }} entries
+      {% endif %}
+    {% endif %}
+    </div>
   </div>
 </div>
 

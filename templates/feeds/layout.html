@@ -2,12 +2,12 @@
 
 {% block content %}
   <!-- First column: feeds, folders, tags -->
-  <div class="{% if entry or in_feed %}hidden lg:flex{% else %}flex{% endif %} flex-col w-full lg:w-32 p-4 lg:p-0 bg-gray-300 rounded-tl-lg rounded-bl-lg">
+  <div class="{% if mode or in_feed or entry %}hidden lg:flex{% else %}flex{% endif %} flex-col w-full lg:w-32 p-4 lg:p-0 bg-gray-300 rounded-tl-lg rounded-bl-lg">
     {% include "feeds/includes/feed_list.html" %}
   </div>
 
   <!-- Second column: entries -->
-  <div class="{% if entry %}hidden md:flex{% else %}{% if in_feed %}flex{% else %}hidden md:flex{% endif %}{% endif %} flex-col w-full md:w-96 bg-white">
+  <div class="{% if entry %}hidden md:flex{% else %}{% if in_feed or mode %}flex{% else %}hidden md:flex{% endif %}{% endif %} flex-col w-full md:w-96 bg-white">
     {% include "feeds/includes/entry_list.html" %}
   </div>
 

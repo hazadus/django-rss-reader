@@ -1344,6 +1344,11 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -1386,6 +1391,10 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-\[24px\] {
+  height: 24px;
 }
 
 .max-h-24 {
@@ -1549,6 +1558,10 @@ video {
 
 .pl-2 {
   padding-left: 0.5rem;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .text-2xl {
@@ -2136,6 +2149,10 @@ video {
 @media (min-width: 768px) {
   .md\:flex {
     display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
   }
 
   .md\:w-96 {
