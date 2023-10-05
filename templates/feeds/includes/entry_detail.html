@@ -26,6 +26,14 @@
         {% include "feeds/includes/icons/icon_share.html" with size="24" color="#6b7280" %}
       </a>
     </div>
+    <!-- "Edit in Admin" - gear with pencil -->
+    {% if entry %}
+      <div class="mx-2 h-[24px]">
+        <a href="/admin/feeds/entry/{{ entry.pk }}/change/" target="_blank">
+          {% include "feeds/includes/icons/icon_gear_edit.html" with size="24" color="#6b7280" %}
+        </a>
+      </div>
+    {% endif %}
   </div>
   <!-- Search bar (hidden on mobile) -->
   <div class="hidden md:flex">
