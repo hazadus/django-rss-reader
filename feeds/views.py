@@ -42,8 +42,12 @@ class EntriesListView(ListView):
         context = super().get_context_data(**kwargs)
         context["mode"] = self.kwargs.get("mode", "all")
         context["entry_count"] = self.get_queryset().count()
-        context["in_feed"] = self.request.GET.get("in_feed", None)
         context["feeds"] = Feed.objects.all()
+
+        in_feed = self.request.GET.get("in_feed", None)
+        if in_feed:
+            context["in_feed"] = in_feed
+            context["feed"] = Feed.objects.get(pk=in_feed)
         return context
 
 
@@ -75,6 +79,8 @@ class EntryDetailView(DetailView):
         if in_feed:
             entry_queryset = entry_queryset.filter(feed=in_feed)
             context["in_feed"] = in_feed
+            context["feed"] = Feed.objects.get(pk=in_feed)
+            context["entry_count"] = entry_queryset.count()
 
         context["mode"] = mode
         context["previous_entry"] = get_previous_entry(

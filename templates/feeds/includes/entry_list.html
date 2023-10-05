@@ -1,6 +1,25 @@
 <!-- Entries column header (fixed) -->
-<div class="h-16 flex-shrink-0 bg-gray-300 shadow-sm">
-  Entries Header
+<div class="h-16 p-2 flex flex-col flex-shrink-0 bg-gray-300 shadow-sm justify-center">
+  <!-- Feed title -->
+  <div class="block text-sm font-semibold text-gray-800 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+  {% if entries %}
+    {% if in_feed and feed %}
+      {{ feed }}
+    {% elif mode %}
+      {{ mode|capfirst }}
+    {% endif %}
+  {% endif %}
+  </div>
+  <!-- Number of entries in the feed -->
+  <div class="block text-xs text-gray-700 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+  {% if entries %}
+    {% if in_feed and feed %}
+      {{ entry_count }} entries
+    {% elif mode %}
+      {{ entries.count }} entries
+    {% endif %}
+  {% endif %}
+  </div>
 </div>
 
 <!-- Entries column content (scrollable) -->
