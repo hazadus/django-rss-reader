@@ -1408,6 +1408,10 @@ video {
   width: 24rem;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -2134,6 +2138,10 @@ video {
     display: flex;
   }
 
+  .md\:w-96 {
+    width: 24rem;
+  }
+
   .md\:p-8 {
     padding: 2rem;
   }
@@ -2142,5 +2150,13 @@ video {
 @media (min-width: 1024px) {
   .lg\:flex {
     display: flex;
+  }
+
+  .lg\:w-32 {
+    width: 8rem;
+  }
+
+  .lg\:p-0 {
+    padding: 0px;
   }
 }
