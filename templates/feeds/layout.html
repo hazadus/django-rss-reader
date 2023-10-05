@@ -7,12 +7,12 @@
   </div>
 
   <!-- Second column: entries -->
-  <div class="{% if entry %}hidden md:flex{% else %}{% if in_feed or mode %}flex{% else %}hidden md:flex{% endif %}{% endif %} flex-col w-full md:w-96 bg-white">
+  <div class="{% if entry %}hidden md:flex{% else %}{% if in_feed or mode %}flex{% else %}hidden md:flex{% endif %}{% endif %} flex-col w-full md:w-96 shrink-0 bg-white">
     {% include "feeds/includes/entry_list.html" %}
   </div>
 
   <!-- Third column: content -->
-  <div class="{% if entry %}flex{% else %}hidden md:flex{% endif %} flex-1 flex-col">
+  <div class="{% if entry %}flex{% else %}hidden md:flex{% endif %} flex-1 flex-col overflow-y-hidden">
     {% include "feeds/includes/entry_detail.html" %}
   </div>
 {% endblock content %}
