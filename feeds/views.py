@@ -22,7 +22,7 @@ MODE_QUERYSETS = {
 class EntriesListView(ListView):
     paginate_by = 100
     model = Entry
-    template_name = "feeds/entry_list.html"
+    template_name = "feeds/layout.html"
     context_object_name = "entries"
 
     def get_queryset(self):
@@ -42,13 +42,24 @@ class EntriesListView(ListView):
         context = super().get_context_data(**kwargs)
         context["mode"] = self.kwargs.get("mode", "all")
         context["entry_count"] = self.get_queryset().count()
-        context["in_feed"] = self.request.GET.get("in_feed", None)
+        context["feeds"] = Feed.objects.all()
+
+        context["all_entries_count"] = MODE_QUERYSETS["all"].count()
+        context["today_entries_count"] = MODE_QUERYSETS["today"].count()
+        context["unread_entries_count"] = MODE_QUERYSETS["unread"].count()
+        context["read_entries_count"] = MODE_QUERYSETS["read"].count()
+        context["favorites_entries_count"] = MODE_QUERYSETS["favorites"].count()
+
+        in_feed = self.request.GET.get("in_feed", None)
+        if in_feed:
+            context["in_feed"] = in_feed
+            context["feed"] = Feed.objects.get(pk=in_feed)
         return context
 
 
 class EntryDetailView(DetailView):
     model = Entry
-    template_name = "feeds/entry_detail.html"
+    template_name = "feeds/layout.html"
     context_object_name = "entry"
 
     def get(self, request, *args, **kwargs):
@@ -62,7 +73,6 @@ class EntryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        entry = self.get_object()
         mode = self.kwargs.get("mode", "all")
         in_feed = self.request.GET.get("in_feed", None)
 
@@ -74,12 +84,25 @@ class EntryDetailView(DetailView):
         if in_feed:
             entry_queryset = entry_queryset.filter(feed=in_feed)
             context["in_feed"] = in_feed
+            context["feed"] = Feed.objects.get(pk=in_feed)
+            context["entry_count"] = entry_queryset.count()
 
         context["mode"] = mode
+
+        context["all_entries_count"] = MODE_QUERYSETS["all"].count()
+        context["today_entries_count"] = MODE_QUERYSETS["today"].count()
+        context["unread_entries_count"] = MODE_QUERYSETS["unread"].count()
+        context["read_entries_count"] = MODE_QUERYSETS["read"].count()
+        context["favorites_entries_count"] = MODE_QUERYSETS["favorites"].count()
+
+        # Specific for this view
+        entry = self.get_object()
         context["previous_entry"] = get_previous_entry(
             entry=entry, queryset=entry_queryset
         )
         context["next_entry"] = get_next_entry(entry=entry, queryset=entry_queryset)
+        context["feeds"] = Feed.objects.all().prefetch_related("entries")
+        context["entries"] = entry_queryset.prefetch_related("feed")
         return context
 
 
@@ -90,12 +113,12 @@ class TagListView(ListView):
         .annotate(num_entries=Count("entries"))
         .order_by("-num_entries")
     )
-    template_name = "feeds/tag_list.html"
+    template_name = "feeds/layout.html"
     context_object_name = "tags"
 
 
 class FeedListView(ListView):
     model = Feed
     queryset = Feed.objects.all().prefetch_related("entries")
-    template_name = "feeds/feed_list.html"
+    template_name = "feeds/layout.html"
     context_object_name = "feeds"

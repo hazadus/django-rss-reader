@@ -1,0 +1,68 @@
+<!-- Feeds column header (fixed) -->
+<div class="h-16 flex-shrink-0 shadow-sm">
+</div>
+
+<!-- Feeds column content (scrollable) -->
+<div class="flex flex-col p-1 overflow-y-auto overflow-x-hidden">
+  <div class="mb-2 text-sm text-gray-500 uppercase drop-shadow cursor-default">
+    Smart Feeds
+  </div>
+  <div class="flex pl-1 items-center rounded-lg {% if mode == "all" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
+    <div class="w-[16px]"></div>
+    <a class="flex-1 text-sm py-1 mx-1 {% if mode == "all" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'all' %}">
+      All
+    </a>
+    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ all_entries_count }}</div>
+  </div>
+  <div class="flex pl-1 items-center rounded-lg {% if mode == "today" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
+    <div class="w-[16px]">
+      {% include "feeds/includes/icons/icon_sun.html" with size="16" color="#6b7280" %}
+    </div>
+    <a class="flex-1 text-sm py-1 mx-1 {% if mode == "today" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'today' %}">
+      Today
+    </a>
+    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ today_entries_count }}</div>
+  </div>
+  <div class="flex pl-1 items-center rounded-lg {% if mode == "unread" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
+    <div class="w-[16px]">
+      {% include "feeds/includes/icons/icon_circle_dot.html" with size="16" color="#6b7280" %}
+    </div>
+    <a class="flex-1 text-sm py-1 mx-1 {% if mode == "unread" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'unread' %}">
+      Unread
+    </a>
+    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ unread_entries_count }}</div>
+  </div>
+  <div class="flex pl-1 items-center rounded-lg {% if mode == "read" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
+    <div class="w-[16px]">
+      {% include "feeds/includes/icons/icon_circle.html" with size="16" color="#6b7280" %}
+    </div>
+    <a class="flex-1 text-sm py-1 mx-1 {% if mode == "read" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'read' %}">
+      Read
+    </a>
+    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ read_entries_count }}</div>
+  </div>
+  <div class="flex pl-1 items-center rounded-lg {% if mode == "favorites" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
+    <div class="flex w-[16px]">
+      {% include "feeds/includes/icons/icon_star.html" with size="16" color="#6b7280" %}
+    </div>
+    <a class="flex-1 text-sm py-1 mx-1 {% if mode == "favorites" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'favorites' %}">
+      Favorites
+    </a>
+    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ favorites_entries_count }}</div>
+  </div>
+
+  <div class="mt-2 mb-2 text-sm text-gray-500 uppercase drop-shadow cursor-default">
+    Feeds
+  </div>
+  {% for item in feeds %}
+    <div class="text-xs whitespace-nowrap pl-2 max-w-32 flex-grow-0 rounded-lg {% if feed and item.pk == feed.pk %}bg-blue-500 hover:bg-blue-600 text-white{% endif %}">
+      <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ item.pk }}" class="hover:underline block max-w-32 overflow-x-hidden overflow-ellipsis ">
+        {{ item.title }} ({{ item.entries.count }})
+      </a>
+    </div>
+  {% endfor %}
+
+  <div class="mt-2 mb-4 text-sm text-gray-500 uppercase drop-shadow cursor-default">
+    All Tags
+  </div>
+</div>

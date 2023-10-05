@@ -1,0 +1,119 @@
+<!-- Content column header (fixed) -->
+<div class="h-16 p-2 flex flex-shrink-0 bg-gray-300 shadow-sm rounded-tr-lg items-center">
+  <!-- Buttons -->
+  <div class="flex flex-1">
+    <!-- "Home" (mobile only) -->
+    <div class="flex md:hidden mx-2 h-[24px]">
+      <a href="{% url 'feeds:feed_list' %}">
+        {% include "feeds/includes/icons/icon_home.html" with size="24" color="#6b7280" %}
+      </a>
+    </div>
+
+    <!-- Entry-related buttons -->
+    {% if entry %}
+      <!-- "Unread" - circle -->
+      <div class="mx-2 h-[24px]">
+        <a href="#">
+          {% include "feeds/includes/icons/icon_circle.html" with size="24" color="#6b7280" %}
+        </a>
+      </div>
+      <!-- "Favorite" - star -->
+      <div class="mx-2 h-[24px]">
+        <a href="#">
+          {% include "feeds/includes/icons/icon_star.html" with size="24" color="#6b7280" %}
+        </a>
+      </div>
+      <!-- "Share" -->
+      <div class="mx-2 h-[24px]">
+        <a href="#">
+          {% include "feeds/includes/icons/icon_share.html" with size="24" color="#6b7280" %}
+        </a>
+      </div>
+      <!-- "Edit in Admin" - gear with pencil -->
+      <div class="mx-2 h-[24px]">
+        <a href="/admin/feeds/entry/{{ entry.pk }}/change/" target="_blank">
+          {% include "feeds/includes/icons/icon_gear_edit.html" with size="24" color="#6b7280" %}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+  <!-- Search bar (hidden on mobile) -->
+  <div class="hidden md:flex">
+    <input class="mr-2 py-1 px-4 text-sm rounded-lg bg-gray-300 border border-gray-400" type="text" placeholder="Search" />
+  </div>
+</div>
+
+<!-- Content of the entry (scrollable) -->
+<div class="flex flex-1 flex-col p-4 md:p-8 overflow-y-auto overflow-x-hidden border-r border-r-gray-300 rounded-br-lg">
+  {% if entry %}
+    <!-- Feed title and entry author + cover image -->
+    <div class="flex pb-2 mb-4 border-b border-b-gray-300">
+      <div class="flex-1">
+        <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ entry.feed.pk }}">
+          <h2 class="text-xl text-gray-500">{{ entry.feed.title }}</h2>
+        </a>
+        {% if entry.author %}
+          <span class="text-gray-500">by {{ entry.author }}</span>
+        {% endif %}
+      </div>
+      {% if entry.image_url %}
+        <img class="h-16" src="{{ entry.image_url }}" alt="{{ entry.title|truncatechars:16 }}">
+      {% endif %}
+    </div>
+
+    <!-- Entry content -->
+    <article>
+      <!-- Title and publication date -->
+      <a href="{{ entry.url }}" target="_blank">
+        <h1 class="text-2xl font-semibold text-gray-900 mb-1">
+            {{ entry.title }}
+        </h1>
+      </a>
+      <span class="text-gray-500">
+        {{ entry.pub_date|timesince }} ago
+      </span>
+
+      <!-- Tags -->
+      {% if entry.tags.count %}
+        <div class="flex flex-wrap my-2">
+          {% for tag in entry.tags.all %}
+            <div class="text-xs text-gray-800 uppercase py-1 px-2 m-1 rounded-lg bg-blue-200 cursor-default whitespace-nowrap">
+              {{ tag.title }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Previous/next entry navigation (debug) -->
+      <div class="my-2 rounded-lg bg-gray-100 p-2 text-sm text-gray-500">
+        <ul>
+          <li>
+            {% if previous_entry %}
+              Previous: <a class="hover:underline" href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ previous_entry }}</a>
+            {% else %}
+              No previous entry
+            {% endif %}
+          </li>
+          <li>
+            {% if next_entry %}
+              Next: <a class="hover:underline" href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ next_entry }}</a>
+            {% else %}
+              No next entry
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Entry content or summary -->
+      <article class="prose prose-sm lg:prose-lg xl:prose-xl">
+        {% if entry.content %}
+          {{ entry.content|safe }}
+        {% else %}
+          {{ entry.summary|safe }}
+        {% endif %}
+      </article>
+    </div>
+  {% else %}
+    <span>Please select an entry to view.</span>
+  {% endif %}
+</div>

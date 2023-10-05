@@ -1,0 +1,68 @@
+<!-- Entries column header (fixed) -->
+<div class="h-16 p-2 flex flex-shrink-0 bg-gray-300 shadow-sm items-center">
+  <!-- Buttons (mobile only) -->
+  <div class="flex md:hidden mx-2 h-[24px]">
+    <a href="{% url 'feeds:feed_list' %}">
+      {% include "feeds/includes/icons/icon_home.html" with size="24" color="#6b7280" %}
+    </a>
+  </div>
+  <!-- Feed title -->
+  <div class="flex flex-col flex-1 justify-center">
+    <div class="block text-sm font-semibold text-gray-800 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+    {% if entries %}
+      {% if in_feed and feed %}
+        {{ feed }}
+      {% elif mode %}
+        {{ mode|capfirst }}
+      {% endif %}
+    {% endif %}
+    </div>
+    <!-- Number of entries in the feed -->
+    <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+    {% if entries %}
+      {% if in_feed and feed %}
+        {{ entry_count }} entries
+      {% elif mode %}
+        {{ entries.count }} entries
+      {% endif %}
+    {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Entries column content (scrollable) -->
+<div class="flex flex-col flex-1 overflow-y-auto overflow-x-hidden border-r border-r-gray-300">
+  {% if entries %}
+    {% for item in entries %}
+      <a href="{% url 'feeds:entry_detail' mode item.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
+        <div class="flex m-1 rounded-lg h-24 max-h-24 items-center {% if item.pk == entry.pk %}bg-blue-500 hover:bg-blue-600{% else %}bg-gray-100 hover:bg-gray-200{% endif %} {% if not item.is_read %}border-l-4 border-teal-600 pl-1{% else %}pl-2{% endif %}"
+          {% if item.pk == entry.pk %}id="selected-entry"{% endif %}
+        >
+          <!-- Feed image -->
+          {% if item.feed.image_url %}
+            <img class="w-16 h-16 rounded-lg shrink-0" src="{{ item.feed.image_url }}" alt="{{ item.feed.title }}">
+          {% else %}
+            <div class="w-16 h-16 rounded-lg shrink-0"></div>
+          {% endif %}
+          <!-- Feed title, etc. -->
+          <div class="flex flex-col p-1 h-full">
+            <div class="flex flex-1 text-sm max-h-[72px] overflow-y-hidden overflow-ellipsis font-semibold leading-tight {% if item.pk == entry.pk %}text-white{% endif %}">
+              {% if item.is_favorite %}❤️{% endif %}
+              {{ item }}
+            </div>
+            {% if not in_feed %}
+              <div class="text-xs {% if item.pk == entry.pk %}text-white{% else %}text-gray-600{% endif %}">
+                in {{ item.feed.title }}
+              </div>
+            {% endif %}
+            <div class="text-xs {% if item.pk == entry.pk %}text-white{% else %}text-gray-600{% endif %}">
+              {{ item.pub_date|timesince }} ago
+            </div>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  {% else %}
+    <span>Select a feed to view.</span>
+  {% endif %}
+</div>

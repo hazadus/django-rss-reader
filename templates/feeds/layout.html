@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!-- First column: feeds, folders, tags -->
+  <div class="{% if mode or in_feed or entry %}hidden lg:flex{% else %}flex{% endif %} flex-col w-full lg:w-32 p-4 lg:p-0 bg-gray-300 rounded-tl-lg rounded-bl-lg">
+    {% include "feeds/includes/feed_list.html" %}
+  </div>
+
+  <!-- Second column: entries -->
+  <div class="{% if entry %}hidden md:flex{% else %}{% if in_feed or mode %}flex{% else %}hidden md:flex{% endif %}{% endif %} flex-col w-full md:w-96 shrink-0 bg-white">
+    {% include "feeds/includes/entry_list.html" %}
+  </div>
+
+  <!-- Third column: content -->
+  <div class="{% if entry %}flex{% else %}hidden md:flex{% endif %} flex-1 flex-col overflow-y-hidden">
+    {% include "feeds/includes/entry_detail.html" %}
+  </div>
+{% endblock content %}
+
+<script>
+  {% block javascript %}
+    /**
+     * This id is set inside `entry_list.html` template for selected entry's DIV.
+     */
+    const selectedEntry = document.getElementById("selected-entry");
+
+    if (selectedEntry) {
+      selectedEntry.scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
+    }
+  {% endblock %}
+</script>
