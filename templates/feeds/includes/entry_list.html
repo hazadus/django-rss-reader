@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Entries list</title>
-</head>
-<body>
-  <h1>Entries list: {{ mode }} ({{ entry_count }})</h1>
-
-  {% include "feeds/menu.html" %}
-
+{% if entries %}
   <ul>
     {% for entry in entries %}
       <li>
@@ -24,5 +14,6 @@
       </li>
     {% endfor %}
   </ul>
-</body>
-</html>
+{% else %}
+  <span>Select a feed to view.</span>
+{% endif %}

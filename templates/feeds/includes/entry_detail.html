@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ entry.title }}</title>
-</head>
-<body>
+{% if entry %}
   <h1>
     {{ entry.title }}
   </h1>
-
-  {% include "feeds/menu.html" %}
 
   <p>
     {% if entry.author %}
@@ -65,5 +57,6 @@
     <b>Content:</b>
     {{ entry.content|safe }}
   </div>
-</body>
-</html>
+{% else %}
+  <span>Please select an entry to view.</span>
+{% endif %}

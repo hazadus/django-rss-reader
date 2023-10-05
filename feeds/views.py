@@ -22,7 +22,7 @@ MODE_QUERYSETS = {
 class EntriesListView(ListView):
     paginate_by = 100
     model = Entry
-    template_name = "feeds/entry_list.html"
+    template_name = "feeds/layout.html"
     context_object_name = "entries"
 
     def get_queryset(self):
@@ -43,12 +43,13 @@ class EntriesListView(ListView):
         context["mode"] = self.kwargs.get("mode", "all")
         context["entry_count"] = self.get_queryset().count()
         context["in_feed"] = self.request.GET.get("in_feed", None)
+        context["feeds"] = Feed.objects.all()
         return context
 
 
 class EntryDetailView(DetailView):
     model = Entry
-    template_name = "feeds/entry_detail.html"
+    template_name = "feeds/layout.html"
     context_object_name = "entry"
 
     def get(self, request, *args, **kwargs):
@@ -80,6 +81,8 @@ class EntryDetailView(DetailView):
             entry=entry, queryset=entry_queryset
         )
         context["next_entry"] = get_next_entry(entry=entry, queryset=entry_queryset)
+        context["feeds"] = Feed.objects.all()
+        context["entries"] = entry_queryset
         return context
 
 
@@ -90,12 +93,12 @@ class TagListView(ListView):
         .annotate(num_entries=Count("entries"))
         .order_by("-num_entries")
     )
-    template_name = "feeds/tag_list.html"
+    template_name = "feeds/layout.html"
     context_object_name = "tags"
 
 
 class FeedListView(ListView):
     model = Feed
     queryset = Feed.objects.all().prefetch_related("entries")
-    template_name = "feeds/feed_list.html"
+    template_name = "feeds/layout.html"
     context_object_name = "feeds"

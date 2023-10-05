@@ -1,0 +1,27 @@
+<span class="text-lg">Smart Feeds</span>
+<div class="text-sm p-1 mx-1">
+  <a href="{% url 'feeds:entry_list' 'all' %}">All entries</a>
+</div>
+<div class="text-sm p-1 mx-1">
+  <a href="{% url 'feeds:entry_list' 'today' %}">Today</a>
+</div>
+<div class="text-sm p-1 mx-1">
+  <a href="{% url 'feeds:entry_list' 'unread' %}">Unread</a>
+</div>
+<div class="text-sm p-1 mx-1">
+  <a href="{% url 'feeds:entry_list' 'read' %}">Read</a>
+</div>
+<div class="text-sm p-1 mx-1">
+   <a href="{% url 'feeds:entry_list' 'favorites' %}">Favorites</a>
+</div>
+
+<span class="text-lg mt-2">All Feeds</span>
+{% for feed in feeds %}
+  <div class="text-xs whitespace-nowrap pl-2 max-w-32 flex-grow-0">
+    <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ feed.pk }}" class="hover:underline block max-w-32 overflow-x-hidden overflow-ellipsis ">
+      {{ feed.title }} ({{ feed.entries.count }})
+    </a>
+  </div>
+{% endfor %}
+
+<a class="text-lg mt-2" href="{% url 'feeds:tag_list' %}">All tags</a>

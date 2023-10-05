@@ -14,9 +14,9 @@
 ## Building Tailwind styles
 
 ```bash
-npx tailwindcss -i ./static/src/input.css -o ./static/src/output.css
+npx tailwindcss -i ./static/src/input.css -o ./static/styles.css
 # or
-npx tailwindcss -i ./static/src/input.css -o ./static/src/output.css --watch
+npx tailwindcss -i ./static/src/input.css -o ./static/styles.css --watch
 ```
 
 ## References
