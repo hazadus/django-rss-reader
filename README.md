@@ -25,3 +25,4 @@ npx tailwindcss -i ./static/src/input.css -o ./static/styles.css --watch
 
 - [Advanced Logging Tutorial](https://docs.python.org/3/howto/logging.html#advanced-logging-tutorial)
 - [Tailwind CSS Django - Flowbite](https://flowbite.com/docs/getting-started/django/)
+- [MDN: scrollIntoView() method](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)

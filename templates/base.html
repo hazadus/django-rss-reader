@@ -16,6 +16,11 @@
   <div class="container flex h-screen mx-auto mt-0 shadow-md">
     {% block content %}
     {% endblock content %}
+    <script>
+      console.log("Welcome to Django RSS Reader! Visit https://hazadus.ru for more info.")
+      {% block javascript %}
+      {% endblock javascript %}
+    </script>
   </div>
 </body>
 

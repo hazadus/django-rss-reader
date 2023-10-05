@@ -35,7 +35,9 @@
   {% if entries %}
     {% for item in entries %}
       <a href="{% url 'feeds:entry_detail' mode item.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
-        <div class="flex m-1 rounded-lg h-24 max-h-24 items-center {% if item.pk == entry.pk %}bg-blue-500 hover:bg-blue-600{% else %}bg-gray-100 hover:bg-gray-200{% endif %} {% if not item.is_read %}border-l-4 border-teal-600 pl-1{% else %}pl-2{% endif %}">
+        <div class="flex m-1 rounded-lg h-24 max-h-24 items-center {% if item.pk == entry.pk %}bg-blue-500 hover:bg-blue-600{% else %}bg-gray-100 hover:bg-gray-200{% endif %} {% if not item.is_read %}border-l-4 border-teal-600 pl-1{% else %}pl-2{% endif %}"
+          {% if item.pk == entry.pk %}id="selected-entry"{% endif %}
+        >
           <!-- Feed image -->
           {% if item.feed.image_url %}
             <img class="w-16 h-16 rounded-lg shrink-0" src="{{ item.feed.image_url }}" alt="{{ item.feed.title }}">

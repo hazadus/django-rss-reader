@@ -16,3 +16,16 @@
     {% include "feeds/includes/entry_detail.html" %}
   </div>
 {% endblock content %}
+
+<script>
+  {% block javascript %}
+    /**
+     * This id is set inside `entry_list.html` template for selected entry's DIV.
+     */
+    const selectedEntry = document.getElementById("selected-entry");
+
+    if (selectedEntry) {
+      selectedEntry.scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
+    }
+  {% endblock %}
+</script>
