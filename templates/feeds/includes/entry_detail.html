@@ -22,7 +22,7 @@
     </div>
 
     <!-- Entry content -->
-    <div>
+    <article>
       <!-- Title and publication date -->
       <a href="{{ entry.url }}" target="_blank">
         <h1 class="text-2xl font-semibold text-gray-900 mb-1">
@@ -64,13 +64,13 @@
       </div>
 
       <!-- Entry content or summary -->
-      <div>
+      <article class="prose prose-sm md:prose-lg lg:prose-xl">
         {% if entry.content %}
           {{ entry.content|safe }}
         {% else %}
           {{ entry.summary|safe }}
         {% endif %}
-      </div>
+      </article>
     </div>
   {% else %}
     <span>Please select an entry to view.</span>

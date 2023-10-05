@@ -11,6 +11,7 @@
   standard datetime module, available in Python.
 - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/): Best debugging tool for Django.
 - [Tailwind CSS](https://tailwindcss.com/)
+  - [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin): Beautiful typographic defaults for HTML you don't control. 
 
 ## Building Tailwind styles
 
