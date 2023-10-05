@@ -73,10 +73,11 @@
 
       <!-- Tags -->
       {% if entry.tags.count %}
-        <div class="my-2">
-          Tags:
+        <div class="flex flex-wrap my-2">
           {% for tag in entry.tags.all %}
-            {{ tag.title }}{% if not forloop.last %},{% else %}.{% endif %}
+            <div class="text-xs text-gray-800 uppercase py-1 px-2 m-1 rounded-lg bg-blue-200 cursor-default whitespace-nowrap">
+              {{ tag.title }}
+            </div>
           {% endfor %}
         </div>
       {% endif %}
