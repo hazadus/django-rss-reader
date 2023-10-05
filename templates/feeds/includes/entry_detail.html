@@ -1,62 +1,70 @@
-{% if entry %}
-  <h1>
-    {{ entry.title }}
-  </h1>
+<!-- Content column header (fixed) -->
+<div class="h-16 flex-shrink-0 bg-gray-300 shadow-sm rounded-tr-lg">
+  Content Header
+</div>
 
-  <p>
-    {% if entry.author %}
-      by {{ entry.author }} &middot;
-    {% endif %}
-    in <a href="{% url 'feeds:entry_list' mode %}?in_feed={{ entry.feed.pk }}">{{ entry.feed.title }}</a>
-    &middot;
-    {{ entry.pub_date|timesince }} ago
-    &middot;
-    <a href="{{ entry.url }}">Read full article</a>
-  </p>
+<!-- Content of the entry (scrollable) -->
+<div class="flex flex-1 flex-col p-8 overflow-y-auto overflow-x-hidden border-r border-r-gray-300 rounded-br-lg">
+  {% if entry %}
+    <h1>
+      {{ entry.title }}
+    </h1>
 
-  {% if entry.tags.count %}
     <p>
-      Tags:
-      {% for tag in entry.tags.all %}
-        {{ tag.title }}{% if not forloop.last %},{% else %}.{% endif %}
-      {% endfor %}
+      {% if entry.author %}
+        by {{ entry.author }} &middot;
+      {% endif %}
+      in <a href="{% url 'feeds:entry_list' mode %}?in_feed={{ entry.feed.pk }}">{{ entry.feed.title }}</a>
+      &middot;
+      {{ entry.pub_date|timesince }} ago
+      &middot;
+      <a href="{{ entry.url }}">Read full article</a>
     </p>
-  {% endif %}
 
-  <p>
-    <ul>
-      <li>
-        {% if previous_entry %}
-          Previous: <a href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ previous_entry }}</a>
-        {% else %}
-          No previous entry
-        {% endif %}
-      </li>
-      <li>
-        {% if next_entry %}
-          Next: <a href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ next_entry }}</a>
-        {% else %}
-          No next entry
-        {% endif %}
-      </li>
-    </ul>
-  </p>
-
-  <div>
-    <b>Summary:</b>
-    {{ entry.summary|safe }}
-  </div>
-
-  <div>
-    {% if entry.image_url %}
-      <img src="{{ entry.image_url }}" alt="{{ entry.title }}" style="max-width: 500px;">
+    {% if entry.tags.count %}
+      <p>
+        Tags:
+        {% for tag in entry.tags.all %}
+          {{ tag.title }}{% if not forloop.last %},{% else %}.{% endif %}
+        {% endfor %}
+      </p>
     {% endif %}
-  </div>
 
-  <div>
-    <b>Content:</b>
-    {{ entry.content|safe }}
-  </div>
-{% else %}
-  <span>Please select an entry to view.</span>
-{% endif %}
+    <p>
+      <ul>
+        <li>
+          {% if previous_entry %}
+            Previous: <a href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ previous_entry }}</a>
+          {% else %}
+            No previous entry
+          {% endif %}
+        </li>
+        <li>
+          {% if next_entry %}
+            Next: <a href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ next_entry }}</a>
+          {% else %}
+            No next entry
+          {% endif %}
+        </li>
+      </ul>
+    </p>
+
+    <div>
+      <b>Summary:</b>
+      {{ entry.summary|safe }}
+    </div>
+
+    <div>
+      {% if entry.image_url %}
+        <img src="{{ entry.image_url }}" alt="{{ entry.title }}" style="max-width: 500px;">
+      {% endif %}
+    </div>
+
+    <div>
+      <b>Content:</b>
+      {{ entry.content|safe }}
+    </div>
+  {% else %}
+    <span>Please select an entry to view.</span>
+  {% endif %}
+</div>

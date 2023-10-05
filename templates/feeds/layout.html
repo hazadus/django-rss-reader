@@ -2,17 +2,17 @@
 
 {% block content %}
   <!-- First column: feeds, folders, tags -->
-  <div class="hidden lg:flex flex-col w-32 bg-gray-300 overflow-y-scroll overflow-x-hidden">
+  <div class="hidden lg:flex flex-col w-32 bg-gray-300 rounded-tl-lg rounded-bl-lg">
     {% include "feeds/includes/feed_list.html" %}
   </div>
 
   <!-- Second column: entries -->
-  <div class="hidden md:flex w-64 bg-gray-100 overflow-x-hidden overflow-y-scroll">
+  <div class="hidden md:flex flex-col w-64 bg-gray-100">
     {% include "feeds/includes/entry_list.html" %}
   </div>
 
   <!-- Third column: content -->
-  <div class="p-8 block flex-1 overflow-x-hidden overflow-y-scroll">
+  <div class="flex flex-1 flex-col">
     {% include "feeds/includes/entry_detail.html" %}
   </div>
 {% endblock content %}
