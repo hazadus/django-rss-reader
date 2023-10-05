@@ -44,6 +44,12 @@ class EntriesListView(ListView):
         context["entry_count"] = self.get_queryset().count()
         context["feeds"] = Feed.objects.all()
 
+        context["all_entries_count"] = MODE_QUERYSETS["all"].count()
+        context["today_entries_count"] = MODE_QUERYSETS["today"].count()
+        context["unread_entries_count"] = MODE_QUERYSETS["unread"].count()
+        context["read_entries_count"] = MODE_QUERYSETS["read"].count()
+        context["favorites_entries_count"] = MODE_QUERYSETS["favorites"].count()
+
         in_feed = self.request.GET.get("in_feed", None)
         if in_feed:
             context["in_feed"] = in_feed
@@ -67,7 +73,6 @@ class EntryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        entry = self.get_object()
         mode = self.kwargs.get("mode", "all")
         in_feed = self.request.GET.get("in_feed", None)
 
@@ -83,6 +88,15 @@ class EntryDetailView(DetailView):
             context["entry_count"] = entry_queryset.count()
 
         context["mode"] = mode
+
+        context["all_entries_count"] = MODE_QUERYSETS["all"].count()
+        context["today_entries_count"] = MODE_QUERYSETS["today"].count()
+        context["unread_entries_count"] = MODE_QUERYSETS["unread"].count()
+        context["read_entries_count"] = MODE_QUERYSETS["read"].count()
+        context["favorites_entries_count"] = MODE_QUERYSETS["favorites"].count()
+
+        # Specific for this view
+        entry = self.get_object()
         context["previous_entry"] = get_previous_entry(
             entry=entry, queryset=entry_queryset
         )

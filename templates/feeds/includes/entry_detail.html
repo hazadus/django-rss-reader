@@ -8,26 +8,28 @@
         {% include "feeds/includes/icons/icon_home.html" with size="24" color="#6b7280" %}
       </a>
     </div>
-    <!-- "Unread" - circle -->
-    <div class="mx-2 h-[24px]">
-      <a href="#">
-        {% include "feeds/includes/icons/icon_circle.html" with size="24" color="#6b7280" %}
-      </a>
-    </div>
-    <!-- "Favorite" - star -->
-    <div class="mx-2 h-[24px]">
-      <a href="#">
-        {% include "feeds/includes/icons/icon_star.html" with size="24" color="#6b7280" %}
-      </a>
-    </div>
-    <!-- "Share" -->
-    <div class="mx-2 h-[24px]">
-      <a href="#">
-        {% include "feeds/includes/icons/icon_share.html" with size="24" color="#6b7280" %}
-      </a>
-    </div>
-    <!-- "Edit in Admin" - gear with pencil -->
+
+    <!-- Entry-related buttons -->
     {% if entry %}
+      <!-- "Unread" - circle -->
+      <div class="mx-2 h-[24px]">
+        <a href="#">
+          {% include "feeds/includes/icons/icon_circle.html" with size="24" color="#6b7280" %}
+        </a>
+      </div>
+      <!-- "Favorite" - star -->
+      <div class="mx-2 h-[24px]">
+        <a href="#">
+          {% include "feeds/includes/icons/icon_star.html" with size="24" color="#6b7280" %}
+        </a>
+      </div>
+      <!-- "Share" -->
+      <div class="mx-2 h-[24px]">
+        <a href="#">
+          {% include "feeds/includes/icons/icon_share.html" with size="24" color="#6b7280" %}
+        </a>
+      </div>
+      <!-- "Edit in Admin" - gear with pencil -->
       <div class="mx-2 h-[24px]">
         <a href="/admin/feeds/entry/{{ entry.pk }}/change/" target="_blank">
           {% include "feeds/includes/icons/icon_gear_edit.html" with size="24" color="#6b7280" %}
