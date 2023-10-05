@@ -87,8 +87,8 @@ class EntryDetailView(DetailView):
             entry=entry, queryset=entry_queryset
         )
         context["next_entry"] = get_next_entry(entry=entry, queryset=entry_queryset)
-        context["feeds"] = Feed.objects.all()
-        context["entries"] = entry_queryset
+        context["feeds"] = Feed.objects.all().prefetch_related("entries")
+        context["entries"] = entry_queryset.prefetch_related("feed")
         return context
 
 
