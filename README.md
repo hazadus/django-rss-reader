@@ -10,7 +10,7 @@
 - [dateutil](https://pypi.org/project/python-dateutil/): The dateutil module provides powerful extensions to the 
   standard datetime module, available in Python.
 - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/): Best debugging tool for Django.
-- Tailwind CSS
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Building Tailwind styles
 

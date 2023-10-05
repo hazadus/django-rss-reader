@@ -36,7 +36,7 @@
           {% endif %}
           <!-- Feed title, etc. -->
           <div class="flex flex-col p-1 h-full">
-            <div class="flex flex-1 text-sm max-h-[56px] overflow-y-hidden overflow-ellipsis font-semibold leading-tight {% if item.pk == entry.pk %}text-white{% endif %}">
+            <div class="flex flex-1 text-sm max-h-[72px] overflow-y-hidden overflow-ellipsis font-semibold leading-tight {% if item.pk == entry.pk %}text-white{% endif %}">
               {% if item.is_favorite %}❤️{% endif %}
               {{ item }}
             </div>

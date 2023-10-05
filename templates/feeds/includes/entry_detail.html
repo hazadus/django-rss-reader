@@ -4,65 +4,73 @@
 </div>
 
 <!-- Content of the entry (scrollable) -->
-<div class="flex flex-1 flex-col p-8 overflow-y-auto overflow-x-hidden border-r border-r-gray-300 rounded-br-lg">
+<div class="flex flex-1 flex-col p-4 md:p-8 overflow-y-auto overflow-x-hidden border-r border-r-gray-300 rounded-br-lg">
   {% if entry %}
-    <h1>
-      {{ entry.title }}
-    </h1>
-
-    <p>
-      {% if entry.author %}
-        by {{ entry.author }} &middot;
-      {% endif %}
-      in <a href="{% url 'feeds:entry_list' mode %}?in_feed={{ entry.feed.pk }}">{{ entry.feed.title }}</a>
-      &middot;
-      {{ entry.pub_date|timesince }} ago
-      &middot;
-      <a href="{{ entry.url }}">Read full article</a>
-    </p>
-
-    {% if entry.tags.count %}
-      <p>
-        Tags:
-        {% for tag in entry.tags.all %}
-          {{ tag.title }}{% if not forloop.last %},{% else %}.{% endif %}
-        {% endfor %}
-      </p>
-    {% endif %}
-
-    <p>
-      <ul>
-        <li>
-          {% if previous_entry %}
-            Previous: <a href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ previous_entry }}</a>
-          {% else %}
-            No previous entry
-          {% endif %}
-        </li>
-        <li>
-          {% if next_entry %}
-            Next: <a href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ next_entry }}</a>
-          {% else %}
-            No next entry
-          {% endif %}
-        </li>
-      </ul>
-    </p>
-
-    <div>
-      <b>Summary:</b>
-      {{ entry.summary|safe }}
-    </div>
-
-    <div>
+    <!-- Feed title and entry author + cover image -->
+    <div class="flex pb-2 mb-4 border-b border-b-gray-300">
+      <div class="flex-1">
+        <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ entry.feed.pk }}">
+          <h2 class="text-xl text-gray-500">{{ entry.feed.title }}</h2>
+        </a>
+        {% if entry.author %}
+          <span class="text-gray-500">by {{ entry.author }}</span>
+        {% endif %}
+      </div>
       {% if entry.image_url %}
-        <img src="{{ entry.image_url }}" alt="{{ entry.title }}" style="max-width: 500px;">
+        <img class="h-16" src="{{ entry.image_url }}" alt="{{ entry.title }}">
       {% endif %}
     </div>
 
+    <!-- Entry content -->
     <div>
-      <b>Content:</b>
-      {{ entry.content|safe }}
+      <!-- Title and publication date -->
+      <a href="{{ entry.url }}" target="_blank">
+        <h1 class="text-2xl font-semibold text-gray-900 mb-1">
+            {{ entry.title }}
+        </h1>
+      </a>
+      <span class="text-gray-500">
+        {{ entry.pub_date|timesince }} ago
+      </span>
+
+      <!-- Tags -->
+      {% if entry.tags.count %}
+        <div class="my-2">
+          Tags:
+          {% for tag in entry.tags.all %}
+            {{ tag.title }}{% if not forloop.last %},{% else %}.{% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Previous/next entry navigation (debug) -->
+      <div class="my-2 rounded-lg bg-gray-100 p-2 text-sm text-gray-500">
+        <ul>
+          <li>
+            {% if previous_entry %}
+              Previous: <a class="hover:underline" href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ previous_entry }}</a>
+            {% else %}
+              No previous entry
+            {% endif %}
+          </li>
+          <li>
+            {% if next_entry %}
+              Next: <a class="hover:underline" href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ next_entry }}</a>
+            {% else %}
+              No next entry
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Entry content or summary -->
+      <div>
+        {% if entry.content %}
+          {{ entry.content|safe }}
+        {% else %}
+          {{ entry.summary|safe }}
+        {% endif %}
+      </div>
     </div>
   {% else %}
     <span>Please select an entry to view.</span>
