@@ -1,6 +1,36 @@
 <!-- Content column header (fixed) -->
-<div class="h-16 p-2 flex-shrink-0 bg-gray-300 shadow-sm rounded-tr-lg">
-  Content Header
+<div class="h-16 p-2 flex flex-shrink-0 bg-gray-300 shadow-sm rounded-tr-lg items-center">
+  <!-- Buttons -->
+  <div class="flex flex-1">
+    <!-- "Home" (mobile only) -->
+    <div class="flex md:hidden mx-2 h-[24px]">
+      <a href="{% url 'feeds:feed_list' %}">
+        {% include "feeds/includes/icons/icon_home.html" with size="24" color="#6b7280" %}
+      </a>
+    </div>
+    <!-- "Unread" - circle -->
+    <div class="mx-2 h-[24px]">
+      <a href="#">
+        {% include "feeds/includes/icons/icon_circle.html" with size="24" color="#6b7280" %}
+      </a>
+    </div>
+    <!-- "Favorite" - star -->
+    <div class="mx-2 h-[24px]">
+      <a href="#">
+        {% include "feeds/includes/icons/icon_star.html" with size="24" color="#6b7280" %}
+      </a>
+    </div>
+    <!-- "Share" -->
+    <div class="mx-2 h-[24px]">
+      <a href="#">
+        {% include "feeds/includes/icons/icon_share.html" with size="24" color="#6b7280" %}
+      </a>
+    </div>
+  </div>
+  <!-- Search bar (hidden on mobile) -->
+  <div class="hidden md:flex">
+    <input class="mr-2 py-1 px-4 text-sm rounded-lg bg-gray-300 border border-gray-400" type="text" placeholder="Search" />
+  </div>
 </div>
 
 <!-- Content of the entry (scrollable) -->
@@ -64,7 +94,7 @@
       </div>
 
       <!-- Entry content or summary -->
-      <article class="prose prose-sm md:prose-lg lg:prose-xl">
+      <article class="prose prose-sm lg:prose-lg xl:prose-xl">
         {% if entry.content %}
           {{ entry.content|safe }}
         {% else %}
