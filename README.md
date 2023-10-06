@@ -9,6 +9,8 @@
 - [coloredlogs](https://coloredlogs.readthedocs.io/en/latest/index.html): The coloredlogs package enables colored terminal output for Python’s logging module.
 - [dateutil](https://pypi.org/project/python-dateutil/): The dateutil module provides powerful extensions to the 
   standard datetime module, available in Python.
+- [gunicorn](https://github.com/benoitc/gunicorn): WSGI HTTP Server for UNIX, fast clients and sleepy applications. 
+- [whitenoise](https://github.com/evansd/whitenoise): Radically simplified static file serving for Python web apps.
 - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/): Best debugging tool for Django.
 - [Tailwind CSS](https://tailwindcss.com/)
   - [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin): Beautiful typographic defaults for HTML you don't control. 

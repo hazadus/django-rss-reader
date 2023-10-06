@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  web:
+    container_name: "web"
+    build: .
+    command: gunicorn django_project.wsgi -b 0.0.0.0:8000
+    ports:
+      - "80:8000"
+    volumes:
+      - .:/code
+    environment:
+      - "DEBUG=True"
