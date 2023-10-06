@@ -44,7 +44,7 @@
 </div>
 
 <!-- Content of the entry (scrollable) -->
-<div class="flex flex-1 flex-col p-4 md:p-8 overflow-y-auto overflow-x-hidden border-r border-r-gray-300 rounded-br-lg">
+<div class="flex flex-1 flex-col p-4 md:p-8 overflow-y-auto overflow-x-hidden border-r border-r-gray-300 rounded-br-lg relative">
   {% if entry %}
     <!-- Feed title and entry author + cover image -->
     <div class="flex pb-2 mb-4 border-b border-b-gray-300">
@@ -84,8 +84,8 @@
         </div>
       {% endif %}
 
-      <!-- Previous/next entry navigation (debug) -->
-      <div class="my-2 rounded-lg bg-gray-100 p-2 text-sm text-gray-500">
+      <!-- Previous/next entry navigation (debug, hidden on mobile) -->
+      <div class="hidden md:flex my-2 rounded-lg bg-gray-100 p-2 text-sm text-gray-500">
         <ul>
           <li>
             {% if previous_entry %}
@@ -105,13 +105,32 @@
       </div>
 
       <!-- Entry content or summary -->
-      <article class="prose prose-sm lg:prose-lg xl:prose-xl">
+      <article class="mt-2 prose prose-sm lg:prose-lg xl:prose-xl">
         {% if entry.content %}
           {{ entry.content|safe }}
         {% else %}
           {{ entry.summary|safe }}
         {% endif %}
       </article>
+    </div>
+
+    <!-- "Floating" buttons (mobile only) -->
+    <div class="fixed bottom-5 left-5 flex md:hidden">
+      {% if previous_entry %}
+        <a class="hover:underline" href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
+          <div class="w-24 h-24 bg-gray-200 opacity-80 rounded-full p-2 mr-3 flex items-center justify-center">
+            {% include "feeds/includes/icons/icon_arrow_left.html" with size="48" color="#6b7280" %}
+          </div>
+        </a>
+      {% endif %}
+
+      {% if next_entry %}
+        <a class="hover:underline" href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
+          <div class="w-24 h-24 bg-gray-200 opacity-80 rounded-full p-2 flex items-center justify-center">
+            {% include "feeds/includes/icons/icon_arrow_right.html" with size="48" color="#6b7280" %}
+          </div>
+        </a>
+      {% endif %}
     </div>
   {% else %}
     <span>Please select an entry to view.</span>
