@@ -19,9 +19,17 @@
       </div>
       <!-- "Favorite" - star -->
       <div class="mx-2 h-[24px]">
-        <a href="#">
-          {% include "feeds/includes/icons/icon_star.html" with size="24" color="#6b7280" %}
-        </a>
+        <form method="post" action="{% url 'feeds:entry_toggle_is_favorite' entry.pk %}">
+          {% csrf_token %}
+          <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+          <button type="submit">
+            {% if entry.is_favorite %}
+              {% include "feeds/includes/icons/icon_star.html" with size="24" color="orange" %}
+            {% else %}
+              {% include "feeds/includes/icons/icon_star_outline.html" with size="24" color="#6b7280" %}
+            {% endif %}
+          </button>
+        </form>
       </div>
       <!-- "Share" -->
       <div class="mx-2 h-[24px]">

@@ -1,10 +1,17 @@
+import logging
 from datetime import datetime
 
 from django.db.models import Count
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView
 
 from feeds.models import Entry, Feed, Tag
 from feeds.selectors import get_next_entry, get_previous_entry
+
+logger = logging.getLogger(__name__)
 
 MODE_QUERYSETS = {
     "all": Entry.objects.all(),
@@ -132,3 +139,27 @@ class FeedListView(ListView):
         context["read_entries_count"] = MODE_QUERYSETS["read"].count()
         context["favorites_entries_count"] = MODE_QUERYSETS["favorites"].count()
         return context
+
+
+@require_POST
+def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpResponse:
+    """
+    Toggle `is_favorite` value for an entry, then redirect user to the page passed in
+    `redirect_url` POST parameter.
+
+    :param HttpRequest request: HttpRequest object
+    :param int entry_pk: entry where to toggle `is_favorite` value
+    """
+    entry = get_object_or_404(Entry, pk=entry_pk)
+    entry.is_favorite = not entry.is_favorite
+    entry.save()
+
+    # noinspection PyArgumentList
+    return redirect(
+        request.POST.get(
+            key="redirect_url",
+            default=reverse_lazy(
+                "feeds:entry_detail", kwargs={"pk": entry_pk, "mode": "all"}
+            ),
+        )
+    )
