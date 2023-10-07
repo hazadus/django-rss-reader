@@ -31,7 +31,7 @@ DEBUG = env.bool("DEBUG", False)
 
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": True,
+    "disable_existing_loggers": False,
     "filters": {"require_debug": {"()": "django.utils.log.RequireDebugTrue"}},
     "formatters": {
         "basic": {
@@ -65,7 +65,10 @@ LOGGING = {
         },
     },
     "loggers": {
-        "": {"handlers": ["console_dev", "django_file"], "level": "DEBUG"},
+        "": {
+            "handlers": ["console_dev", "django_file"],
+            "level": "DEBUG" if DEBUG else "INFO",
+        },
         "django.server": {
             "handlers": ["console_dev", "server_file"],
             "level": "INFO",
