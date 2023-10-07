@@ -92,8 +92,8 @@ class EntryDetailView(DetailView):
             entry_queryset = entry_queryset.filter(feed=in_feed)
             context["in_feed"] = in_feed
             context["feed"] = Feed.objects.get(pk=in_feed)
-            context["entry_count"] = entry_queryset.count()
 
+        context["entry_count"] = entry_queryset.count()
         context["mode"] = mode
 
         context["all_entries_count"] = MODE_QUERYSETS["all"].count()
