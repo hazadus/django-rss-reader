@@ -1,5 +1,9 @@
 # Online RSS Reader
 
+🏗️The app is in very early stage of development.🚧
+
+Main branch is auto-deployed at http://rss.hazadus.ru/feeds/.
+
 ## Libraries Used
 
 - [Django](https://docs.djangoproject.com/en/4.2/)
