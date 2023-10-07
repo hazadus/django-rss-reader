@@ -33,3 +33,4 @@ npx tailwindcss -i ./static/src/input.css -o ./static/styles.css --watch
 - [Using WhiteNoise with Django](https://whitenoise.readthedocs.io/en/latest/django.html)
 - [Tailwind CSS Django - Flowbite](https://flowbite.com/docs/getting-started/django/)
 - [MDN: scrollIntoView() method](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)
+- [MDN: Navigator: share() method](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#syntax)

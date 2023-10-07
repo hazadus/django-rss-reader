@@ -27,5 +27,29 @@
     if (selectedEntry) {
       selectedEntry.scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
     }
+
+    {% if entry %}
+      const shareEntryButton = document.getElementById("share-entry");
+
+      if(shareEntryButton) {
+        if (navigator.canShare) {
+          shareEntryButton.addEventListener("click", async () => {
+            try {
+              await navigator.share({
+                title: "{{ entry.title|escapejs }}",
+                text: "{{ entry.summary|truncatechars:128|escapejs }}",
+                url: "{{ entry.url }}"
+              });
+              console.log("Share clicked");
+            } catch (err) {
+              console.log("Error sharing entry:", err);
+            }
+          });
+        } else {
+          console.log(`Your browser doesn't support the Web Share API.`);
+          shareEntryButton.hidden = true;
+        }
+      }
+    {% endif %}
   {% endblock %}
 </script>
