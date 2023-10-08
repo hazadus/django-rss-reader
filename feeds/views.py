@@ -73,8 +73,6 @@ class FeedListView(BaseFeedColumnView, ListView):
     Represents first column of the UI - "Feeds".
     """
 
-    # TODO: tests
-
     model = Feed
     queryset = Feed.objects.all().prefetch_related("entries")
     template_name = "feeds/layout.html"
