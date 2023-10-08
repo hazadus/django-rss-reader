@@ -1,0 +1,408 @@
+[
+{
+  "model": "feeds.feed",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "title": "Adam Johnson",
+    "url": "http://adamj.eu/tech/atom.xml",
+    "site_url": "https://adamj.eu/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:39.367Z",
+    "updated": "2023-10-08T16:38:39.367Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "title": "Anthony Fu",
+    "url": "https://antfu.me/feed.xml",
+    "site_url": "https://antfu.me/",
+    "image_url": "https://antfu.me/avatar.png",
+    "folder": null,
+    "created": "2023-10-08T16:38:39.935Z",
+    "updated": "2023-10-08T16:38:39.935Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "title": "Apollo GraphQL Blog",
+    "url": "https://www.apollographql.com/blog/rss.xml",
+    "site_url": "https://www.apollographql.com/blog",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:43.489Z",
+    "updated": "2023-10-08T16:38:43.489Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "title": "BenCodeZen Blog",
+    "url": "https://www.bencodezen.io/rss.xml",
+    "site_url": "https://www.bencodezen.io",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:44.404Z",
+    "updated": "2023-10-08T16:38:44.404Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 5,
+  "fields": {
+    "user": 1,
+    "title": "Better Simple",
+    "url": "https://www.better-simple.com/atom.xml",
+    "site_url": "https://www.better-simple.com/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:44.943Z",
+    "updated": "2023-10-08T16:38:44.943Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "title": "Brenton Cleeland",
+    "url": "https://brntn.me/rss/",
+    "site_url": "https://brntn.me/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:48.432Z",
+    "updated": "2023-10-08T16:38:48.432Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 7,
+  "fields": {
+    "user": 1,
+    "title": "CSS-Tricks",
+    "url": "https://css-tricks.com/feed/",
+    "site_url": "https://css-tricks.com",
+    "image_url": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2021/07/star.png?fit=32%2C32&ssl=1",
+    "folder": null,
+    "created": "2023-10-08T16:38:48.753Z",
+    "updated": "2023-10-08T16:38:48.753Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 8,
+  "fields": {
+    "user": 1,
+    "title": "Daniel Roy Greenfeld",
+    "url": "https://daniel.feldroy.com/feeds/atom.xml",
+    "site_url": "https://daniel.feldroy.com",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:48.838Z",
+    "updated": "2023-10-08T16:38:48.838Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 9,
+  "fields": {
+    "user": 1,
+    "title": "DigitalOcean Community Tutorials",
+    "url": "https://www.digitalocean.com/community/articles/feed.atom",
+    "site_url": "https://www.digitalocean.com/community/tutorials",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:52.584Z",
+    "updated": "2023-10-08T16:38:52.584Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 10,
+  "fields": {
+    "user": 1,
+    "title": "freeCodeCamp.org",
+    "url": "https://www.freecodecamp.org/news/rss/",
+    "site_url": "https://www.freecodecamp.org/news/",
+    "image_url": "https://cdn.freecodecamp.org/universal/favicons/favicon.png",
+    "folder": null,
+    "created": "2023-10-08T16:38:52.848Z",
+    "updated": "2023-10-08T16:38:52.848Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 11,
+  "fields": {
+    "user": 1,
+    "title": "Josh Collinsworth",
+    "url": "https://joshcollinsworth.com/api/rss.xml",
+    "site_url": "https://joshcollinsworth.com",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:53.117Z",
+    "updated": "2023-10-08T16:38:53.117Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 12,
+  "fields": {
+    "user": 1,
+    "title": "Josh Comeau's blog",
+    "url": "https://www.joshwcomeau.com/rss.xml",
+    "site_url": "https://www.joshwcomeau.com/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:53.247Z",
+    "updated": "2023-10-08T16:38:53.247Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 13,
+  "fields": {
+    "user": 1,
+    "title": "Martin Fowler",
+    "url": "https://martinfowler.com/feed.atom",
+    "site_url": "https://martinfowler.com",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:54.019Z",
+    "updated": "2023-10-08T16:38:54.019Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 14,
+  "fields": {
+    "user": 1,
+    "title": "Michael Hoffmann",
+    "url": "https://mokkapps.de/rss.xml",
+    "site_url": "https://mokkapps.de",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:54.273Z",
+    "updated": "2023-10-08T16:38:54.273Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 15,
+  "fields": {
+    "user": 1,
+    "title": "Quickwit Blog",
+    "url": "https://quickwit.io/blog/rss.xml",
+    "site_url": "https://quickwit.io/blog",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:54.446Z",
+    "updated": "2023-10-08T16:38:54.446Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 16,
+  "fields": {
+    "user": 1,
+    "title": "Real Python",
+    "url": "https://realpython.com/atom.xml",
+    "site_url": "https://realpython.com/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:54.669Z",
+    "updated": "2023-10-08T16:38:54.669Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 17,
+  "fields": {
+    "user": 1,
+    "title": "Stefan Judis Web Development",
+    "url": "https://www.stefanjudis.com/rss.xml",
+    "site_url": "https://www.stefanjudis.com/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:55.416Z",
+    "updated": "2023-10-08T16:38:55.416Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 18,
+  "fields": {
+    "user": 1,
+    "title": "Tall, Snarky Canadian",
+    "url": "http://www.snarky.ca/feed",
+    "site_url": "https://snarky.ca/",
+    "image_url": "https://snarky.ca/favicon.png",
+    "folder": null,
+    "created": "2023-10-08T16:38:55.813Z",
+    "updated": "2023-10-08T16:38:55.813Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 19,
+  "fields": {
+    "user": 1,
+    "title": "TestDriven.io Blog Feed",
+    "url": "http://testdriven.io/feed.xml",
+    "site_url": "https://testdriven.io/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:56.803Z",
+    "updated": "2023-10-08T16:38:56.803Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 20,
+  "fields": {
+    "user": 1,
+    "title": "This Week in Rust",
+    "url": "https://this-week-in-rust.org/rss.xml",
+    "site_url": "https://this-week-in-rust.org/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:56.979Z",
+    "updated": "2023-10-08T16:38:56.979Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 21,
+  "fields": {
+    "user": 1,
+    "title": "Wesley Aptekar-Cassels",
+    "url": "http://blog.wesleyac.com/feed.xml",
+    "site_url": "https://blog.wesleyac.com",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:57.168Z",
+    "updated": "2023-10-08T16:38:57.168Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 22,
+  "fields": {
+    "user": 1,
+    "title": "RA - Album Reviews",
+    "url": "http://www.residentadvisor.net/xml/review-album.xml",
+    "site_url": "https://ra.co/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:57.852Z",
+    "updated": "2023-10-08T16:38:57.852Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 23,
+  "fields": {
+    "user": 1,
+    "title": "Артемий Лебедев",
+    "url": "https://teletype.in/rss/temalebedev",
+    "site_url": "https://blog.tema.ru/?utm_source=teletype&utm_medium=feed_rss&utm_campaign=temalebedev",
+    "image_url": "https://img2.teletype.in/files/1e/47/1e47842e-e4b1-4877-952a-b2eeb5941f8a.png",
+    "folder": null,
+    "created": "2023-10-08T16:38:58.363Z",
+    "updated": "2023-10-08T16:38:58.363Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 24,
+  "fields": {
+    "user": 1,
+    "title": "Авторевю",
+    "url": "https://autoreview.ru/feed/news/rss",
+    "site_url": "https://autoreview.ru",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:38:58.571Z",
+    "updated": "2023-10-08T16:38:58.571Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 25,
+  "fields": {
+    "user": 1,
+    "title": "3DNews: Главные новости",
+    "url": "http://www.3dnews.ru/news/main/rss",
+    "site_url": "https://3dnews.ru/",
+    "image_url": "https://3dnews.ru/assets/images/logo.png",
+    "folder": null,
+    "created": "2023-10-08T16:38:59.347Z",
+    "updated": "2023-10-08T16:38:59.347Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 26,
+  "fields": {
+    "user": 1,
+    "title": "Мир фантастики и фэнтези",
+    "url": "https://www.mirf.ru/feed",
+    "site_url": "https://www.mirf.ru",
+    "image_url": "https://www.mirf.ru/wp-content/uploads/2019/03/cropped-MF_186_N03_2019_Logo_MF_Short_Black-125x125.png",
+    "folder": null,
+    "created": "2023-10-08T16:38:59.720Z",
+    "updated": "2023-10-08T16:38:59.720Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 27,
+  "fields": {
+    "user": 1,
+    "title": "Игровые новости от StopGame",
+    "url": "http://stopgame.ru/rss/rss_news.xml",
+    "site_url": "https://stopgame.ru",
+    "image_url": "https://images.stopgame.ru/site/logos/stopgame.logo.square.140.png",
+    "folder": null,
+    "created": "2023-10-08T16:39:00.294Z",
+    "updated": "2023-10-08T16:39:00.294Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 28,
+  "fields": {
+    "user": 1,
+    "title": "DTF: Популярное за все время",
+    "url": "https://dtf.ru/rss/all",
+    "site_url": "https://dtf.ru/",
+    "image_url": "https://leonardo.osnova.io/16204d4e-a928-fff9-a4ed-e1ca1d2cec0d",
+    "folder": null,
+    "created": "2023-10-08T16:39:01.002Z",
+    "updated": "2023-10-08T16:39:01.002Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 29,
+  "fields": {
+    "user": 1,
+    "title": "DISGUSTING MEN. Отвратительные мужики",
+    "url": "http://disgustingmen.com/feed/",
+    "site_url": "https://disgustingmen.com",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-08T16:39:01.475Z",
+    "updated": "2023-10-08T16:39:01.475Z"
+  }
+}
+]

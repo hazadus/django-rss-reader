@@ -1,0 +1,569 @@
+[
+{
+  "model": "feeds.tag",
+  "pk": 1,
+  "fields": {
+    "title": "Кино"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 2,
+  "fields": {
+    "title": "Жизнь"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 3,
+  "fields": {
+    "title": "История"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 4,
+  "fields": {
+    "title": "Рецензии"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 5,
+  "fields": {
+    "title": "Блог"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 6,
+  "fields": {
+    "title": "Отвратительные мужики"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 7,
+  "fields": {
+    "title": "Подкаст"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 8,
+  "fields": {
+    "title": "Строки"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 9,
+  "fields": {
+    "title": "Игры"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 10,
+  "fields": {
+    "title": "Девушки"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 11,
+  "fields": {
+    "title": "Nsfw"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 12,
+  "fields": {
+    "title": "Комиксы"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 13,
+  "fields": {
+    "title": "Юмор"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 14,
+  "fields": {
+    "title": "Fallout"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 15,
+  "fields": {
+    "title": "Наши комиксы"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 16,
+  "fields": {
+    "title": "Постапокалипсис"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 17,
+  "fields": {
+    "title": "Юмористическая фантастика"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 18,
+  "fields": {
+    "title": "Блоги"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 19,
+  "fields": {
+    "title": "Книги"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 20,
+  "fields": {
+    "title": "Героическое фэнтези"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 21,
+  "fields": {
+    "title": "Что почитать"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 22,
+  "fields": {
+    "title": "Эпическое фэнтези"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 23,
+  "fields": {
+    "title": "Новости"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 24,
+  "fields": {
+    "title": "Новинки кино"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 25,
+  "fields": {
+    "title": "Анонс"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 26,
+  "fields": {
+    "title": "Дайджест"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 27,
+  "fields": {
+    "title": "Что посмотреть"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 28,
+  "fields": {
+    "title": "Главные новости - космос"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 29,
+  "fields": {
+    "title": "Главные новости - интересности из мира хай-тек"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 30,
+  "fields": {
+    "title": "Главные новости - мобильные телефоны смартфоны сотовая связь коммуникаторы кпк"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 31,
+  "fields": {
+    "title": "This week in rust"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 32,
+  "fields": {
+    "title": "Environment"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 33,
+  "fields": {
+    "title": "Philosophy"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 34,
+  "fields": {
+    "title": "Packaging"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 35,
+  "fields": {
+    "title": "Python"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 36,
+  "fields": {
+    "title": "Wasi"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 37,
+  "fields": {
+    "title": "Webassembly"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 38,
+  "fields": {
+    "title": "Tilpost"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 39,
+  "fields": {
+    "title": "Css"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 40,
+  "fields": {
+    "title": "Javascript"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 41,
+  "fields": {
+    "title": "Blogpost"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 42,
+  "fields": {
+    "title": "Newsletter"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 43,
+  "fields": {
+    "title": "Note"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 44,
+  "fields": {
+    "title": "Shower thoughts"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 45,
+  "fields": {
+    "title": "Release"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 46,
+  "fields": {
+    "title": "Engineering"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 47,
+  "fields": {
+    "title": "Tracing"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 48,
+  "fields": {
+    "title": "Monitoring"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 49,
+  "fields": {
+    "title": "Devops"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 50,
+  "fields": {
+    "title": "Skip-home-page"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 51,
+  "fields": {
+    "title": "React"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 52,
+  "fields": {
+    "title": "Artificial intelligence"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 53,
+  "fields": {
+    "title": "Browsers"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 54,
+  "fields": {
+    "title": "User experience"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 55,
+  "fields": {
+    "title": "Git"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 56,
+  "fields": {
+    "title": "Laravel"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 57,
+  "fields": {
+    "title": "Travel"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 58,
+  "fields": {
+    "title": "Family"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 59,
+  "fields": {
+    "title": "Uma"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 60,
+  "fields": {
+    "title": "Octopus"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 61,
+  "fields": {
+    "title": "Kraken"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 62,
+  "fields": {
+    "title": "Til"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 63,
+  "fields": {
+    "title": "Article"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 64,
+  "fields": {
+    "title": "Passkeys"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 65,
+  "fields": {
+    "title": "Security"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 66,
+  "fields": {
+    "title": "Webauthn"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 67,
+  "fields": {
+    "title": "Cross-browser"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 68,
+  "fields": {
+    "title": "Devtools"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 69,
+  "fields": {
+    "title": "Custom elements"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 70,
+  "fields": {
+    "title": "I18n"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 71,
+  "fields": {
+    "title": "Locales"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 72,
+  "fields": {
+    "title": "Learning"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 73,
+  "fields": {
+    "title": "Cos()"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 74,
+  "fields": {
+    "title": "Math"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 75,
+  "fields": {
+    "title": "Sin()"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 76,
+  "fields": {
+    "title": "Django"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 77,
+  "fields": {
+    "title": "Orm"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 78,
+  "fields": {
+    "title": "Modelfield"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 79,
+  "fields": {
+    "title": "Registerfield"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 80,
+  "fields": {
+    "title": "Hookfield"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 81,
+  "fields": {
+    "title": "Posts"
+  }
+}
+]
