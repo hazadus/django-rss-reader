@@ -9,7 +9,6 @@ from users.models import CustomUser
 logger = logging.getLogger(__name__)
 
 FEED_URLS = [
-    "https://hazadus.ru",
     "http://adamj.eu/tech/atom.xml",
     "https://antfu.me/feed.xml",
     "https://www.apollographql.com/blog/rss.xml",
@@ -59,7 +58,7 @@ class Command(BaseCommand):
         """
         Handles the flow of the command.
         """
-        user = CustomUser.objects.get(email="hazadus7@gmail.com")
+        user = CustomUser.objects.first()
 
         start_time = time.time()
         total_items = 0

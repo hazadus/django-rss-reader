@@ -1,0 +1,21 @@
+[
+{
+  "model": "users.customuser",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$kXjPSpBJAJu6vWUNmo4dQi$NvPaHgQccbdiGkLaKi8kZgNwIJVRnW1YMZ2fGBctoLY=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "anonymous",
+    "first_name": "",
+    "last_name": "",
+    "email": "anon@mail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-10-08T16:38:26.796Z",
+    "profile_image": "",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

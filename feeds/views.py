@@ -26,7 +26,24 @@ MODE_QUERYSETS = {
 }
 
 
-class EntriesListView(ListView):
+class FeedListView(ListView):
+    model = Feed
+    queryset = Feed.objects.all().prefetch_related("entries")
+    template_name = "feeds/layout.html"
+    context_object_name = "feeds"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["all_entries_count"] = MODE_QUERYSETS["all"].count()
+        context["today_entries_count"] = MODE_QUERYSETS["today"].count()
+        context["unread_entries_count"] = MODE_QUERYSETS["unread"].count()
+        context["read_entries_count"] = MODE_QUERYSETS["read"].count()
+        context["favorites_entries_count"] = MODE_QUERYSETS["favorites"].count()
+        return context
+
+
+class EntryListView(ListView):
     paginate_by = 100
     model = Entry
     template_name = "feeds/layout.html"
@@ -122,23 +139,6 @@ class TagListView(ListView):
     )
     template_name = "feeds/layout.html"
     context_object_name = "tags"
-
-
-class FeedListView(ListView):
-    model = Feed
-    queryset = Feed.objects.all().prefetch_related("entries")
-    template_name = "feeds/layout.html"
-    context_object_name = "feeds"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context["all_entries_count"] = MODE_QUERYSETS["all"].count()
-        context["today_entries_count"] = MODE_QUERYSETS["today"].count()
-        context["unread_entries_count"] = MODE_QUERYSETS["unread"].count()
-        context["read_entries_count"] = MODE_QUERYSETS["read"].count()
-        context["favorites_entries_count"] = MODE_QUERYSETS["favorites"].count()
-        return context
 
 
 @require_POST
