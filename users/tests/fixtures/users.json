@@ -3,7 +3,7 @@
   "model": "users.customuser",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$600000$kXjPSpBJAJu6vWUNmo4dQi$NvPaHgQccbdiGkLaKi8kZgNwIJVRnW1YMZ2fGBctoLY=",
+    "password": "pbkdf2_sha256$600000$jLZNOKZ7O3ipYgQoUVS9on$Ej83rDk3z8s2IbVHsKYVSDa58+N2ps+PnVk05N3HIN8=",
     "last_login": null,
     "is_superuser": true,
     "username": "anonymous",
@@ -12,7 +12,7 @@
     "email": "anon@mail.com",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2023-10-08T16:38:26.796Z",
+    "date_joined": "2023-10-09T09:33:03.309Z",
     "profile_image": "",
     "groups": [],
     "user_permissions": []

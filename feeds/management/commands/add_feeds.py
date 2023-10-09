@@ -9,6 +9,7 @@ from users.models import CustomUser
 logger = logging.getLogger(__name__)
 
 FEED_URLS = [
+    "https://hazadus.ru/rss.xml",
     "http://adamj.eu/tech/atom.xml",
     "https://antfu.me/feed.xml",
     "https://www.apollographql.com/blog/rss.xml",
@@ -32,15 +33,28 @@ FEED_URLS = [
     "https://github.com/readme.rss",
     "https://this-week-in-rust.org/rss.xml",
     "http://blog.wesleyac.com/feed.xml",
-    "https://www.macworld.com/feed",
     "http://www.residentadvisor.net/xml/review-album.xml",
+    "http://www.residentadvisor.net/xml/features.xml",
+    "http://www.residentadvisor.net/xml/review-single.xml",
     "https://teletype.in/rss/temalebedev",
     "https://autoreview.ru/feed/news/rss",
     "http://www.3dnews.ru/news/main/rss",
+    "http://www.3dnews.ru/video/rss/",
+    "http://www.3dnews.ru/cooling/rss/",
+    "http://www.3dnews.ru/display/rss/",
+    "http://www.3dnews.ru/mobile/rss/",
+    "http://www.3dnews.ru/smart-things/rss/",
     "https://www.mirf.ru/feed",
     "http://stopgame.ru/rss/rss_news.xml",
+    "http://stopgame.ru/rss/rss_review.xml",
+    "http://stopgame.ru/rss/rss_preview.xml",
     "https://dtf.ru/rss/all",
+    "http://feeds.feedburner.com/RockPaperShotgun",
+    "http://igromania.ru/rss/rss_articles.xml",
+    "http://torick.ru/feed/",
     "http://feeds.howtogeek.com/HowToGeek",
+    "https://www.macworld.com/feed",
+    "https://surface-pro.ru/feed/",
     "http://disgustingmen.com/feed/",
 ]
 

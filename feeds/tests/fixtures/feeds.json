@@ -4,13 +4,13 @@
   "pk": 1,
   "fields": {
     "user": 1,
-    "title": "Adam Johnson",
-    "url": "http://adamj.eu/tech/atom.xml",
-    "site_url": "https://adamj.eu/",
+    "title": "Hazadus.ru Blog",
+    "url": "https://hazadus.ru/rss.xml",
+    "site_url": "https://hazadus.ru",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:39.367Z",
-    "updated": "2023-10-08T16:38:39.367Z"
+    "created": "2023-10-09T09:33:11.677Z",
+    "updated": "2023-10-09T09:33:11.677Z"
   }
 },
 {
@@ -18,13 +18,13 @@
   "pk": 2,
   "fields": {
     "user": 1,
-    "title": "Anthony Fu",
-    "url": "https://antfu.me/feed.xml",
-    "site_url": "https://antfu.me/",
-    "image_url": "https://antfu.me/avatar.png",
+    "title": "Adam Johnson",
+    "url": "http://adamj.eu/tech/atom.xml",
+    "site_url": "https://adamj.eu/",
+    "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:39.935Z",
-    "updated": "2023-10-08T16:38:39.935Z"
+    "created": "2023-10-09T09:33:11.852Z",
+    "updated": "2023-10-09T09:33:11.852Z"
   }
 },
 {
@@ -32,13 +32,13 @@
   "pk": 3,
   "fields": {
     "user": 1,
-    "title": "Apollo GraphQL Blog",
-    "url": "https://www.apollographql.com/blog/rss.xml",
-    "site_url": "https://www.apollographql.com/blog",
-    "image_url": null,
+    "title": "Anthony Fu",
+    "url": "https://antfu.me/feed.xml",
+    "site_url": "https://antfu.me/",
+    "image_url": "https://antfu.me/avatar.png",
     "folder": null,
-    "created": "2023-10-08T16:38:43.489Z",
-    "updated": "2023-10-08T16:38:43.489Z"
+    "created": "2023-10-09T09:33:12.304Z",
+    "updated": "2023-10-09T09:33:12.304Z"
   }
 },
 {
@@ -46,13 +46,13 @@
   "pk": 4,
   "fields": {
     "user": 1,
-    "title": "BenCodeZen Blog",
-    "url": "https://www.bencodezen.io/rss.xml",
-    "site_url": "https://www.bencodezen.io",
+    "title": "Apollo GraphQL Blog",
+    "url": "https://www.apollographql.com/blog/rss.xml",
+    "site_url": "https://www.apollographql.com/blog",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:44.404Z",
-    "updated": "2023-10-08T16:38:44.404Z"
+    "created": "2023-10-09T09:33:14.416Z",
+    "updated": "2023-10-09T09:33:14.416Z"
   }
 },
 {
@@ -60,13 +60,13 @@
   "pk": 5,
   "fields": {
     "user": 1,
-    "title": "Better Simple",
-    "url": "https://www.better-simple.com/atom.xml",
-    "site_url": "https://www.better-simple.com/",
+    "title": "BenCodeZen Blog",
+    "url": "https://www.bencodezen.io/rss.xml",
+    "site_url": "https://www.bencodezen.io",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:44.943Z",
-    "updated": "2023-10-08T16:38:44.943Z"
+    "created": "2023-10-09T09:33:15.126Z",
+    "updated": "2023-10-09T09:33:15.126Z"
   }
 },
 {
@@ -74,13 +74,13 @@
   "pk": 6,
   "fields": {
     "user": 1,
-    "title": "Brenton Cleeland",
-    "url": "https://brntn.me/rss/",
-    "site_url": "https://brntn.me/",
+    "title": "Better Simple",
+    "url": "https://www.better-simple.com/atom.xml",
+    "site_url": "https://www.better-simple.com/",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:48.432Z",
-    "updated": "2023-10-08T16:38:48.432Z"
+    "created": "2023-10-09T09:33:15.574Z",
+    "updated": "2023-10-09T09:33:15.574Z"
   }
 },
 {
@@ -88,13 +88,13 @@
   "pk": 7,
   "fields": {
     "user": 1,
-    "title": "CSS-Tricks",
-    "url": "https://css-tricks.com/feed/",
-    "site_url": "https://css-tricks.com",
-    "image_url": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2021/07/star.png?fit=32%2C32&ssl=1",
+    "title": "Brenton Cleeland",
+    "url": "https://brntn.me/rss/",
+    "site_url": "https://brntn.me/",
+    "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:48.753Z",
-    "updated": "2023-10-08T16:38:48.753Z"
+    "created": "2023-10-09T09:33:18.658Z",
+    "updated": "2023-10-09T09:33:18.658Z"
   }
 },
 {
@@ -102,13 +102,13 @@
   "pk": 8,
   "fields": {
     "user": 1,
-    "title": "Daniel Roy Greenfeld",
-    "url": "https://daniel.feldroy.com/feeds/atom.xml",
-    "site_url": "https://daniel.feldroy.com",
-    "image_url": null,
+    "title": "CSS-Tricks",
+    "url": "https://css-tricks.com/feed/",
+    "site_url": "https://css-tricks.com",
+    "image_url": "https://i0.wp.com/css-tricks.com/wp-content/uploads/2021/07/star.png?fit=32%2C32&ssl=1",
     "folder": null,
-    "created": "2023-10-08T16:38:48.838Z",
-    "updated": "2023-10-08T16:38:48.838Z"
+    "created": "2023-10-09T09:33:18.940Z",
+    "updated": "2023-10-09T09:33:18.940Z"
   }
 },
 {
@@ -116,13 +116,13 @@
   "pk": 9,
   "fields": {
     "user": 1,
-    "title": "DigitalOcean Community Tutorials",
-    "url": "https://www.digitalocean.com/community/articles/feed.atom",
-    "site_url": "https://www.digitalocean.com/community/tutorials",
+    "title": "Daniel Roy Greenfeld",
+    "url": "https://daniel.feldroy.com/feeds/atom.xml",
+    "site_url": "https://daniel.feldroy.com",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:52.584Z",
-    "updated": "2023-10-08T16:38:52.584Z"
+    "created": "2023-10-09T09:33:19.053Z",
+    "updated": "2023-10-09T09:33:19.053Z"
   }
 },
 {
@@ -130,13 +130,13 @@
   "pk": 10,
   "fields": {
     "user": 1,
-    "title": "freeCodeCamp.org",
-    "url": "https://www.freecodecamp.org/news/rss/",
-    "site_url": "https://www.freecodecamp.org/news/",
-    "image_url": "https://cdn.freecodecamp.org/universal/favicons/favicon.png",
+    "title": "DigitalOcean Community Tutorials",
+    "url": "https://www.digitalocean.com/community/articles/feed.atom",
+    "site_url": "https://www.digitalocean.com/community/tutorials",
+    "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:52.848Z",
-    "updated": "2023-10-08T16:38:52.848Z"
+    "created": "2023-10-09T09:33:21.291Z",
+    "updated": "2023-10-09T09:33:21.291Z"
   }
 },
 {
@@ -144,13 +144,13 @@
   "pk": 11,
   "fields": {
     "user": 1,
-    "title": "Josh Collinsworth",
-    "url": "https://joshcollinsworth.com/api/rss.xml",
-    "site_url": "https://joshcollinsworth.com",
-    "image_url": null,
+    "title": "freeCodeCamp.org",
+    "url": "https://www.freecodecamp.org/news/rss/",
+    "site_url": "https://www.freecodecamp.org/news/",
+    "image_url": "https://cdn.freecodecamp.org/universal/favicons/favicon.png",
     "folder": null,
-    "created": "2023-10-08T16:38:53.117Z",
-    "updated": "2023-10-08T16:38:53.117Z"
+    "created": "2023-10-09T09:33:21.529Z",
+    "updated": "2023-10-09T09:33:21.529Z"
   }
 },
 {
@@ -158,13 +158,13 @@
   "pk": 12,
   "fields": {
     "user": 1,
-    "title": "Josh Comeau's blog",
-    "url": "https://www.joshwcomeau.com/rss.xml",
-    "site_url": "https://www.joshwcomeau.com/",
+    "title": "Josh Collinsworth",
+    "url": "https://joshcollinsworth.com/api/rss.xml",
+    "site_url": "https://joshcollinsworth.com",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:53.247Z",
-    "updated": "2023-10-08T16:38:53.247Z"
+    "created": "2023-10-09T09:33:21.698Z",
+    "updated": "2023-10-09T09:33:21.698Z"
   }
 },
 {
@@ -172,13 +172,13 @@
   "pk": 13,
   "fields": {
     "user": 1,
-    "title": "Martin Fowler",
-    "url": "https://martinfowler.com/feed.atom",
-    "site_url": "https://martinfowler.com",
+    "title": "Josh Comeau's blog",
+    "url": "https://www.joshwcomeau.com/rss.xml",
+    "site_url": "https://www.joshwcomeau.com/",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:54.019Z",
-    "updated": "2023-10-08T16:38:54.019Z"
+    "created": "2023-10-09T09:33:21.860Z",
+    "updated": "2023-10-09T09:33:21.860Z"
   }
 },
 {
@@ -186,13 +186,13 @@
   "pk": 14,
   "fields": {
     "user": 1,
-    "title": "Michael Hoffmann",
-    "url": "https://mokkapps.de/rss.xml",
-    "site_url": "https://mokkapps.de",
+    "title": "Martin Fowler",
+    "url": "https://martinfowler.com/feed.atom",
+    "site_url": "https://martinfowler.com",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:54.273Z",
-    "updated": "2023-10-08T16:38:54.273Z"
+    "created": "2023-10-09T09:33:22.604Z",
+    "updated": "2023-10-09T09:33:22.604Z"
   }
 },
 {
@@ -200,13 +200,13 @@
   "pk": 15,
   "fields": {
     "user": 1,
-    "title": "Quickwit Blog",
-    "url": "https://quickwit.io/blog/rss.xml",
-    "site_url": "https://quickwit.io/blog",
+    "title": "Michael Hoffmann",
+    "url": "https://mokkapps.de/rss.xml",
+    "site_url": "https://mokkapps.de",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:54.446Z",
-    "updated": "2023-10-08T16:38:54.446Z"
+    "created": "2023-10-09T09:33:22.898Z",
+    "updated": "2023-10-09T09:33:22.898Z"
   }
 },
 {
@@ -214,13 +214,13 @@
   "pk": 16,
   "fields": {
     "user": 1,
-    "title": "Real Python",
-    "url": "https://realpython.com/atom.xml",
-    "site_url": "https://realpython.com/",
+    "title": "Quickwit Blog",
+    "url": "https://quickwit.io/blog/rss.xml",
+    "site_url": "https://quickwit.io/blog",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:54.669Z",
-    "updated": "2023-10-08T16:38:54.669Z"
+    "created": "2023-10-09T09:33:23.080Z",
+    "updated": "2023-10-09T09:33:23.080Z"
   }
 },
 {
@@ -228,13 +228,13 @@
   "pk": 17,
   "fields": {
     "user": 1,
-    "title": "Stefan Judis Web Development",
-    "url": "https://www.stefanjudis.com/rss.xml",
-    "site_url": "https://www.stefanjudis.com/",
+    "title": "Real Python",
+    "url": "https://realpython.com/atom.xml",
+    "site_url": "https://realpython.com/",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:55.416Z",
-    "updated": "2023-10-08T16:38:55.416Z"
+    "created": "2023-10-09T09:33:23.256Z",
+    "updated": "2023-10-09T09:33:23.256Z"
   }
 },
 {
@@ -242,13 +242,13 @@
   "pk": 18,
   "fields": {
     "user": 1,
-    "title": "Tall, Snarky Canadian",
-    "url": "http://www.snarky.ca/feed",
-    "site_url": "https://snarky.ca/",
-    "image_url": "https://snarky.ca/favicon.png",
+    "title": "Stefan Judis Web Development",
+    "url": "https://www.stefanjudis.com/rss.xml",
+    "site_url": "https://www.stefanjudis.com/",
+    "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:55.813Z",
-    "updated": "2023-10-08T16:38:55.813Z"
+    "created": "2023-10-09T09:33:26.981Z",
+    "updated": "2023-10-09T09:33:26.981Z"
   }
 },
 {
@@ -256,13 +256,13 @@
   "pk": 19,
   "fields": {
     "user": 1,
-    "title": "TestDriven.io Blog Feed",
-    "url": "http://testdriven.io/feed.xml",
-    "site_url": "https://testdriven.io/",
-    "image_url": null,
+    "title": "Tall, Snarky Canadian",
+    "url": "http://www.snarky.ca/feed",
+    "site_url": "https://snarky.ca/",
+    "image_url": "https://snarky.ca/favicon.png",
     "folder": null,
-    "created": "2023-10-08T16:38:56.803Z",
-    "updated": "2023-10-08T16:38:56.803Z"
+    "created": "2023-10-09T09:33:27.451Z",
+    "updated": "2023-10-09T09:33:27.451Z"
   }
 },
 {
@@ -270,13 +270,13 @@
   "pk": 20,
   "fields": {
     "user": 1,
-    "title": "This Week in Rust",
-    "url": "https://this-week-in-rust.org/rss.xml",
-    "site_url": "https://this-week-in-rust.org/",
+    "title": "TestDriven.io Blog Feed",
+    "url": "http://testdriven.io/feed.xml",
+    "site_url": "https://testdriven.io/",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:56.979Z",
-    "updated": "2023-10-08T16:38:56.979Z"
+    "created": "2023-10-09T09:33:28.454Z",
+    "updated": "2023-10-09T09:33:28.454Z"
   }
 },
 {
@@ -284,13 +284,13 @@
   "pk": 21,
   "fields": {
     "user": 1,
-    "title": "Wesley Aptekar-Cassels",
-    "url": "http://blog.wesleyac.com/feed.xml",
-    "site_url": "https://blog.wesleyac.com",
+    "title": "The GitHub Blog",
+    "url": "https://github.com/blog/all.atom",
+    "site_url": "https://github.blog/",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:57.168Z",
-    "updated": "2023-10-08T16:38:57.168Z"
+    "created": "2023-10-09T09:33:28.870Z",
+    "updated": "2023-10-09T09:33:28.870Z"
   }
 },
 {
@@ -298,13 +298,13 @@
   "pk": 22,
   "fields": {
     "user": 1,
-    "title": "RA - Album Reviews",
-    "url": "http://www.residentadvisor.net/xml/review-album.xml",
-    "site_url": "https://ra.co/",
-    "image_url": null,
+    "title": "The ReadME Project",
+    "url": "https://github.com/readme.rss",
+    "site_url": "https://github.com/readme",
+    "image_url": "https://github.githubassets.com/images/modules/site/social-cards/readme-project.jpg",
     "folder": null,
-    "created": "2023-10-08T16:38:57.852Z",
-    "updated": "2023-10-08T16:38:57.852Z"
+    "created": "2023-10-09T09:33:29.199Z",
+    "updated": "2023-10-09T09:33:29.199Z"
   }
 },
 {
@@ -312,13 +312,13 @@
   "pk": 23,
   "fields": {
     "user": 1,
-    "title": "Артемий Лебедев",
-    "url": "https://teletype.in/rss/temalebedev",
-    "site_url": "https://blog.tema.ru/?utm_source=teletype&utm_medium=feed_rss&utm_campaign=temalebedev",
-    "image_url": "https://img2.teletype.in/files/1e/47/1e47842e-e4b1-4877-952a-b2eeb5941f8a.png",
+    "title": "This Week in Rust",
+    "url": "https://this-week-in-rust.org/rss.xml",
+    "site_url": "https://this-week-in-rust.org/",
+    "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:58.363Z",
-    "updated": "2023-10-08T16:38:58.363Z"
+    "created": "2023-10-09T09:33:29.621Z",
+    "updated": "2023-10-09T09:33:29.621Z"
   }
 },
 {
@@ -326,13 +326,13 @@
   "pk": 24,
   "fields": {
     "user": 1,
-    "title": "Авторевю",
-    "url": "https://autoreview.ru/feed/news/rss",
-    "site_url": "https://autoreview.ru",
+    "title": "Wesley Aptekar-Cassels",
+    "url": "http://blog.wesleyac.com/feed.xml",
+    "site_url": "https://blog.wesleyac.com",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:58.571Z",
-    "updated": "2023-10-08T16:38:58.571Z"
+    "created": "2023-10-09T09:33:29.967Z",
+    "updated": "2023-10-09T09:33:29.967Z"
   }
 },
 {
@@ -340,13 +340,13 @@
   "pk": 25,
   "fields": {
     "user": 1,
-    "title": "3DNews: Главные новости",
-    "url": "http://www.3dnews.ru/news/main/rss",
-    "site_url": "https://3dnews.ru/",
-    "image_url": "https://3dnews.ru/assets/images/logo.png",
+    "title": "RA - Album Reviews",
+    "url": "http://www.residentadvisor.net/xml/review-album.xml",
+    "site_url": "https://ra.co/",
+    "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:59.347Z",
-    "updated": "2023-10-08T16:38:59.347Z"
+    "created": "2023-10-09T09:33:30.495Z",
+    "updated": "2023-10-09T09:33:30.495Z"
   }
 },
 {
@@ -354,13 +354,13 @@
   "pk": 26,
   "fields": {
     "user": 1,
-    "title": "Мир фантастики и фэнтези",
-    "url": "https://www.mirf.ru/feed",
-    "site_url": "https://www.mirf.ru",
-    "image_url": "https://www.mirf.ru/wp-content/uploads/2019/03/cropped-MF_186_N03_2019_Logo_MF_Short_Black-125x125.png",
+    "title": "RA - Features",
+    "url": "http://www.residentadvisor.net/xml/features.xml",
+    "site_url": "https://ra.co/",
+    "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:38:59.720Z",
-    "updated": "2023-10-08T16:38:59.720Z"
+    "created": "2023-10-09T09:33:31.066Z",
+    "updated": "2023-10-09T09:33:31.066Z"
   }
 },
 {
@@ -368,13 +368,13 @@
   "pk": 27,
   "fields": {
     "user": 1,
-    "title": "Игровые новости от StopGame",
-    "url": "http://stopgame.ru/rss/rss_news.xml",
-    "site_url": "https://stopgame.ru",
-    "image_url": "https://images.stopgame.ru/site/logos/stopgame.logo.square.140.png",
+    "title": "RA - Single Reviews",
+    "url": "http://www.residentadvisor.net/xml/review-single.xml",
+    "site_url": "https://ra.co/",
+    "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:39:00.294Z",
-    "updated": "2023-10-08T16:39:00.294Z"
+    "created": "2023-10-09T09:33:31.674Z",
+    "updated": "2023-10-09T09:33:31.674Z"
   }
 },
 {
@@ -382,13 +382,13 @@
   "pk": 28,
   "fields": {
     "user": 1,
-    "title": "DTF: Популярное за все время",
-    "url": "https://dtf.ru/rss/all",
-    "site_url": "https://dtf.ru/",
-    "image_url": "https://leonardo.osnova.io/16204d4e-a928-fff9-a4ed-e1ca1d2cec0d",
+    "title": "Артемий Лебедев",
+    "url": "https://teletype.in/rss/temalebedev",
+    "site_url": "https://blog.tema.ru/?utm_source=teletype&utm_medium=feed_rss&utm_campaign=temalebedev",
+    "image_url": "https://img2.teletype.in/files/1e/47/1e47842e-e4b1-4877-952a-b2eeb5941f8a.png",
     "folder": null,
-    "created": "2023-10-08T16:39:01.002Z",
-    "updated": "2023-10-08T16:39:01.002Z"
+    "created": "2023-10-09T09:33:32.678Z",
+    "updated": "2023-10-09T09:33:32.678Z"
   }
 },
 {
@@ -396,13 +396,251 @@
   "pk": 29,
   "fields": {
     "user": 1,
+    "title": "Авторевю",
+    "url": "https://autoreview.ru/feed/news/rss",
+    "site_url": "https://autoreview.ru",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-09T09:33:32.922Z",
+    "updated": "2023-10-09T09:33:32.922Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 30,
+  "fields": {
+    "user": 1,
+    "title": "3DNews: Главные новости",
+    "url": "http://www.3dnews.ru/news/main/rss",
+    "site_url": "https://3dnews.ru/",
+    "image_url": "https://3dnews.ru/assets/images/logo.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:33.523Z",
+    "updated": "2023-10-09T09:33:33.523Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 31,
+  "fields": {
+    "user": 1,
+    "title": "3DNews: Видеокарты",
+    "url": "http://www.3dnews.ru/video/rss/",
+    "site_url": "https://3dnews.ru/",
+    "image_url": "https://3dnews.ru/assets/images/logo.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:34.076Z",
+    "updated": "2023-10-09T09:33:34.076Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 32,
+  "fields": {
+    "user": 1,
+    "title": "3DNews: Корпуса, БП и охлаждение",
+    "url": "http://www.3dnews.ru/cooling/rss/",
+    "site_url": "https://3dnews.ru/",
+    "image_url": "https://3dnews.ru/assets/images/logo.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:35.463Z",
+    "updated": "2023-10-09T09:33:35.463Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 33,
+  "fields": {
+    "user": 1,
+    "title": "3DNews: Мониторы и проекторы",
+    "url": "http://www.3dnews.ru/display/rss/",
+    "site_url": "https://3dnews.ru/",
+    "image_url": "https://3dnews.ru/assets/images/logo.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:35.947Z",
+    "updated": "2023-10-09T09:33:35.947Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 34,
+  "fields": {
+    "user": 1,
+    "title": "3DNews: Ноутбуки и ПК",
+    "url": "http://www.3dnews.ru/mobile/rss/",
+    "site_url": "https://3dnews.ru/",
+    "image_url": "https://3dnews.ru/assets/images/logo.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:36.355Z",
+    "updated": "2023-10-09T09:33:36.355Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 35,
+  "fields": {
+    "user": 1,
+    "title": "3DNews: Умные вещи",
+    "url": "http://www.3dnews.ru/smart-things/rss/",
+    "site_url": "https://3dnews.ru/",
+    "image_url": "https://3dnews.ru/assets/images/logo.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:37.694Z",
+    "updated": "2023-10-09T09:33:37.694Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 36,
+  "fields": {
+    "user": 1,
+    "title": "Мир фантастики и фэнтези",
+    "url": "https://www.mirf.ru/feed",
+    "site_url": "https://www.mirf.ru",
+    "image_url": "https://www.mirf.ru/wp-content/uploads/2019/03/cropped-MF_186_N03_2019_Logo_MF_Short_Black-125x125.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:38.125Z",
+    "updated": "2023-10-09T09:33:38.125Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 37,
+  "fields": {
+    "user": 1,
+    "title": "Игровые новости от StopGame",
+    "url": "http://stopgame.ru/rss/rss_news.xml",
+    "site_url": "https://stopgame.ru",
+    "image_url": "https://images.stopgame.ru/site/logos/stopgame.logo.square.140.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:38.537Z",
+    "updated": "2023-10-09T09:33:38.537Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 38,
+  "fields": {
+    "user": 1,
+    "title": "Обзоры",
+    "url": "http://stopgame.ru/rss/rss_review.xml",
+    "site_url": "https://stopgame.ru",
+    "image_url": "https://images.stopgame.ru/site/logos/stopgame.logo.square.140.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:38.961Z",
+    "updated": "2023-10-09T09:33:38.961Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 39,
+  "fields": {
+    "user": 1,
+    "title": "Превью",
+    "url": "http://stopgame.ru/rss/rss_preview.xml",
+    "site_url": "https://stopgame.ru",
+    "image_url": "https://images.stopgame.ru/site/logos/stopgame.logo.square.140.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:39.248Z",
+    "updated": "2023-10-09T09:33:39.248Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 40,
+  "fields": {
+    "user": 1,
+    "title": "DTF: Популярное за все время",
+    "url": "https://dtf.ru/rss/all",
+    "site_url": "https://dtf.ru/",
+    "image_url": "https://leonardo.osnova.io/16204d4e-a928-fff9-a4ed-e1ca1d2cec0d",
+    "folder": null,
+    "created": "2023-10-09T09:33:39.356Z",
+    "updated": "2023-10-09T09:33:39.356Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 41,
+  "fields": {
+    "user": 1,
+    "title": "Rock, Paper, Shotgun",
+    "url": "http://feeds.feedburner.com/RockPaperShotgun",
+    "site_url": "https://www.rockpapershotgun.com/feed",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-09T09:33:40.095Z",
+    "updated": "2023-10-09T09:33:40.095Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 42,
+  "fields": {
+    "user": 1,
+    "title": "Kanobu.ru: статьи",
+    "url": "http://igromania.ru/rss/rss_articles.xml",
+    "site_url": "https://www.igromania.ru/articles/",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-09T09:33:40.549Z",
+    "updated": "2023-10-09T09:33:40.549Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 43,
+  "fields": {
+    "user": 1,
+    "title": "Ваш эксперт по геймдизайну",
+    "url": "http://torick.ru/feed/",
+    "site_url": "https://torick.ru",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-09T09:33:40.832Z",
+    "updated": "2023-10-09T09:33:40.832Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 44,
+  "fields": {
+    "user": 1,
+    "title": "Macworld",
+    "url": "https://www.macworld.com/feed",
+    "site_url": "https://www.macworld.com",
+    "image_url": null,
+    "folder": null,
+    "created": "2023-10-09T09:33:41.105Z",
+    "updated": "2023-10-09T09:33:41.105Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 45,
+  "fields": {
+    "user": 1,
+    "title": "Surface Pro",
+    "url": "https://surface-pro.ru/feed/",
+    "site_url": "https://surface-pro.ru",
+    "image_url": "https://surface-pro.ru/wp-content/uploads/2018/09/cropped-Microsoft-logo-m-box-32x32.png",
+    "folder": null,
+    "created": "2023-10-09T09:33:41.529Z",
+    "updated": "2023-10-09T09:33:41.529Z"
+  }
+},
+{
+  "model": "feeds.feed",
+  "pk": 46,
+  "fields": {
+    "user": 1,
     "title": "DISGUSTING MEN. Отвратительные мужики",
     "url": "http://disgustingmen.com/feed/",
     "site_url": "https://disgustingmen.com",
     "image_url": null,
     "folder": null,
-    "created": "2023-10-08T16:39:01.475Z",
-    "updated": "2023-10-08T16:39:01.475Z"
+    "created": "2023-10-09T09:33:42.060Z",
+    "updated": "2023-10-09T09:33:42.060Z"
   }
 }
 ]

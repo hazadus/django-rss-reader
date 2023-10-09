@@ -145,8 +145,6 @@ class Entry(models.Model):
     )
     pub_date = models.DateTimeField(
         verbose_name="publication date",
-        blank=True,
-        null=True,
     )
     upd_date = models.DateTimeField(
         verbose_name="update date",

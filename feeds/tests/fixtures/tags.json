@@ -3,565 +3,824 @@
   "model": "feeds.tag",
   "pk": 1,
   "fields": {
-    "title": "Кино"
+    "title": "Блог"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 2,
   "fields": {
-    "title": "Жизнь"
+    "title": "Дичь"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 3,
   "fields": {
-    "title": "История"
+    "title": "Новости"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 4,
   "fields": {
-    "title": "Рецензии"
+    "title": "Случайные обзоры"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 5,
   "fields": {
-    "title": "Блог"
+    "title": "Кино"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 6,
   "fields": {
-    "title": "Отвратительные мужики"
+    "title": "Жизнь"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 7,
   "fields": {
-    "title": "Подкаст"
+    "title": "История"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 8,
   "fields": {
-    "title": "Строки"
+    "title": "Microsoft office"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 9,
   "fields": {
-    "title": "Игры"
+    "title": "Microsoft"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 10,
   "fields": {
-    "title": "Девушки"
+    "title": "Microsoft onedrive"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 11,
   "fields": {
-    "title": "Nsfw"
+    "title": "Onedrive"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 12,
   "fields": {
-    "title": "Комиксы"
+    "title": "Искусственный интеллект"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 13,
   "fields": {
-    "title": "Юмор"
+    "title": "Bing"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 14,
   "fields": {
-    "title": "Fallout"
+    "title": "Google"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 15,
   "fields": {
-    "title": "Наши комиксы"
+    "title": "Microsoft bing"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 16,
   "fields": {
-    "title": "Постапокалипсис"
+    "title": "Surface duo"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 17,
   "fields": {
-    "title": "Юмористическая фантастика"
+    "title": "Android"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 18,
   "fields": {
-    "title": "Блоги"
+    "title": "Surface duo 2"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 19,
   "fields": {
-    "title": "Книги"
+    "title": "Retroactive"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 20,
   "fields": {
-    "title": "Героическое фэнтези"
+    "title": "Graeme devine"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 21,
   "fields": {
-    "title": "Что почитать"
+    "title": "Rob landeros"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 22,
   "fields": {
-    "title": "Эпическое фэнтези"
+    "title": "The 11th hour"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 23,
   "fields": {
-    "title": "Новости"
+    "title": "The 7th guest"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 24,
   "fields": {
-    "title": "Новинки кино"
+    "title": "Trilobyte"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 25,
   "fields": {
-    "title": "Анонс"
+    "title": "Игровая индустрия"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 26,
   "fields": {
-    "title": "Дайджест"
+    "title": "Игровой дизайн"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 27,
   "fields": {
-    "title": "Что посмотреть"
+    "title": "Геймдизайн"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 28,
   "fields": {
-    "title": "Главные новости - космос"
+    "title": "Геймдизайнеры"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 29,
   "fields": {
-    "title": "Главные новости - интересности из мира хай-тек"
+    "title": "Снг"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 30,
   "fields": {
-    "title": "Главные новости - мобильные телефоны смартфоны сотовая связь коммуникаторы кпк"
+    "title": "Indie"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 31,
   "fields": {
-    "title": "This week in rust"
+    "title": "Egx 2023"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 32,
   "fields": {
-    "title": "Environment"
+    "title": "Egx"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 33,
   "fields": {
-    "title": "Philosophy"
+    "title": "The sunday papers"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 34,
   "fields": {
-    "title": "Packaging"
+    "title": "Blockbuster"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 35,
   "fields": {
-    "title": "Python"
+    "title": "Rpg"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 36,
   "fields": {
-    "title": "Wasi"
+    "title": "Action adventure"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 37,
   "fields": {
-    "title": "Webassembly"
+    "title": "Xbox series x/s"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 38,
   "fields": {
-    "title": "Tilpost"
+    "title": "Arkane austin"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 39,
   "fields": {
-    "title": "Css"
+    "title": "First person"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 40,
   "fields": {
-    "title": "Javascript"
+    "title": "Single player"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 41,
   "fields": {
-    "title": "Blogpost"
+    "title": "Multiplayer cooperative"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 42,
   "fields": {
-    "title": "Newsletter"
+    "title": "Multiplayer competitive"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 43,
   "fields": {
-    "title": "Note"
+    "title": "Pc"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 44,
   "fields": {
-    "title": "Shower thoughts"
+    "title": "Redfall"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 45,
   "fields": {
-    "title": "Release"
+    "title": "Shooter"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 46,
   "fields": {
-    "title": "Engineering"
+    "title": "Комиксы"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 47,
   "fields": {
-    "title": "Tracing"
+    "title": "Фан"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 48,
   "fields": {
-    "title": "Monitoring"
+    "title": "Юмор"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 49,
   "fields": {
-    "title": "Devops"
+    "title": "Наши комиксы"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 50,
   "fields": {
-    "title": "Skip-home-page"
+    "title": "Юмористическое фэнтези"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 51,
   "fields": {
-    "title": "React"
+    "title": "Fallout"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 52,
   "fields": {
-    "title": "Artificial intelligence"
+    "title": "Постапокалипсис"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 53,
   "fields": {
-    "title": "Browsers"
+    "title": "Юмористическая фантастика"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 54,
   "fields": {
-    "title": "User experience"
+    "title": "Блоги"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 55,
   "fields": {
-    "title": "Git"
+    "title": "Книги"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 56,
   "fields": {
-    "title": "Laravel"
+    "title": "Героическое фэнтези"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 57,
   "fields": {
-    "title": "Travel"
+    "title": "Что почитать"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 58,
   "fields": {
-    "title": "Family"
+    "title": "Эпическое фэнтези"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 59,
   "fields": {
-    "title": "Uma"
+    "title": "Умные вещи"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 60,
   "fields": {
-    "title": "Octopus"
+    "title": "Ноутбуки и пк - другие"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 61,
   "fields": {
-    "title": "Kraken"
+    "title": "Ноутбуки и пк - выбор компьютера"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 62,
   "fields": {
-    "title": "Til"
+    "title": "Ноутбуки и пк - msi"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 63,
   "fields": {
-    "title": "Article"
+    "title": "Мониторы и проекторы - lcd-мониторы"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 64,
   "fields": {
-    "title": "Passkeys"
+    "title": "Корпуса бп и охлаждение - блоки питания"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 65,
   "fields": {
-    "title": "Security"
+    "title": "Корпуса бп и охлаждение - выбор компьютера"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 66,
   "fields": {
-    "title": "Webauthn"
+    "title": "Видеокарты - сравнительные тестирования"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 67,
   "fields": {
-    "title": "Cross-browser"
+    "title": "Видеокарты - nvidia"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 68,
   "fields": {
-    "title": "Devtools"
+    "title": "Видеокарты - amd"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 69,
   "fields": {
-    "title": "Custom elements"
+    "title": "Главные новости - автомобили мотоциклы транспортные средства"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 70,
   "fields": {
-    "title": "I18n"
+    "title": "Главные новости - космос"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 71,
   "fields": {
-    "title": "Locales"
+    "title": "Главные новости - интересности из мира хай-тек"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 72,
   "fields": {
-    "title": "Learning"
+    "title": "This week in rust"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 73,
   "fields": {
-    "title": "Cos()"
+    "title": "Open source"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 74,
   "fields": {
-    "title": "Math"
+    "title": "Ai"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 75,
   "fields": {
-    "title": "Sin()"
+    "title": "Generative ai"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 76,
   "fields": {
-    "title": "Django"
+    "title": "Llm"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 77,
   "fields": {
-    "title": "Orm"
+    "title": "Company"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 78,
   "fields": {
-    "title": "Modelfield"
+    "title": "Automation"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 79,
   "fields": {
-    "title": "Registerfield"
+    "title": "Collaboration"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 80,
   "fields": {
-    "title": "Hookfield"
+    "title": "Developer experience"
   }
 },
 {
   "model": "feeds.tag",
   "pk": 81,
+  "fields": {
+    "title": "How github builds github"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 82,
+  "fields": {
+    "title": "Security"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 83,
+  "fields": {
+    "title": "Secret scanning"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 84,
+  "fields": {
+    "title": "Environment"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 85,
+  "fields": {
+    "title": "Philosophy"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 86,
+  "fields": {
+    "title": "Packaging"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 87,
+  "fields": {
+    "title": "Python"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 88,
+  "fields": {
+    "title": "Tilpost"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 89,
+  "fields": {
+    "title": "Css"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 90,
+  "fields": {
+    "title": "Javascript"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 91,
+  "fields": {
+    "title": "Blogpost"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 92,
+  "fields": {
+    "title": "Newsletter"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 93,
+  "fields": {
+    "title": "Release"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 94,
+  "fields": {
+    "title": "Engineering"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 95,
+  "fields": {
+    "title": "Skip-home-page"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 96,
+  "fields": {
+    "title": "React"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 97,
+  "fields": {
+    "title": "Artificial intelligence"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 98,
+  "fields": {
+    "title": "Git"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 99,
+  "fields": {
+    "title": "Travel"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 100,
+  "fields": {
+    "title": "Family"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 101,
+  "fields": {
+    "title": "Uma"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 102,
+  "fields": {
+    "title": "Octopus"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 103,
+  "fields": {
+    "title": "Kraken"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 104,
+  "fields": {
+    "title": "Til"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 105,
+  "fields": {
+    "title": "Article"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 106,
+  "fields": {
+    "title": "Passkeys"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 107,
+  "fields": {
+    "title": "Webauthn"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 108,
+  "fields": {
+    "title": "Cross-browser"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 109,
+  "fields": {
+    "title": "Devtools"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 110,
+  "fields": {
+    "title": "Custom elements"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 111,
+  "fields": {
+    "title": "I18n"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 112,
+  "fields": {
+    "title": "Locales"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 113,
+  "fields": {
+    "title": "Django"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 114,
+  "fields": {
+    "title": "Orm"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 115,
+  "fields": {
+    "title": "Modelfield"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 116,
+  "fields": {
+    "title": "Registerfield"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 117,
+  "fields": {
+    "title": "Hookfield"
+  }
+},
+{
+  "model": "feeds.tag",
+  "pk": 118,
   "fields": {
     "title": "Posts"
   }
