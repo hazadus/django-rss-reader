@@ -16,4 +16,4 @@ jobs:
       - name: Run Tests
         env:
           SECRET_KEY: "django-test-key"
-        run: make test
+        run: python -m manage test
