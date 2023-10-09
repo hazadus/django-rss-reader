@@ -9,6 +9,9 @@ class MiscViewTest(TestCase):
     Test misc. views.
     """
 
+    username = "anon@mail.com"
+    password = "12345678"
+
     fixtures = [
         "users/tests/fixtures/users.json",
         "feeds/tests/fixtures/tags.json",
@@ -24,6 +27,13 @@ class MiscViewTest(TestCase):
         """
         Test `entry_toggle_is_favorite` view works as expected.
         """
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
         entry = Entry.objects.filter(is_favorite=False).first()
         entry_pk = entry.pk
         url = reverse("feeds:entry_toggle_is_favorite", kwargs={"entry_pk": entry_pk})

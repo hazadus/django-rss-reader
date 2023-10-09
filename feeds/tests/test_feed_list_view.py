@@ -23,6 +23,9 @@ class FeedListViewTest(TestCase):
     Test "feeds:feed_list" view.
     """
 
+    username = "anon@mail.com"
+    password = "12345678"
+
     fixtures = [
         "users/tests/fixtures/users.json",
         "feeds/tests/fixtures/tags.json",
@@ -34,10 +37,26 @@ class FeedListViewTest(TestCase):
     def setUpTestData(cls):
         pass
 
+    def test_feed_list_url(self):
+        """
+        Ensure "feeds:feed_list" view is not accessible without login.
+        """
+        # Redirect when not logged in
+        url = reverse("feeds:feed_list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
     def test_feed_list_view(self):
         """
         Check that correct data required in the template is present in context.
         """
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
         url = reverse("feeds:feed_list")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

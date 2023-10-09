@@ -1,5 +1,7 @@
 import logging
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -61,7 +63,7 @@ class BaseEntryColumnView(ContextMixin, View):
         return context
 
 
-class FeedListView(BaseFeedColumnView, ListView):
+class FeedListView(LoginRequiredMixin, BaseFeedColumnView, ListView):
     """
     Represents first column of the UI - "Feeds".
     """
@@ -72,7 +74,9 @@ class FeedListView(BaseFeedColumnView, ListView):
     context_object_name = "feeds"
 
 
-class EntryListView(BaseEntryColumnView, BaseFeedColumnView, ListView):
+class EntryListView(
+    LoginRequiredMixin, BaseEntryColumnView, BaseFeedColumnView, ListView
+):
     """
     Represents two columns of the UI "Entries" and "Feeds".
     """
@@ -98,7 +102,9 @@ class EntryListView(BaseEntryColumnView, BaseFeedColumnView, ListView):
         return context
 
 
-class EntryDetailView(BaseEntryColumnView, BaseFeedColumnView, DetailView):
+class EntryDetailView(
+    LoginRequiredMixin, BaseEntryColumnView, BaseFeedColumnView, DetailView
+):
     """
     Represents all three columns of the UI - Entry detail view, plus "Entries" and "Feeds" columns.
     """
@@ -136,6 +142,7 @@ class EntryDetailView(BaseEntryColumnView, BaseFeedColumnView, DetailView):
         return context
 
 
+@login_required
 @require_POST
 def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpResponse:
     """

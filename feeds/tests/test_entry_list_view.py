@@ -23,6 +23,9 @@ class EntryListViewTest(TestCase):
     Test "feeds:entry_list" view with various options.
     """
 
+    username = "anon@mail.com"
+    password = "12345678"
+
     fixtures = [
         "users/tests/fixtures/users.json",
         "feeds/tests/fixtures/tags.json",
@@ -38,6 +41,13 @@ class EntryListViewTest(TestCase):
         """
         Mode "all"
         """
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
         url = reverse("feeds:entry_list", kwargs={"mode": "all"})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -65,6 +75,13 @@ class EntryListViewTest(TestCase):
         """
         Mode "today"
         """
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
         url = reverse("feeds:entry_list", kwargs={"mode": "today"})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -95,6 +112,13 @@ class EntryListViewTest(TestCase):
         """
         Mode "unread"
         """
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
         url = reverse("feeds:entry_list", kwargs={"mode": "unread"})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -124,6 +148,13 @@ class EntryListViewTest(TestCase):
         """
         Mode "read"
         """
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
         url = reverse("feeds:entry_list", kwargs={"mode": "read"})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -153,6 +184,13 @@ class EntryListViewTest(TestCase):
         """
         Mode "favorites"
         """
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
         url = reverse("feeds:entry_list", kwargs={"mode": "favorites"})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -183,6 +221,13 @@ class EntryListViewTest(TestCase):
         Test "feeds:entry_list" with all modes and all feeds using
         "in_feed" GET parameter.
         """
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
         for mode in MODE_QUERYSETS.keys():
             for feed in Feed.objects.all():
                 url = (

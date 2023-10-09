@@ -23,6 +23,9 @@ class EntryDetailViewTest(TestCase):
     Test "feeds:entry_list" view with various options.
     """
 
+    username = "anon@mail.com"
+    password = "12345678"
+
     fixtures = [
         "users/tests/fixtures/users.json",
         "feeds/tests/fixtures/tags.json",
@@ -38,8 +41,18 @@ class EntryDetailViewTest(TestCase):
         """
         Test that when user opens entry detail view the entry's `is_read` is set to `True`.
         """
-        entry = Entry.objects.filter(is_read=False).first()
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
+        entry = Entry.objects.all().first()
+        entry.is_read = False
+        entry.save()
         entry_pk = entry.pk
+
         url = reverse("feeds:entry_detail", kwargs={"mode": "all", "pk": entry_pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -51,6 +64,15 @@ class EntryDetailViewTest(TestCase):
         Slow test, but we need to ensure correct context data.
         """
 
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url,
+            {"login": self.username, "password": self.password},
+            follow=True,
+        )
+
+        # Do the actual test
         for mode in MODE_QUERYSETS.keys():
             for entry in MODE_QUERYSETS[mode]:
                 url = reverse(
@@ -92,6 +114,13 @@ class EntryDetailViewTest(TestCase):
         """
         mode = "all"
 
+        # Login
+        url = reverse("account_login")
+        response = self.client.post(
+            url, {"login": self.username, "password": self.password}, follow=True
+        )
+
+        # Do the actual test
         for feed in Feed.objects.all():
             for entry in feed.entries.all():
                 url = reverse(
