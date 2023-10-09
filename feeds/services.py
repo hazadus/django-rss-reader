@@ -254,7 +254,7 @@ def feed_update(feed: Feed):
     # For each entry in feed_content.entries, try to get Entry from the database by `url`
     # If not exists, create one.
     new_entry_count = 0
-    for entry_data in entries[:3]:
+    for entry_data in entries:
         if entry_create_from_data_if_not_exists(feed=feed, entry_data=entry_data):
             new_entry_count += 1
 
