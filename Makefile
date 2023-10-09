@@ -11,6 +11,6 @@ dumpdata:
 	python manage.py dumpdata --indent=2 --output=./feeds/tests/fixtures/tags.json feeds.Tag
 	python manage.py dumpdata --indent=2 --output=./users/tests/fixtures/users.json users.CustomUser
 test:
-	python -m manage test
+	python -m manage test --timing
 run:
 	python -m manage runserver

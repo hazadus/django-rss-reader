@@ -265,3 +265,25 @@ def update_all_feeds():
     # Call feed_update() for each feed
     for feed in feeds:
         feed_update(feed)
+
+
+def mark_entry_as_read(pk: int):
+    """
+    Mark entry as read and save it.
+
+    :param int pk: primary key of the entry to mark as read.
+    """
+    entry = Entry.objects.get(pk=pk)
+    entry.is_read = True
+    entry.save()
+
+
+def toggle_entry_is_favorite(pk: int):
+    """
+    Toggle entry's favorite status and save it.
+
+    :param int pk: primary key of the entry to toggle favorite status.
+    """
+    entry = Entry.objects.get(pk=pk)
+    entry.is_favorite = not entry.is_favorite
+    entry.save()

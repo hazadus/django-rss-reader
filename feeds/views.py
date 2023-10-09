@@ -1,32 +1,20 @@
 import logging
-from datetime import datetime
 
-from django.db.models import Count
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import ContextMixin
 
-from feeds.models import Entry, Feed, Tag
-from feeds.selectors import get_next_entry, get_previous_entry
+from feeds.models import Entry, Feed
+from feeds.selectors import (get_all_feeds, get_entry_count,
+                             get_entry_queryset, get_feed, get_next_entry,
+                             get_previous_entry)
+from feeds.services import mark_entry_as_read, toggle_entry_is_favorite
 
 logger = logging.getLogger(__name__)
-
-# TODO: refactor - move to service layer
-MODE_QUERYSETS = {
-    "all": Entry.objects.all(),
-    "today": Entry.objects.filter(
-        pub_date__day=datetime.today().day,
-        pub_date__month=datetime.today().month,
-        pub_date__year=datetime.today().year,
-    ),
-    "unread": Entry.objects.filter(is_read=False),
-    "read": Entry.objects.filter(is_read=True),
-    "favorites": Entry.objects.filter(is_favorite=True),
-}
 
 
 class BaseFeedColumnView(ContextMixin, View):
@@ -38,11 +26,11 @@ class BaseFeedColumnView(ContextMixin, View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["all_entries_count"] = MODE_QUERYSETS["all"].count()
-        context["today_entries_count"] = MODE_QUERYSETS["today"].count()
-        context["unread_entries_count"] = MODE_QUERYSETS["unread"].count()
-        context["read_entries_count"] = MODE_QUERYSETS["read"].count()
-        context["favorites_entries_count"] = MODE_QUERYSETS["favorites"].count()
+        context["all_entries_count"] = get_entry_count("all")
+        context["today_entries_count"] = get_entry_count("today")
+        context["unread_entries_count"] = get_entry_count("unread")
+        context["read_entries_count"] = get_entry_count("read")
+        context["favorites_entries_count"] = get_entry_count("favorites")
         return context
 
 
@@ -59,12 +47,12 @@ class BaseEntryColumnView(ContextMixin, View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["mode"] = self.kwargs.get("mode", "all")
-        context["feeds"] = Feed.objects.all().prefetch_related("entries")
+        context["feeds"] = get_all_feeds()
 
         in_feed = self.request.GET.get("in_feed", None)
         if in_feed:
             context["in_feed"] = in_feed
-            context["feed"] = Feed.objects.get(pk=in_feed)
+            context["feed"] = get_feed(pk=in_feed)
         return context
 
 
@@ -74,7 +62,7 @@ class FeedListView(BaseFeedColumnView, ListView):
     """
 
     model = Feed
-    queryset = Feed.objects.all().prefetch_related("entries")
+    queryset = get_all_feeds()
     template_name = "feeds/layout.html"
     context_object_name = "feeds"
 
@@ -90,14 +78,10 @@ class EntryListView(BaseEntryColumnView, BaseFeedColumnView, ListView):
     context_object_name = "entries"
 
     def get_queryset(self):
-        queryset = Entry.objects.all()
         mode = self.kwargs.get("mode", None)
-        in_feed = self.request.GET.get("in_feed", None)
+        queryset = get_entry_queryset(mode)
 
-        if mode in MODE_QUERYSETS.keys():
-            queryset = MODE_QUERYSETS.get(mode)
-
-        if in_feed:
+        if in_feed := self.request.GET.get("in_feed", None):
             queryset = queryset.filter(feed=in_feed)
 
         return queryset.select_related("feed").prefetch_related("tags")
@@ -113,8 +97,6 @@ class EntryDetailView(BaseEntryColumnView, BaseFeedColumnView, DetailView):
     Represents all three columns of the UI - Entry detail view, plus "Entries" and "Feeds" columns.
     """
 
-    # TODO: tests
-
     model = Entry
     template_name = "feeds/layout.html"
     context_object_name = "entry"
@@ -123,17 +105,14 @@ class EntryDetailView(BaseEntryColumnView, BaseFeedColumnView, DetailView):
         """
         Merk entry as "read" when user opens the page.
         """
-        # TODO: refactor - use service layer
-        entry: Entry = self.get_object()
-        entry.is_read = True
-        entry.save()
+        mark_entry_as_read(pk=self.get_object().pk)
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         mode = self.kwargs.get("mode", "all")
-        entry_queryset = MODE_QUERYSETS[mode]
+        entry_queryset = get_entry_queryset(mode)
 
         if context.get("feed", None):
             entry_queryset = entry_queryset.filter(feed=context.get("feed"))
@@ -150,33 +129,16 @@ class EntryDetailView(BaseEntryColumnView, BaseFeedColumnView, DetailView):
         return context
 
 
-class TagListView(ListView):
-    # TODO: move to `BaseFeedColumnView`
-
-    model = Tag
-    queryset = (
-        Tag.objects.all()
-        .annotate(num_entries=Count("entries"))
-        .order_by("-num_entries")
-    )
-    template_name = "feeds/layout.html"
-    context_object_name = "tags"
-
-
 @require_POST
 def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpResponse:
     """
-    Toggle `is_favorite` value for an entry, then redirect user to the page passed in
+    Toggle Favorite status of an entry, then redirect user to the page passed in
     `redirect_url` POST parameter.
 
     :param HttpRequest request: HttpRequest object
-    :param int entry_pk: entry where to toggle `is_favorite` value
+    :param int entry_pk: entry where to toggle Favorite status
     """
-    # TODO: refactor - use service layer
-    # TODO: add test
-    entry = get_object_or_404(Entry, pk=entry_pk)
-    entry.is_favorite = not entry.is_favorite
-    entry.save()
+    toggle_entry_is_favorite(pk=entry_pk)
 
     # noinspection PyArgumentList
     return redirect(
