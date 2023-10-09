@@ -2,12 +2,17 @@
 <div class="h-16 flex-shrink-0 shadow-sm flex items-center">
   {% if user.is_authenticated %}
     <div class="mx-2">
-      {% include "feeds/includes/icons/icon_account.html" with size="20" color="#6b7280" %}
+      {% include "feeds/includes/icons/icon_account.html" with size="16" color="#6b7280" %}
     </div>
     <div class="flex-1 text-sm whitespace-nowrap overflow-x-hidden overflow-ellipsis">
       {{ user.username }}
     </div>
-    <div>LO</div>
+    <!-- Logout link -->
+    <a href="{% url 'account_logout' %}">
+      <div class="mx-2">
+        {% include "feeds/includes/icons/icon_logout.html" with size="16" color="#6b7280" %}
+      </div>
+    </a>
   {% endif %}
 </div>
 
