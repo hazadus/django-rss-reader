@@ -1,7 +1,11 @@
 from django.urls import path
 
-from feeds.views import (EntryDetailView, EntryListView, FeedListView,
-                         entry_toggle_is_favorite_view)
+from feeds.views import (
+    EntryDetailView,
+    EntryListView,
+    FeedListView,
+    entry_toggle_is_favorite_view,
+)
 
 app_name = "feeds"
 urlpatterns = [

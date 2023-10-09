@@ -51,7 +51,7 @@ class Command(BaseCommand):
     """
 
     help = """
-    Load default feeds for debug purposes. 
+    Load default feeds for debug purposes.
     """
 
     def handle(self, *args, **options):

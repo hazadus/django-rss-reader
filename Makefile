@@ -10,6 +10,11 @@ dumpdata:
 	python manage.py dumpdata --indent=2 --output=./feeds/tests/fixtures/entries.json feeds.Entry
 	python manage.py dumpdata --indent=2 --output=./feeds/tests/fixtures/tags.json feeds.Tag
 	python manage.py dumpdata --indent=2 --output=./users/tests/fixtures/users.json users.CustomUser
+format:
+	python -m isort --profile black .
+lint:
+	python -m isort --check-only --profile black .
+	flake8 .
 test:
 	python -m manage test --timing
 run:

@@ -9,9 +9,14 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.base import ContextMixin
 
 from feeds.models import Entry, Feed
-from feeds.selectors import (get_all_feeds, get_entry_count,
-                             get_entry_queryset, get_feed, get_next_entry,
-                             get_previous_entry)
+from feeds.selectors import (
+    get_all_feeds,
+    get_entry_count,
+    get_entry_queryset,
+    get_feed,
+    get_next_entry,
+    get_previous_entry,
+)
 from feeds.services import mark_entry_as_read, toggle_entry_is_favorite
 
 logger = logging.getLogger(__name__)

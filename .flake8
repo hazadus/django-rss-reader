@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 120
+max-complexity = 5
+exclude = __pycache__, .venv, concept, docker, htmlcov, media, static, staticfiles, ./users/migrations
