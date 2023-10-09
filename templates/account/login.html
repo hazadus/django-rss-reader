@@ -1,0 +1,18 @@
+{# Used by `django-allauth` #}
+{# Link to this view: {% url 'account_login' %} #}
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div>
+    <input type="submit" value="Войти" />
+  </div>
+  <a href="{% url 'account_signup' %}">
+    Регистрация
+  </a>
+</form>
+{% endblock %}
