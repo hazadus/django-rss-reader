@@ -33,11 +33,21 @@ class BaseFeedColumnView(ContextMixin, View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["all_entries_count"] = get_entry_count("all")
-        context["today_entries_count"] = get_entry_count("today")
-        context["unread_entries_count"] = get_entry_count("unread")
-        context["read_entries_count"] = get_entry_count("read")
-        context["favorites_entries_count"] = get_entry_count("favorites")
+        context["all_entries_count"] = get_entry_count(
+            user=self.request.user, mode="all"
+        )
+        context["today_entries_count"] = get_entry_count(
+            user=self.request.user, mode="today"
+        )
+        context["unread_entries_count"] = get_entry_count(
+            user=self.request.user, mode="unread"
+        )
+        context["read_entries_count"] = get_entry_count(
+            user=self.request.user, mode="read"
+        )
+        context["favorites_entries_count"] = get_entry_count(
+            user=self.request.user, mode="favorites"
+        )
         return context
 
 
@@ -54,7 +64,7 @@ class BaseEntryColumnView(ContextMixin, View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["mode"] = self.kwargs.get("mode", "all")
-        context["feeds"] = get_all_feeds()
+        context["feeds"] = get_all_feeds(user=self.request.user)
 
         in_feed = self.request.GET.get("in_feed", None)
         if in_feed:
@@ -69,9 +79,11 @@ class FeedListView(LoginRequiredMixin, BaseFeedColumnView, ListView):
     """
 
     model = Feed
-    queryset = get_all_feeds()
     template_name = "feeds/layout.html"
     context_object_name = "feeds"
+
+    def get_queryset(self):
+        return get_all_feeds(user=self.request.user)
 
 
 class EntryListView(
@@ -88,7 +100,7 @@ class EntryListView(
 
     def get_queryset(self):
         mode = self.kwargs.get("mode", None)
-        queryset = get_entry_queryset(mode)
+        queryset = get_entry_queryset(user=self.request.user, mode=mode)
 
         if in_feed := self.request.GET.get("in_feed", None):
             queryset = queryset.filter(feed=in_feed)
@@ -124,7 +136,7 @@ class EntryDetailView(
         context = super().get_context_data(**kwargs)
 
         mode = self.kwargs.get("mode", "all")
-        entry_queryset = get_entry_queryset(mode)
+        entry_queryset = get_entry_queryset(user=self.request.user, mode=mode)
 
         if context.get("feed", None):
             entry_queryset = entry_queryset.filter(feed=context.get("feed"))
@@ -136,9 +148,11 @@ class EntryDetailView(
         # Stuff specific for detailed entry view
         entry = self.get_object()
         context["previous_entry"] = get_previous_entry(
-            entry=entry, queryset=entry_queryset
+            user=self.request.user, entry=entry, queryset=entry_queryset
         )
-        context["next_entry"] = get_next_entry(entry=entry, queryset=entry_queryset)
+        context["next_entry"] = get_next_entry(
+            user=self.request.user, entry=entry, queryset=entry_queryset
+        )
         return context
 
 

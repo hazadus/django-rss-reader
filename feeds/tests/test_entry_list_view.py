@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from feeds.models import Entry, Feed
+from users.models import CustomUser
 
 MODE_QUERYSETS = {
     "all": Entry.objects.all(),
@@ -25,6 +26,7 @@ class EntryListViewTest(TestCase):
 
     username = "anon@mail.com"
     password = "12345678"
+    user = None
 
     fixtures = [
         "users/tests/fixtures/users.json",
@@ -35,7 +37,7 @@ class EntryListViewTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        pass
+        cls.user = CustomUser.objects.get(email=cls.username)
 
     def test_entry_list_mode_all_view(self):
         """
@@ -52,23 +54,32 @@ class EntryListViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["mode"], "all")
-        self.assertEqual(response.context["entry_count"], MODE_QUERYSETS["all"].count())
-        self.assertEqual(len(response.context["feeds"]), Feed.objects.all().count())
         self.assertEqual(
-            response.context["all_entries_count"], MODE_QUERYSETS["all"].count()
+            response.context["entry_count"],
+            MODE_QUERYSETS["all"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["today_entries_count"], MODE_QUERYSETS["today"].count()
+            len(response.context["feeds"]), Feed.objects.filter(user=self.user).count()
         )
         self.assertEqual(
-            response.context["unread_entries_count"], MODE_QUERYSETS["unread"].count()
+            response.context["all_entries_count"],
+            MODE_QUERYSETS["all"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["read_entries_count"], MODE_QUERYSETS["read"].count()
+            response.context["today_entries_count"],
+            MODE_QUERYSETS["today"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["unread_entries_count"],
+            MODE_QUERYSETS["unread"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["read_entries_count"],
+            MODE_QUERYSETS["read"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
             response.context["favorites_entries_count"],
-            MODE_QUERYSETS["favorites"].count(),
+            MODE_QUERYSETS["favorites"].filter(feed__user=self.user).count(),
         )
 
     def test_entry_list_mode_today_view(self):
@@ -88,24 +99,30 @@ class EntryListViewTest(TestCase):
         self.assertEqual(response.context["mode"], "today")
         self.assertEqual(
             response.context["entry_count"],
-            MODE_QUERYSETS["today"].count(),
-        )
-        self.assertEqual(len(response.context["feeds"]), Feed.objects.all().count())
-        self.assertEqual(
-            response.context["all_entries_count"], MODE_QUERYSETS["all"].count()
+            MODE_QUERYSETS["today"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["today_entries_count"], MODE_QUERYSETS["today"].count()
+            len(response.context["feeds"]), Feed.objects.filter(user=self.user).count()
         )
         self.assertEqual(
-            response.context["unread_entries_count"], MODE_QUERYSETS["unread"].count()
+            response.context["all_entries_count"],
+            MODE_QUERYSETS["all"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["read_entries_count"], MODE_QUERYSETS["read"].count()
+            response.context["today_entries_count"],
+            MODE_QUERYSETS["today"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["unread_entries_count"],
+            MODE_QUERYSETS["unread"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["read_entries_count"],
+            MODE_QUERYSETS["read"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
             response.context["favorites_entries_count"],
-            MODE_QUERYSETS["favorites"].count(),
+            MODE_QUERYSETS["favorites"].filter(feed__user=self.user).count(),
         )
 
     def test_entry_list_mode_unread_view(self):
@@ -124,24 +141,32 @@ class EntryListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["mode"], "unread")
         self.assertEqual(
-            response.context["entry_count"], MODE_QUERYSETS["unread"].count()
-        )
-        self.assertEqual(len(response.context["feeds"]), Feed.objects.all().count())
-        self.assertEqual(
-            response.context["all_entries_count"], MODE_QUERYSETS["all"].count()
+            response.context["entry_count"],
+            MODE_QUERYSETS["unread"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["today_entries_count"], MODE_QUERYSETS["today"].count()
+            len(response.context["feeds"]),
+            Feed.objects.filter(user=self.user).count(),
         )
         self.assertEqual(
-            response.context["unread_entries_count"], MODE_QUERYSETS["unread"].count()
+            response.context["all_entries_count"],
+            MODE_QUERYSETS["all"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["read_entries_count"], MODE_QUERYSETS["read"].count()
+            response.context["today_entries_count"],
+            MODE_QUERYSETS["today"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["unread_entries_count"],
+            MODE_QUERYSETS["unread"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["read_entries_count"],
+            MODE_QUERYSETS["read"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
             response.context["favorites_entries_count"],
-            MODE_QUERYSETS["favorites"].count(),
+            MODE_QUERYSETS["favorites"].filter(feed__user=self.user).count(),
         )
 
     def test_entry_list_mode_read_view(self):
@@ -160,24 +185,32 @@ class EntryListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["mode"], "read")
         self.assertEqual(
-            response.context["entry_count"], MODE_QUERYSETS["read"].count()
-        )
-        self.assertEqual(len(response.context["feeds"]), Feed.objects.all().count())
-        self.assertEqual(
-            response.context["all_entries_count"], MODE_QUERYSETS["all"].count()
+            response.context["entry_count"],
+            MODE_QUERYSETS["read"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["today_entries_count"], MODE_QUERYSETS["today"].count()
+            len(response.context["feeds"]),
+            Feed.objects.filter(user=self.user).count(),
         )
         self.assertEqual(
-            response.context["unread_entries_count"], MODE_QUERYSETS["unread"].count()
+            response.context["all_entries_count"],
+            MODE_QUERYSETS["all"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["read_entries_count"], MODE_QUERYSETS["read"].count()
+            response.context["today_entries_count"],
+            MODE_QUERYSETS["today"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["unread_entries_count"],
+            MODE_QUERYSETS["unread"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["read_entries_count"],
+            MODE_QUERYSETS["read"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
             response.context["favorites_entries_count"],
-            MODE_QUERYSETS["favorites"].count(),
+            MODE_QUERYSETS["favorites"].filter(feed__user=self.user).count(),
         )
 
     def test_entry_list_mode_favorites_view(self):
@@ -196,24 +229,32 @@ class EntryListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["mode"], "favorites")
         self.assertEqual(
-            response.context["entry_count"], MODE_QUERYSETS["favorites"].count()
-        )
-        self.assertEqual(len(response.context["feeds"]), Feed.objects.all().count())
-        self.assertEqual(
-            response.context["all_entries_count"], MODE_QUERYSETS["all"].count()
+            response.context["entry_count"],
+            MODE_QUERYSETS["favorites"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["today_entries_count"], MODE_QUERYSETS["today"].count()
+            len(response.context["feeds"]),
+            Feed.objects.filter(user=self.user).count(),
         )
         self.assertEqual(
-            response.context["unread_entries_count"], MODE_QUERYSETS["unread"].count()
+            response.context["all_entries_count"],
+            MODE_QUERYSETS["all"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
-            response.context["read_entries_count"], MODE_QUERYSETS["read"].count()
+            response.context["today_entries_count"],
+            MODE_QUERYSETS["today"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["unread_entries_count"],
+            MODE_QUERYSETS["unread"].filter(feed__user=self.user).count(),
+        )
+        self.assertEqual(
+            response.context["read_entries_count"],
+            MODE_QUERYSETS["read"].filter(feed__user=self.user).count(),
         )
         self.assertEqual(
             response.context["favorites_entries_count"],
-            MODE_QUERYSETS["favorites"].count(),
+            MODE_QUERYSETS["favorites"].filter(feed__user=self.user).count(),
         )
 
     def test_entry_list_in_feed_view(self):
@@ -242,27 +283,31 @@ class EntryListViewTest(TestCase):
                 self.assertEqual(response.context["feed"], feed)
                 self.assertEqual(
                     response.context["entry_count"],
-                    MODE_QUERYSETS[mode].filter(feed=feed).count(),
+                    MODE_QUERYSETS[mode]
+                    .filter(feed__user=self.user, feed=feed)
+                    .count(),
                 )
                 self.assertEqual(
-                    len(response.context["feeds"]), Feed.objects.all().count()
+                    len(response.context["feeds"]),
+                    Feed.objects.filter(user=self.user).count(),
                 )
                 self.assertEqual(
-                    response.context["all_entries_count"], MODE_QUERYSETS["all"].count()
+                    response.context["all_entries_count"],
+                    MODE_QUERYSETS["all"].filter(feed__user=self.user).count(),
                 )
                 self.assertEqual(
                     response.context["today_entries_count"],
-                    MODE_QUERYSETS["today"].count(),
+                    MODE_QUERYSETS["today"].filter(feed__user=self.user).count(),
                 )
                 self.assertEqual(
                     response.context["unread_entries_count"],
-                    MODE_QUERYSETS["unread"].count(),
+                    MODE_QUERYSETS["unread"].filter(feed__user=self.user).count(),
                 )
                 self.assertEqual(
                     response.context["read_entries_count"],
-                    MODE_QUERYSETS["read"].count(),
+                    MODE_QUERYSETS["read"].filter(feed__user=self.user).count(),
                 )
                 self.assertEqual(
                     response.context["favorites_entries_count"],
-                    MODE_QUERYSETS["favorites"].count(),
+                    MODE_QUERYSETS["favorites"].filter(feed__user=self.user).count(),
                 )
