@@ -93,7 +93,8 @@ class EntryListView(BaseEntryColumnView, BaseFeedColumnView, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["entry_count"] = self.get_queryset().count()
+        # NB: `all()` is workaround for queryset caching
+        context["entry_count"] = self.get_queryset().all().count()
         return context
 
 
@@ -122,7 +123,8 @@ class EntryDetailView(BaseEntryColumnView, BaseFeedColumnView, DetailView):
         if context.get("feed", None):
             entry_queryset = entry_queryset.filter(feed=context.get("feed"))
 
-        context["entry_count"] = entry_queryset.count()
+        # NB: `all()` is workaround for queryset caching
+        context["entry_count"] = entry_queryset.all().count()
         context["entries"] = entry_queryset.prefetch_related("feed")
 
         # Stuff specific for detailed entry view

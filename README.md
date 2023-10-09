@@ -34,3 +34,5 @@ npx tailwindcss -i ./static/src/input.css -o ./static/styles.css --watch
 - [Tailwind CSS Django - Flowbite](https://flowbite.com/docs/getting-started/django/)
 - [MDN: scrollIntoView() method](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)
 - [MDN: Navigator: share() method](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#syntax)
+- [Django - Understand cached attributes](https://docs.djangoproject.com/en/4.2/topics/db/optimization/#understand-cached-attributes): Long story short – use `all()` on queryset whenever you 
+  need to avoid queryset caching to get correct `count()` results. Took me half a day to figure this out.

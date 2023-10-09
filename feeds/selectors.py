@@ -31,7 +31,9 @@ def get_entry_count(mode: str) -> int:
     """
     Return TOTAL number of entries in specified "Smart Feed".
     """
-    return get_entry_queryset(mode=mode).count()
+    # NB: `all()` is workaround for queryset caching
+    # Reference: https://docs.djangoproject.com/en/4.2/topics/db/optimization/#understand-cached-attributes
+    return get_entry_queryset(mode=mode).all().count()
 
 
 def get_previous_entry(entry: Entry, queryset: QuerySet = Entry.objects.all()):
