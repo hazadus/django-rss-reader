@@ -28,6 +28,22 @@ npx tailwindcss -i ./static/src/input.css -o ./static/styles.css
 npx tailwindcss -i ./static/src/input.css -o ./static/styles.css --watch
 ```
 
+## Building fixtures for tests
+
+```bash
+# Create fresh DB
+python -m manage migrate
+# Create test users with subscriptions
+python -m manage add_test_data
+# Fetch feeds for test users
+python -m manage update_feeds
+#
+# Mark some stuff as read, some as favorite...
+#
+# Dump all data to fixtures
+make dumpdata
+```
+
 ## References
 
 - [Advanced Logging Tutorial](https://docs.python.org/3/howto/logging.html#advanced-logging-tutorial)
