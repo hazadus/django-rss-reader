@@ -54,6 +54,10 @@ python -m manage update_feeds
 make dumpdata
 ```
 
+## Deploy
+
+Create `.env` file with two variables: `SECRET_KEY` and `SENTRY_DSN`.
+
 ## References
 
 - [Advanced Logging Tutorial](https://docs.python.org/3/howto/logging.html#advanced-logging-tutorial)
