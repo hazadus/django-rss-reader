@@ -1,8 +1,12 @@
 # Online RSS Reader
 
+Inspired by amazing [NetNewsWire](https://netnewswire.com/) Mac/iOS app – the best RSS reader out there!
+
 🏗️The app is in very early stage of development.🚧
 
 Main branch is auto-deployed at http://rss.hazadus.ru/.
+
+![Arc screenshot](./static/images/arc_screen_1.png)
 
 ## Libraries Used
 
@@ -57,3 +61,8 @@ make dumpdata
 - [MDN: Navigator: share() method](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#syntax)
 - [Django - Understand cached attributes](https://docs.djangoproject.com/en/4.2/topics/db/optimization/#understand-cached-attributes): Long story short – use `all()` on queryset whenever you 
   need to avoid queryset caching to get correct `count()` results. Took me half a day to figure this out.
+
+## Repo Activity 
+
+![Repo Activity](https://repobeats.axiom.co/api/embed/d68c55d646134fe9a358583df8a78dc7a3240b93.svg "Repobeats analytics 
+image")
