@@ -2,23 +2,27 @@
 
 🏗️The app is in very early stage of development.🚧
 
-Main branch is auto-deployed at http://rss.hazadus.ru/feeds/.
+Main branch is auto-deployed at http://rss.hazadus.ru/.
 
 ## Libraries Used
 
 - [Django](https://docs.djangoproject.com/en/4.2/)
     - [django-allauth](https://pypi.org/project/django-allauth/): Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication.
     - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/): Best debugging tool for Django.
-- [feedparser](https://pythonhosted.org/feedparser/): Universal Feed Parser is a Python module for downloading and parsing syndicated feeds.
-- [beautifulsoup4](https://pypi.org/project/beautifulsoup4/): Beautiful Soup is a library that makes it easy to scrape information from web pages.
-- [environs](https://pypi.org/project/environs/): `environs` is a Python library for parsing environment variables. 
-- [coloredlogs](https://coloredlogs.readthedocs.io/en/latest/index.html): The coloredlogs package enables colored terminal output for Python’s logging module.
-- [dateutil](https://pypi.org/project/python-dateutil/): The dateutil module provides powerful extensions to the 
-  standard datetime module, available in Python.
-- [gunicorn](https://github.com/benoitc/gunicorn): WSGI HTTP Server for UNIX, fast clients and sleepy applications. 
-- [whitenoise](https://github.com/evansd/whitenoise): Radically simplified static file serving for Python web apps.
-- [Tailwind CSS](https://tailwindcss.com/)
-  - [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin): Beautiful typographic defaults for HTML you don't control. 
+- Feed Parsing:
+  - [feedparser](https://pythonhosted.org/feedparser/): Universal Feed Parser is a Python module for downloading and parsing syndicated feeds.
+  - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/): Beautiful Soup is a library that makes it easy to scrape information from web pages.
+  - [dateutil](https://pypi.org/project/python-dateutil/): The dateutil module provides powerful extensions to the 
+    standard datetime module, available in Python.
+- Serving App in Production:
+  - [gunicorn](https://github.com/benoitc/gunicorn): WSGI HTTP Server for UNIX, fast clients and sleepy applications. 
+  - [whitenoise](https://github.com/evansd/whitenoise): Radically simplified static file serving for Python web apps.
+- Styling:
+  - [Tailwind CSS](https://tailwindcss.com/)
+    - [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin): Beautiful typographic defaults for HTML you don't control. 
+- Misc:
+  - [environs](https://pypi.org/project/environs/): `environs` is a Python library for parsing environment variables. 
+  - [coloredlogs](https://coloredlogs.readthedocs.io/en/latest/index.html): The coloredlogs package enables colored terminal output for Python’s logging module.
 
 ## Building Tailwind styles
 

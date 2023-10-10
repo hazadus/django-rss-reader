@@ -7,14 +7,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Django RSS Reader</title>
+  <title>RSS Reader</title>
 
   <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
   <script async src="https://stats.hazadus.ru/script.js" data-website-id="c94e0204-7775-4695-9f51-34f16c1a3fd8"></script>
 </head>
 
 <body class="bg-white">
-  <div class="container flex h-screen mx-auto mt-0 shadow-md">
+  <div class="container flex h-screen mx-auto mt-0 shadow-md rounded-bl-lg rounded-br-lg">
     {% block content %}
     {% endblock content %}
     <script>

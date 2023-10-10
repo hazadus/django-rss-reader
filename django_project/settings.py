@@ -109,6 +109,7 @@ INSTALLED_APPS = [
     "allauth.account",
     # Local apps
     "users.apps.UsersConfig",
+    "core.apps.CoreConfig",
     "feeds.apps.FeedsConfig",
 ]
 

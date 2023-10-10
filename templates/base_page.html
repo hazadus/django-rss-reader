@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="flex flex-col w-full">
+    <!-- Top navbar -->
+    <div class="h-16 shrink-0 bg-gray-300 rounded-tl-lg rounded-tr-lg w-fullshadow flex items-center">
+      <!-- App title -->
+      <div class="px-4">
+        <!-- Add logo here -->
+        <a href="/">
+          <h1 class="text-xl md:text-2xl text-gray-900">RSS Reader</h1>
+        </a>
+      </div>
+
+      <!-- Menu -->
+      <div class="flex-1 flex justify-center">
+        {% if user.is_authenticated %}
+          {{ user.username }}&nbsp;&middot;&nbsp;<a class="hover:underline" href="{% url 'feeds:feed_list' %}">Feeds</a>&nbsp;&middot;&nbsp;<a class="hover:underline" href="{% url 'account_logout' %}">Log Out</a>
+        {% else %}
+          <a class="hover:underline" href="{% url 'account_login' %}">Log In</a>&nbsp;&middot;&nbsp;<a class="hover:underline"  href="{% url 'account_signup' %}">Sign Up</a>
+        {% endif %}
+      </div>
+
+      <!-- GitHub logo with link to repo-->
+      <div class="px-4 hidden md:flex">
+          <a href="https://github.com/hazadus/django-rss-reader/">
+            {% include "core/includes/icon_github.html" with size="24" color="#6b7280" %}
+          </a>
+      </div>
+    </div>
+
+    <div class="rounded-bl-lg rounded-br-lg">
+      {% block page %}
+      {% endblock page %}
+    </div>
+  </div>
+{% endblock content %}

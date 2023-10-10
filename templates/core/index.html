@@ -1,0 +1,42 @@
+{% extends "base_page.html" %}
+{% load static %}
+
+{% block page %}
+  <!-- Content section -->
+  <section
+    class="content bg-primary-100 dark:bg-gray-700 flex flex-col items-center justify-center"
+  >
+    <div
+      class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6"
+    >
+      <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
+        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+          Читайте новости так, как удобно вам
+        </h2>
+        <p class="mb-4">
+          RSS Reader — это веб-приложение для чтения RSS лент сайтов онлайн.
+        </p>
+        <p class="mb-4">
+          Приложение с открытым исходным кодом, разработано как аналог лучшей RSS-читалки для Мака
+          <a class="hover:underline font-semibold" href="https://netnewswire.com/">NetNewsWire</a>, только работает в любом браузере. Попробуйте сами, нужно только <a class="hover:underline font-semibold" href="{% url 'account_signup' %}">создать учетную запись</a>!
+        </p>
+        <p>
+          Информационное наполнение для этой страницы будет доработано позднее. Пока нужно
+          сосредоточиться на основных фичах проекта!
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-4 mt-8">
+        <img
+          class="w-full rounded-lg shadow"
+          src="{% static "images/iphone_screen_1.PNG" %}"
+          alt="iPhone screenshot 1"
+        />
+        <img
+          class="mt-4 w-full lg:mt-10 rounded-lg border-b-gray-300 border shadow"
+          src="{% static "images/iphone_screen_2.PNG" %}"
+          alt="iPhone screenshot 2"
+        />
+      </div>
+    </div>
+  </section>
+{% endblock page %}

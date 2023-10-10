@@ -1,13 +1,10 @@
 {# Used by `django-allauth` #}
 {# Link to this view: {% url 'account_signup' %} #}
-{% extends "base.html" %}
+{% extends "base_page.html" %}
 {% load static %}
 
-{% block content %}
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-    <a href="/" class="flex items-center mb-6 text-2xl font-bold text-gray-900">
-      RSS Reader
-    </a>
+{% block page %}
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0" style="height: calc(100vh - 64px);">
     <div class="w-[350px] md:w-[576px] bg-gray-100 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1 class="text-xl font-semibold leading-tight tracking-tight text-gray-900 md:text-2xl">
@@ -50,4 +47,4 @@
       </div>
     </div>
   </div>
-{% endblock %}
+{% endblock page %}
