@@ -10,13 +10,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  run_tests:
-    name: Run Tests
-    uses: ./.github/workflows/tests.yml
+  qa:
+    name: Quality Assurance
+    uses: ./.github/workflows/qa.yml
 
   deploy:
     name: Deploy
-    needs: run_tests
+    needs: qa
     runs-on: ubuntu-latest
     steps:
       - name: Configure SSH

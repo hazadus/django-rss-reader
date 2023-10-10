@@ -1,9 +1,9 @@
-name: Run Tests
+name: Quality Assurance
 on: [pull_request, workflow_call]
 
 jobs:
-  run_tests:
-    name: Run Tests
+  qa:
+    name: Quality Assurance
     runs-on: ubuntu-latest
     container: python:3.10.2-slim-bullseye
 
@@ -12,6 +12,9 @@ jobs:
 
       - name: Install Dependencies
         run: pip install -r requirements.txt
+
+      - name: Lint Code
+        run: python -m isort --check-only --profile black . && flake8 .
 
       - name: Run Tests
         env:
