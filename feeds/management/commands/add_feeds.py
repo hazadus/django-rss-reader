@@ -61,26 +61,31 @@ FEED_URLS = [
 
 class Command(BaseCommand):
     """
-    Load default feeds for debug purposes.
+    Create initial hard-coded feeds for superuser.
     """
 
     help = """
-    Load default feeds for debug purposes.
+    Create initial hard-coded feeds for superuser.
     """
 
     def handle(self, *args, **options):
         """
         Handles the flow of the command.
         """
-        user = CustomUser.objects.first()
+        user = CustomUser.objects.filter(is_superuser=True).first()
+
+        if not user:
+            logger.error("Create a superuser before running `add_feeds`!")
+            return
 
         start_time = time.time()
-        total_items = 0
+        total_feeds = 0
+        logger.info("Creating feed subscriptions for '%s'", user)
         for feed_url in FEED_URLS:
             feed_instance = feed_subscribe(user=user, feed_url=feed_url)
             if feed_instance:
-                total_items += 1
+                total_feeds += 1
                 logger.info("Created subscription to feed: %s", feed_instance)
 
-        logger.info("Total items fetched: %s", total_items)
+        logger.info("Total feed subscriptions created: %s", total_feeds)
         logger.info("--- Completed in: %s seconds ---" % (time.time() - start_time))

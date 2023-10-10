@@ -1,5 +1,7 @@
 import logging
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -31,11 +33,21 @@ class BaseFeedColumnView(ContextMixin, View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["all_entries_count"] = get_entry_count("all")
-        context["today_entries_count"] = get_entry_count("today")
-        context["unread_entries_count"] = get_entry_count("unread")
-        context["read_entries_count"] = get_entry_count("read")
-        context["favorites_entries_count"] = get_entry_count("favorites")
+        context["all_entries_count"] = get_entry_count(
+            user=self.request.user, mode="all"
+        )
+        context["today_entries_count"] = get_entry_count(
+            user=self.request.user, mode="today"
+        )
+        context["unread_entries_count"] = get_entry_count(
+            user=self.request.user, mode="unread"
+        )
+        context["read_entries_count"] = get_entry_count(
+            user=self.request.user, mode="read"
+        )
+        context["favorites_entries_count"] = get_entry_count(
+            user=self.request.user, mode="favorites"
+        )
         return context
 
 
@@ -52,7 +64,7 @@ class BaseEntryColumnView(ContextMixin, View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["mode"] = self.kwargs.get("mode", "all")
-        context["feeds"] = get_all_feeds()
+        context["feeds"] = get_all_feeds(user=self.request.user)
 
         in_feed = self.request.GET.get("in_feed", None)
         if in_feed:
@@ -61,18 +73,22 @@ class BaseEntryColumnView(ContextMixin, View):
         return context
 
 
-class FeedListView(BaseFeedColumnView, ListView):
+class FeedListView(LoginRequiredMixin, BaseFeedColumnView, ListView):
     """
     Represents first column of the UI - "Feeds".
     """
 
     model = Feed
-    queryset = get_all_feeds()
     template_name = "feeds/layout.html"
     context_object_name = "feeds"
 
+    def get_queryset(self):
+        return get_all_feeds(user=self.request.user)
 
-class EntryListView(BaseEntryColumnView, BaseFeedColumnView, ListView):
+
+class EntryListView(
+    LoginRequiredMixin, BaseEntryColumnView, BaseFeedColumnView, ListView
+):
     """
     Represents two columns of the UI "Entries" and "Feeds".
     """
@@ -84,7 +100,7 @@ class EntryListView(BaseEntryColumnView, BaseFeedColumnView, ListView):
 
     def get_queryset(self):
         mode = self.kwargs.get("mode", None)
-        queryset = get_entry_queryset(mode)
+        queryset = get_entry_queryset(user=self.request.user, mode=mode)
 
         if in_feed := self.request.GET.get("in_feed", None):
             queryset = queryset.filter(feed=in_feed)
@@ -98,7 +114,9 @@ class EntryListView(BaseEntryColumnView, BaseFeedColumnView, ListView):
         return context
 
 
-class EntryDetailView(BaseEntryColumnView, BaseFeedColumnView, DetailView):
+class EntryDetailView(
+    LoginRequiredMixin, BaseEntryColumnView, BaseFeedColumnView, DetailView
+):
     """
     Represents all three columns of the UI - Entry detail view, plus "Entries" and "Feeds" columns.
     """
@@ -118,7 +136,7 @@ class EntryDetailView(BaseEntryColumnView, BaseFeedColumnView, DetailView):
         context = super().get_context_data(**kwargs)
 
         mode = self.kwargs.get("mode", "all")
-        entry_queryset = get_entry_queryset(mode)
+        entry_queryset = get_entry_queryset(user=self.request.user, mode=mode)
 
         if context.get("feed", None):
             entry_queryset = entry_queryset.filter(feed=context.get("feed"))
@@ -130,12 +148,15 @@ class EntryDetailView(BaseEntryColumnView, BaseFeedColumnView, DetailView):
         # Stuff specific for detailed entry view
         entry = self.get_object()
         context["previous_entry"] = get_previous_entry(
-            entry=entry, queryset=entry_queryset
+            user=self.request.user, entry=entry, queryset=entry_queryset
         )
-        context["next_entry"] = get_next_entry(entry=entry, queryset=entry_queryset)
+        context["next_entry"] = get_next_entry(
+            user=self.request.user, entry=entry, queryset=entry_queryset
+        )
         return context
 
 
+@login_required
 @require_POST
 def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpResponse:
     """

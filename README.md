@@ -7,6 +7,8 @@ Main branch is auto-deployed at http://rss.hazadus.ru/feeds/.
 ## Libraries Used
 
 - [Django](https://docs.djangoproject.com/en/4.2/)
+    - [django-allauth](https://pypi.org/project/django-allauth/): Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication.
+    - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/): Best debugging tool for Django.
 - [feedparser](https://pythonhosted.org/feedparser/): Universal Feed Parser is a Python module for downloading and parsing syndicated feeds.
 - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/): Beautiful Soup is a library that makes it easy to scrape information from web pages.
 - [environs](https://pypi.org/project/environs/): `environs` is a Python library for parsing environment variables. 
@@ -15,7 +17,6 @@ Main branch is auto-deployed at http://rss.hazadus.ru/feeds/.
   standard datetime module, available in Python.
 - [gunicorn](https://github.com/benoitc/gunicorn): WSGI HTTP Server for UNIX, fast clients and sleepy applications. 
 - [whitenoise](https://github.com/evansd/whitenoise): Radically simplified static file serving for Python web apps.
-- [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/): Best debugging tool for Django.
 - [Tailwind CSS](https://tailwindcss.com/)
   - [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin): Beautiful typographic defaults for HTML you don't control. 
 
@@ -25,6 +26,22 @@ Main branch is auto-deployed at http://rss.hazadus.ru/feeds/.
 npx tailwindcss -i ./static/src/input.css -o ./static/styles.css
 # or
 npx tailwindcss -i ./static/src/input.css -o ./static/styles.css --watch
+```
+
+## Building fixtures for tests
+
+```bash
+# Create fresh DB
+python -m manage migrate
+# Create test users with subscriptions
+python -m manage add_test_data
+# Fetch feeds for test users
+python -m manage update_feeds
+#
+# Mark some stuff as read, some as favorite...
+#
+# Dump all data to fixtures
+make dumpdata
 ```
 
 ## References

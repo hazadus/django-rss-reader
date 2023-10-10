@@ -21,6 +21,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("feeds/", include("feeds.urls")),
     path("__debug__/", include("debug_toolbar.urls")),
+    path("accounts/", include("allauth.urls")),
 ]
 
 # Configure Admin panel titles
