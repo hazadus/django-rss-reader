@@ -84,6 +84,12 @@ ALLOWED_HOSTS = [
     "rss.hazadus.ru",
 ]
 
+# Reference: https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-trusted-origins
+CSRF_TRUSTED_ORIGINS = [
+    "http://rss.hazadus.ru",
+    "https://rss.hazadus.ru",
+]
+
 if DEBUG:
     import socket
 

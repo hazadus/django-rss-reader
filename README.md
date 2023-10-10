@@ -21,6 +21,8 @@ Main branch is auto-deployed at http://rss.hazadus.ru/.
 - Serving App in Production:
   - [gunicorn](https://github.com/benoitc/gunicorn): WSGI HTTP Server for UNIX, fast clients and sleepy applications. 
   - [whitenoise](https://github.com/evansd/whitenoise): Radically simplified static file serving for Python web apps.
+  - [nginx](https://nginx.org/): nginx *(engine x)* is an HTTP and reverse proxy server, a mail proxy server, and a 
+    generic TCP/UDP proxy server, originally written by Igor Sysoev.
 - Styling:
   - [Tailwind CSS](https://tailwindcss.com/)
     - [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin): Beautiful typographic defaults for HTML you don't control. 
@@ -58,7 +60,8 @@ make dumpdata
 - [Using WhiteNoise with Django](https://whitenoise.readthedocs.io/en/latest/django.html)
 - [Tailwind CSS Django - Flowbite](https://flowbite.com/docs/getting-started/django/)
 - [MDN: scrollIntoView() method](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)
-- [MDN: Navigator: share() method](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#syntax)
+- [MDN: Navigator: share() method](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#syntax): 
+  `navigator.share()` will only work when app is served via HTTPS.
 - [Django - Understand cached attributes](https://docs.djangoproject.com/en/4.2/topics/db/optimization/#understand-cached-attributes): Long story short – use `all()` on queryset whenever you 
   need to avoid queryset caching to get correct `count()` results. Took me half a day to figure this out.
 
