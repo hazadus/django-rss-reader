@@ -1,0 +1,38 @@
+{# Used by `django-allauth` #}
+{# Link to this view: {% url 'account_login' %} #}
+{% extends "base_page.html" %}
+{% load static %}
+
+{% block page %}
+  <div class="border-b border-b-gray-300">
+    <div class="container max-w-screen-lg mx-auto flex">
+      <a href="{% url 'users:user_profile' %}">
+        <div class="py-2 px-6 font-semibold {% if request.path == "/users/profile/" %}text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
+          Profile
+        </div>
+      </a>
+      <a href="{% url 'feeds:settings' %}">
+        <div class="py-2 px-6 font-semibold {% if tab == "feeds" %}text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
+          Feeds
+        </div>
+      </a>
+      <a href="{% url 'feeds:settings' %}?tab=folders">
+        <div class="py-2 px-6 font-semibold {% if tab == "folders" %}text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
+          Folders
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="container max-w-screen-lg mx-auto flex p-1 md:p-4">
+    {% if request.path == "/users/profile/" %}
+      {% include "users/settings_profile.html" %}
+    {% elif request.path == "/feeds/settings/" %}
+      {% if tab == "feeds" %}
+        {% include "feeds/settings_feeds.html" %}
+      {% elif tab == "folders" %}
+        {% include "feeds/settings_folders.html" %}
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock page %}

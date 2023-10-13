@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView
-from django.views.generic.base import ContextMixin
+from django.views.generic.base import ContextMixin, TemplateView
 
 from feeds.models import Entry, Feed
 from feeds.selectors import (
@@ -177,3 +177,16 @@ def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpRe
             ),
         )
     )
+
+
+class FeedsSettingsView(LoginRequiredMixin, TemplateView):
+    template_name = "layout_settings.html"
+    tabs = (
+        "feeds",
+        "folders",
+    )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tab"] = self.request.GET.get("tab", "feeds")
+        return context
