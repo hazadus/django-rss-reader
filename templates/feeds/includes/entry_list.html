@@ -1,5 +1,5 @@
 <!-- Entries column header (fixed) -->
-<div class="h-16 p-2 flex flex-shrink-0 bg-gray-300 shadow-sm items-center">
+<div class="h-16 p-2 flex flex-shrink-0 bg-gray-300 items-center">
   <!-- Buttons (mobile only) -->
   <div class="flex md:hidden mx-2 h-[24px]">
     <a href="{% url 'feeds:feed_list' %}">
@@ -59,6 +59,6 @@
       </a>
     {% endfor %}
   {% else %}
-    <span>Select a feed to view.</span>
+    <div class="p-8">Select a feed to view.</div>
   {% endif %}
 </div>

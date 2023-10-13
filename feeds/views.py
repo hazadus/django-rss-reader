@@ -8,17 +8,12 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, ListView
-from django.views.generic.base import ContextMixin
+from django.views.generic.base import ContextMixin, TemplateView
 
 from feeds.models import Entry, Feed
-from feeds.selectors import (
-    get_all_feeds,
-    get_entry_count,
-    get_entry_queryset,
-    get_feed,
-    get_next_entry,
-    get_previous_entry,
-)
+from feeds.selectors import (get_all_feeds, get_entry_count,
+                             get_entry_queryset, get_feed, get_next_entry,
+                             get_previous_entry)
 from feeds.services import mark_entry_as_read, toggle_entry_is_favorite
 
 logger = logging.getLogger(__name__)
@@ -177,3 +172,16 @@ def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpRe
             ),
         )
     )
+
+
+class FeedsSettingsView(LoginRequiredMixin, TemplateView):
+    template_name = "layout_settings.html"
+    tabs = (
+        "feeds",
+        "folders",
+    )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tab"] = self.request.GET.get("tab", "feeds")
+        return context
