@@ -4,22 +4,51 @@
     Add New Feed
   </h3>
   <div class="mb-4 md:mb-8 p-4">
-    <form id="add-feed-form">
+    <form action="{% url 'feeds:settings_feeds' %}" method="post" id="add-feed-form">
+      {% csrf_token %}
       <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
         <div class="sm:col-span-2">
-          <label for="feed-url" class="block mb-2 text-sm font-medium text-gray-900">
+          <label for="id_url" class="block mb-2 text-sm font-medium text-gray-900">
             Feed URL
           </label>
-          <input type="url" name="feed-url" id="feed-url" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed URL, e.g. https://hazadus.ru/rss.xml" required="">
+          <input type="url" name="url" id="id_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed URL, e.g. https://hazadus.ru/rss.xml" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">
+            Feed Title
+          </label>
+          <input type="text" name="title" id="id_title" maxlength="256" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Enter Feed Title" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_site_url" class="block mb-2 text-sm font-medium text-gray-900">
+            Site URL
+          </label>
+          <input type="url" name="site_url" id="id_site_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed Site URL, e.g. https://hazadus.ru/" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_image_url" class="block mb-2 text-sm font-medium text-gray-900">
+            Feed Image URL
+          </label>
+          <input type="url" name="image_url" id="id_image_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed Image URL">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_folder" class="block mb-2 text-sm font-medium text-gray-900">
+            Folder
+          </label>
+          <select name="folder" id="id_folder" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+            <!-- TODO: add all folders as options -->
+            <option value="" selected>---------</option>
+          </select>
         </div>
       </div>
-      <p id="log-error" class="mt-2 text-red-600">An error has occured!</p>
-      <p id="log-success" class="mt-2 text-teal-600">Feed added!</p>
+      <!-- TODO: show errors in the form! -->
       <button type="submit" id="add-feed" class="inline-flex items-center px-5 py-2.5 mt-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
         Add Feed
       </button>
     </form>
   </div>
+
+
 
   <h3 class="p-1 font-semibold text-lg text-gray-900 border-b border-b-gray-300 w-full">
     Manage Feeds
@@ -30,6 +59,7 @@
 
 <script>
   // "Add New Feed" section handlers
+  /**
   const feedUrlInput = document.getElementById("feed-url");
   const addFeedButton = document.getElementById("add-feed");
   const addFeedForm = document.getElementById("add-feed-form");
@@ -46,4 +76,5 @@
     addFeedButton.disabled = false;
 
   });
+   **/
 </script>

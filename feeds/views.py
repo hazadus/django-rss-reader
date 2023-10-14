@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.http import require_POST
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView
 from django.views.generic.base import ContextMixin, TemplateView
 
 from feeds.models import Entry, Feed
@@ -179,14 +179,39 @@ def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpRe
     )
 
 
-class FeedsSettingsView(LoginRequiredMixin, TemplateView):
+class FeedsSettingsView(LoginRequiredMixin, CreateView):
+    """
+    Settings page - "Feeds" tab.
+    """
+
+    model = Feed
+    fields = ["url", "title", "site_url", "image_url", "folder"]
     template_name = "layout_settings.html"
-    tabs = (
-        "feeds",
-        "folders",
-    )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["tab"] = self.request.GET.get("tab", "feeds")
         return context
+
+    def form_valid(self, form):
+        """
+        Set logged in user as `user` of new Feed.
+        """
+        feed = form.save(commit=False)
+        # TODO: check if feed already exists!
+        # TODO: show a message if feed successfully added!
+        # Associate new Feed with logged in user:
+        feed.user = self.request.user
+        feed.save()
+
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("feeds:settings")
+
+
+class FoldersSettingsView(LoginRequiredMixin, TemplateView):
+    """
+    Settings page - "Folders" tab.
+    """
+
+    template_name = "layout_settings.html"
