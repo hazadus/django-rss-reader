@@ -13,6 +13,15 @@
         {% endif %}
       {% endfor %}
     {% endif %}
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="text-green-600 font-semibold py-2">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
     <form action="{% url 'feeds:settings_feeds' %}" method="post" id="add-feed-form">
       {% csrf_token %}
       <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -66,25 +75,3 @@
   <p class="p-4">🏗️ Under construction! 🚧</p>
 
 </div>
-
-<script>
-  // "Add New Feed" section handlers
-  /**
-  const feedUrlInput = document.getElementById("feed-url");
-  const addFeedButton = document.getElementById("add-feed");
-  const addFeedForm = document.getElementById("add-feed-form");
-
-  addFeedForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    feedUrlInput.disabled = true;
-    addFeedButton.disabled = true;
-    console.log("Add feed submitted", feedUrlInput.value);
-
-    //
-
-    feedUrlInput.disabled = false;
-    addFeedButton.disabled = false;
-
-  });
-   **/
-</script>

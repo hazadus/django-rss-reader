@@ -1,5 +1,6 @@
 import logging
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
@@ -209,7 +210,9 @@ class FeedsSettingsView(LoginRequiredMixin, CreateView):
         feed.user = self.request.user
         feed.save()
 
-        # TODO: show a message if feed successfully added!
+        messages.add_message(
+            self.request, messages.SUCCESS, "New feed was successfully created."
+        )
 
         return super().form_valid(form)
 
