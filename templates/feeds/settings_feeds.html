@@ -4,6 +4,15 @@
     Add New Feed
   </h3>
   <div class="mb-4 md:mb-8 p-4">
+    {% if request.method == "POST" %}
+      {% for field in form %}
+        {% if field.errors %}
+          <div class="text-red-500">
+            {{ field.label }}: {{ field.errors }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
     <form action="{% url 'feeds:settings_feeds' %}" method="post" id="add-feed-form">
       {% csrf_token %}
       <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -36,13 +45,14 @@
             Folder
           </label>
           <select name="folder" id="id_folder" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
-            <!-- TODO: add all folders as options -->
             <option value="" selected>---------</option>
+            {% for folder in folders %}
+              <option value="{{ folder.pk }}">{{ folder.title }}</option>
+            {% endfor %}
           </select>
         </div>
       </div>
-      <!-- TODO: show errors in the form! -->
-      <button type="submit" id="add-feed" class="inline-flex items-center px-5 py-2.5 mt-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+      <button type="submit" id="add-feed" class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
         Add Feed
       </button>
     </form>

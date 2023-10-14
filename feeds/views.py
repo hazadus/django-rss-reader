@@ -7,10 +7,11 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.http import require_POST
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.base import ContextMixin, TemplateView
 
-from feeds.models import Entry, Feed
+from feeds.forms import FeedCreateForm
+from feeds.models import Entry, Feed, Folder
 from feeds.selectors import (
     get_all_feeds,
     get_entry_count,
@@ -185,11 +186,18 @@ class FeedsSettingsView(LoginRequiredMixin, CreateView):
     """
 
     model = Feed
-    fields = ["url", "title", "site_url", "image_url", "folder"]
+    form_class = FeedCreateForm
     template_name = "layout_settings.html"
+
+    def get_form(self, form_class=None):
+        """
+        Pass `request` object to the form instance.
+        """
+        return FeedCreateForm(self.request.POST, request=self.request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["folders"] = Folder.objects.filter(user=self.request.user)
         return context
 
     def form_valid(self, form):
@@ -197,16 +205,16 @@ class FeedsSettingsView(LoginRequiredMixin, CreateView):
         Set logged in user as `user` of new Feed.
         """
         feed = form.save(commit=False)
-        # TODO: check if feed already exists!
-        # TODO: show a message if feed successfully added!
         # Associate new Feed with logged in user:
         feed.user = self.request.user
         feed.save()
 
+        # TODO: show a message if feed successfully added!
+
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("feeds:settings")
+        return reverse_lazy("feeds:settings_feeds")
 
 
 class FoldersSettingsView(LoginRequiredMixin, TemplateView):
