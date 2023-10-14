@@ -3,7 +3,23 @@
   <h3 class="p-1 font-semibold text-lg text-gray-900 border-b border-b-gray-300 w-full">
     Add New Feed
   </h3>
-  <div class="mb-4 md:mb-8 p-4">🏗️ Under construction! 🚧</div>
+  <div class="mb-4 md:mb-8 p-4">
+    <form id="add-feed-form">
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="sm:col-span-2">
+          <label for="feed-url" class="block mb-2 text-sm font-medium text-gray-900">
+            Feed URL
+          </label>
+          <input type="url" name="feed-url" id="feed-url" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed URL, e.g. https://hazadus.ru/rss.xml" required="">
+        </div>
+      </div>
+      <p id="log-error" class="mt-2 text-red-600">An error has occured!</p>
+      <p id="log-success" class="mt-2 text-teal-600">Feed added!</p>
+      <button type="submit" id="add-feed" class="inline-flex items-center px-5 py-2.5 mt-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+        Add Feed
+      </button>
+    </form>
+  </div>
 
   <h3 class="p-1 font-semibold text-lg text-gray-900 border-b border-b-gray-300 w-full">
     Manage Feeds
@@ -11,3 +27,23 @@
   <p class="p-4">🏗️ Under construction! 🚧</p>
 
 </div>
+
+<script>
+  // "Add New Feed" section handlers
+  const feedUrlInput = document.getElementById("feed-url");
+  const addFeedButton = document.getElementById("add-feed");
+  const addFeedForm = document.getElementById("add-feed-form");
+
+  addFeedForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    feedUrlInput.disabled = true;
+    addFeedButton.disabled = true;
+    console.log("Add feed submitted", feedUrlInput.value);
+
+    //
+
+    feedUrlInput.disabled = false;
+    addFeedButton.disabled = false;
+
+  });
+</script>
