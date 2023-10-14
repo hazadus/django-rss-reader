@@ -62,6 +62,7 @@ Create `.env` file with two variables: `SECRET_KEY` and `SENTRY_DSN`.
 
 - [Advanced Logging Tutorial](https://docs.python.org/3/howto/logging.html#advanced-logging-tutorial)
 - [Using WhiteNoise with Django](https://whitenoise.readthedocs.io/en/latest/django.html)
+- [Whitenoise - Add compression and caching support](https://whitenoise.readthedocs.io/en/latest/django.html#add-compression-and-caching-support)
 - [Tailwind CSS Django - Flowbite](https://flowbite.com/docs/getting-started/django/)
 - [MDN: scrollIntoView() method](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)
 - [MDN: Navigator: share() method](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#syntax): 
