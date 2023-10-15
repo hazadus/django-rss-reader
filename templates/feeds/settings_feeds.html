@@ -3,7 +3,71 @@
   <h3 class="p-1 font-semibold text-lg text-gray-900 border-b border-b-gray-300 w-full">
     Add New Feed
   </h3>
-  <div class="mb-4 md:mb-8 p-4">🏗️ Under construction! 🚧</div>
+  <div class="mb-4 md:mb-8 p-4">
+    {% if request.method == "POST" %}
+      {% for field in form %}
+        {% if field.errors %}
+          <div class="text-red-500">
+            {{ field.label }}: {{ field.errors }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="text-green-600 font-semibold py-2">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form action="{% url 'feeds:settings_feeds' %}" method="post" id="add-feed-form">
+      {% csrf_token %}
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="sm:col-span-2">
+          <label for="id_url" class="block mb-2 text-sm font-medium text-gray-900">
+            Feed URL
+          </label>
+          <input type="url" name="url" id="id_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed URL, e.g. https://hazadus.ru/rss.xml" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">
+            Feed Title
+          </label>
+          <input type="text" name="title" id="id_title" maxlength="256" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Enter Feed Title" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_site_url" class="block mb-2 text-sm font-medium text-gray-900">
+            Site URL
+          </label>
+          <input type="url" name="site_url" id="id_site_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed Site URL, e.g. https://hazadus.ru/" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_image_url" class="block mb-2 text-sm font-medium text-gray-900">
+            Feed Image URL
+          </label>
+          <input type="url" name="image_url" id="id_image_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed Image URL">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_folder" class="block mb-2 text-sm font-medium text-gray-900">
+            Folder
+          </label>
+          <select name="folder" id="id_folder" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+            <option value="" selected>---------</option>
+            {% for folder in folders %}
+              <option value="{{ folder.pk }}">{{ folder.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <button type="submit" id="add-feed" class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+        Add Feed
+      </button>
+    </form>
+  </div>
+
+
 
   <h3 class="p-1 font-semibold text-lg text-gray-900 border-b border-b-gray-300 w-full">
     Manage Feeds

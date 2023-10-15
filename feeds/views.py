@@ -1,5 +1,6 @@
 import logging
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
@@ -7,10 +8,11 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.http import require_POST
-from django.views.generic import DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.base import ContextMixin, TemplateView
 
-from feeds.models import Entry, Feed
+from feeds.forms import FeedCreateForm
+from feeds.models import Entry, Feed, Folder
 from feeds.selectors import (
     get_all_feeds,
     get_entry_count,
@@ -179,14 +181,48 @@ def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpRe
     )
 
 
-class FeedsSettingsView(LoginRequiredMixin, TemplateView):
+class FeedsSettingsView(LoginRequiredMixin, CreateView):
+    """
+    Settings page - "Feeds" tab.
+    """
+
+    model = Feed
+    form_class = FeedCreateForm
     template_name = "layout_settings.html"
-    tabs = (
-        "feeds",
-        "folders",
-    )
+
+    def get_form(self, form_class=None):
+        """
+        Pass `request` object to the form instance.
+        """
+        return FeedCreateForm(self.request.POST, request=self.request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["tab"] = self.request.GET.get("tab", "feeds")
+        context["folders"] = Folder.objects.filter(user=self.request.user)
         return context
+
+    def form_valid(self, form):
+        """
+        Set logged in user as `user` of new Feed.
+        """
+        feed = form.save(commit=False)
+        # Associate new Feed with logged in user:
+        feed.user = self.request.user
+        feed.save()
+
+        messages.add_message(
+            self.request, messages.SUCCESS, "New feed was successfully created."
+        )
+
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("feeds:settings_feeds")
+
+
+class FoldersSettingsView(LoginRequiredMixin, TemplateView):
+    """
+    Settings page - "Folders" tab.
+    """
+
+    template_name = "layout_settings.html"
