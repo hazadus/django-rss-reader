@@ -38,4 +38,4 @@ jobs:
           END
       - name: Run Deploy
         run: |
-          ssh target "cd /usr/projects/django-rss-reader && docker compose down && docker system prune -f -a --volumes && git pull && rm -rf ./staticfiles && docker compose up -d --build --force-recreate && docker exec web python manage.py collectstatic --noinput"
+          ssh target "cd /usr/projects/django-rss-reader && docker compose down && docker system prune -f -a --volumes && git pull && rm -rf ./staticfiles && docker compose up -d --build --force-recreate && docker exec web python manage.py collectstatic --noinput && docker compose down && docker compose up -d --build"
