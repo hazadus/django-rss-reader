@@ -27,13 +27,20 @@ def get_entry_queryset(user, mode: str) -> QuerySet:
     return mode_querysets[mode].filter(feed__user=user)
 
 
-def get_entry_count(user, mode: str) -> int:
+def get_total_entry_count(user, mode: str) -> int:
     """
     Return TOTAL number of entries in specified "Smart Feed".
     """
     # NB: `all()` is workaround for queryset caching
     # Reference: https://docs.djangoproject.com/en/4.2/topics/db/optimization/#understand-cached-attributes
     return get_entry_queryset(user=user, mode=mode).all().count()
+
+
+def get_unread_entry_count(user, mode: str) -> int:
+    """
+    Return number of UNREAD entries in specified "Smart Feed".
+    """
+    return get_entry_queryset(user=user, mode=mode).filter(is_read=False).count()
 
 
 def get_previous_entry(user, entry: Entry, queryset: QuerySet = Entry.objects.all()):

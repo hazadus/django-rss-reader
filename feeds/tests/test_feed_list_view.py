@@ -45,6 +45,14 @@ class FeedListViewTest(BaseFeedsViewsTestCase):
             self.MODE_QUERYSETS["today"].count(),
         )
         self.assertEqual(
+            response.context["all_unread_count"],
+            self.MODE_QUERYSETS["all"].filter(is_read=False).count(),
+        )
+        self.assertEqual(
+            response.context["today_unread_count"],
+            self.MODE_QUERYSETS["today"].filter(is_read=False).count(),
+        )
+        self.assertEqual(
             response.context["unread_entries_count"],
             self.MODE_QUERYSETS["unread"].count(),
         )

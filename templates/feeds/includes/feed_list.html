@@ -28,6 +28,7 @@
     <a class="flex-1 text-sm py-1 mx-1 {% if mode == "all" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'all' %}">
       All
     </a>
+    <div class="text-xs p-1 rounded-lg bg-teal-600 text-white">{{ all_unread_count }}</div>
     <div class="text-xs p-1 rounded-lg bg-blue-300">{{ all_entries_count }}</div>
   </div>
   <div class="flex pl-1 items-center rounded-lg {% if mode == "today" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
@@ -37,6 +38,7 @@
     <a class="flex-1 text-sm py-1 mx-1 {% if mode == "today" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'today' %}">
       Today
     </a>
+    <div class="text-xs p-1 rounded-lg bg-teal-600 text-white">{{ today_unread_count }}</div>
     <div class="text-xs p-1 rounded-lg bg-blue-300">{{ today_entries_count }}</div>
   </div>
   <div class="flex pl-1 items-center rounded-lg {% if mode == "unread" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">

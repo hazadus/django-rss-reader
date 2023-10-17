@@ -15,11 +15,12 @@ from feeds.forms import FeedCreateForm
 from feeds.models import Entry, Feed, Folder
 from feeds.selectors import (
     get_all_feeds,
-    get_entry_count,
     get_entry_queryset,
     get_feed,
     get_next_entry,
     get_previous_entry,
+    get_total_entry_count,
+    get_unread_entry_count,
 )
 from feeds.services import mark_entry_as_read, toggle_entry_is_favorite
 
@@ -35,19 +36,25 @@ class BaseFeedColumnView(ContextMixin, View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["all_entries_count"] = get_entry_count(
+        context["all_entries_count"] = get_total_entry_count(
             user=self.request.user, mode="all"
         )
-        context["today_entries_count"] = get_entry_count(
+        context["all_unread_count"] = get_unread_entry_count(
+            user=self.request.user, mode="all"
+        )
+        context["today_entries_count"] = get_total_entry_count(
             user=self.request.user, mode="today"
         )
-        context["unread_entries_count"] = get_entry_count(
+        context["today_unread_count"] = get_unread_entry_count(
+            user=self.request.user, mode="today"
+        )
+        context["unread_entries_count"] = get_total_entry_count(
             user=self.request.user, mode="unread"
         )
-        context["read_entries_count"] = get_entry_count(
+        context["read_entries_count"] = get_total_entry_count(
             user=self.request.user, mode="read"
         )
-        context["favorites_entries_count"] = get_entry_count(
+        context["favorites_entries_count"] = get_total_entry_count(
             user=self.request.user, mode="favorites"
         )
         return context

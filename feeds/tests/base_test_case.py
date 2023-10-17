@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from dateutil import tz
+from django.conf import settings
 from django.test import TestCase
 
 from feeds.models import Entry
@@ -51,3 +53,9 @@ class BaseFeedsViewsTestCase(TestCase):
                 is_favorite=True,
             ),
         }
+
+        # Change date for some entries - we need it so "Today" smart feed have some entries in it
+        entries = Entry.objects.filter(feed__user=cls.user)
+        for entry in entries[10:]:
+            entry.pub_date = datetime.now(tz=tz.gettz(settings.TIME_ZONE))
+            entry.save()
