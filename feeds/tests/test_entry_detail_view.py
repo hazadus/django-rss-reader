@@ -45,7 +45,7 @@ class EntryDetailViewTest(BaseFeedsViewsTestCase):
             follow=True,
         )
 
-        # Do the actual test
+        # Do the actual test: request detail view for each entry in each "Smart Feed".
         for mode in self.MODE_QUERYSETS.keys():
             for entry in self.MODE_QUERYSETS[mode]:
                 url = reverse(
@@ -96,42 +96,48 @@ class EntryDetailViewTest(BaseFeedsViewsTestCase):
             url, {"login": self.email, "password": self.password}, follow=True
         )
 
-        # Do the actual test
+        # Do the actual test: request detail view for each entry in each feed (non-"Smart" feed!)
         for feed in Feed.objects.all():
-            for entry in feed.entries.all():
-                url = reverse(
-                    "feeds:entry_detail", kwargs={"mode": mode, "pk": entry.pk}
-                )
-                response = self.client.get(url)
-                self.assertEqual(response.status_code, 200)
-                self.assertEqual(response.context["mode"], mode)
-                self.assertEqual(
-                    response.context["entry_count"],
-                    self.MODE_QUERYSETS[mode].count(),
-                )
-                self.assertEqual(
-                    len(response.context["feeds"]),
-                    Feed.objects.filter(user=self.user).count(),
-                )
-                self.assertEqual(
-                    response.context["all_entries_count"],
-                    self.MODE_QUERYSETS["all"].count(),
-                )
-                self.assertEqual(
-                    response.context["today_entries_count"],
-                    self.MODE_QUERYSETS["today"].count(),
-                )
-                self.assertEqual(
-                    response.context["unread_entries_count"],
-                    # NB: `all()` is workaround for queryset caching
-                    self.MODE_QUERYSETS["unread"].all().count(),
-                )
-                self.assertEqual(
-                    response.context["read_entries_count"],
-                    # NB: `all()` is workaround for queryset caching
-                    self.MODE_QUERYSETS["read"].all().count(),
-                )
-                self.assertEqual(
-                    response.context["favorites_entries_count"],
-                    self.MODE_QUERYSETS["favorites"].count(),
-                )
+            for entry in feed.entries.filter(feed=feed):
+                with self.subTest(feed=feed, entry=entry):
+                    url = (
+                        reverse(
+                            "feeds:entry_detail", kwargs={"mode": mode, "pk": entry.pk}
+                        )
+                        + "?in_feed="
+                        + str(feed.pk)
+                    )
+                    response = self.client.get(url)
+                    self.assertEqual(response.status_code, 200)
+                    self.assertEqual(response.context["mode"], mode)
+                    # Number of entries in the feed to which entry belongs:
+                    self.assertEqual(
+                        response.context["entry_count"],
+                        self.MODE_QUERYSETS[mode].filter(feed=feed).count(),
+                    )
+                    self.assertEqual(
+                        len(response.context["feeds"]),
+                        Feed.objects.filter(user=self.user).count(),
+                    )
+                    self.assertEqual(
+                        response.context["all_entries_count"],
+                        self.MODE_QUERYSETS["all"].count(),
+                    )
+                    self.assertEqual(
+                        response.context["today_entries_count"],
+                        self.MODE_QUERYSETS["today"].count(),
+                    )
+                    self.assertEqual(
+                        response.context["unread_entries_count"],
+                        # NB: `all()` is workaround for queryset caching
+                        self.MODE_QUERYSETS["unread"].all().count(),
+                    )
+                    self.assertEqual(
+                        response.context["read_entries_count"],
+                        # NB: `all()` is workaround for queryset caching
+                        self.MODE_QUERYSETS["read"].all().count(),
+                    )
+                    self.assertEqual(
+                        response.context["favorites_entries_count"],
+                        self.MODE_QUERYSETS["favorites"].count(),
+                    )
