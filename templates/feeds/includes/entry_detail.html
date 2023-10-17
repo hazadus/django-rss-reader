@@ -52,7 +52,7 @@
 </div>
 
 <!-- Content of the entry (scrollable) -->
-<div class="flex flex-1 flex-col p-4 md:p-8 overflow-y-auto overflow-x-hidden border-r border-r-gray-300 rounded-br-lg relative">
+<div class="flex flex-1 flex-col p-4 md:p-8 overflow-y-auto overflow-x-hidden border-r border-r-gray-300 rounded-br-lg relative {% if not entry %}justify-center{% endif %}">
   {% if entry %}
     <!-- Feed title and entry author + cover image -->
     <div class="flex pb-2 mb-4 border-b border-b-gray-300">
@@ -141,6 +141,8 @@
       {% endif %}
     </div>
   {% else %}
-    <span>Please select an entry to view.</span>
+    <div class="mx-auto rounded-lg p-4 bg-gray-100">
+      Please select an entry to view.
+    </div>
   {% endif %}
 </div>
