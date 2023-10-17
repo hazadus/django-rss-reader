@@ -16,7 +16,8 @@ lint:
 	python -m isort --check-only --profile black .
 	flake8 .
 test:
-	python -m manage collectstatic
-	python -m manage test --timing --shuffle
+	python -m manage collectstatic --noinput
+	coverage run --source='.' -m manage test --timing --shuffle
+	coverage html
 run:
 	python -m manage runserver

@@ -29,6 +29,7 @@ Main branch is auto-deployed at http://rss.hazadus.ru/.
 - Misc:
   - [environs](https://pypi.org/project/environs/): `environs` is a Python library for parsing environment variables. 
   - [coloredlogs](https://coloredlogs.readthedocs.io/en/latest/index.html): The coloredlogs package enables colored terminal output for Python’s logging module.
+  - [coverage](https://pypi.org/project/coverage/): Coverage.py measures code coverage, typically during test execution.
 
 ## Building Tailwind styles
 

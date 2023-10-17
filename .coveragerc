@@ -1,0 +1,26 @@
+# .coveragerc to control coverage.py
+# Configuration reference: https://coverage.readthedocs.io/en/7.2.1/config.html
+[run]
+omit =
+    ./django_project/asgi.py
+    ./django_project/wsgi.py
+    ./django_project/settings.py
+    ./feeds/migrations/*.*
+    ./feeds/admin.py
+    ./users/migrations/*.*
+    ./users/admin.py
+    ./*/__init__.py
+    ./*/*/__init__.py
+    ./manage.py
+
+[report]
+# Regexes for lines to exclude from consideration
+# Reference: https://coverage.readthedocs.io/en/7.2.1/excluding.html
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+    if DEBUG:
+    if GITHUB_ACTIONS:
+    if not DEBUG:
+    except ImportError
+    if __name__ == "__main__":
