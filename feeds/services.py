@@ -287,6 +287,17 @@ def mark_entry_as_read(pk: int):
     entry.save()
 
 
+def mark_feed_as_read(feed_pk: int):
+    """
+    Mark all entries in the feed as read.
+
+    :param int feed_pk: primary key of the feed where to mark all entries as read.
+    """
+    feed = Feed.objects.get(pk=feed_pk)
+    for entry in feed.entries.filter(is_read=False):
+        mark_entry_as_read(pk=entry.pk)
+
+
 def toggle_entry_is_favorite(pk: int):
     """
     Toggle entry's favorite status and save it.

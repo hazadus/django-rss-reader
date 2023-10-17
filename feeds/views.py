@@ -22,7 +22,11 @@ from feeds.selectors import (
     get_total_entry_count,
     get_unread_entry_count,
 )
-from feeds.services import mark_entry_as_read, toggle_entry_is_favorite
+from feeds.services import (
+    mark_entry_as_read,
+    mark_feed_as_read,
+    toggle_entry_is_favorite,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -184,6 +188,28 @@ def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpRe
             default=reverse_lazy(
                 "feeds:entry_detail", kwargs={"pk": entry_pk, "mode": "all"}
             ),
+        )
+    )
+
+
+@login_required
+@require_POST
+def feed_mark_as_read_view(request: HttpRequest, feed_pk: int) -> HttpResponse:
+    """
+    Mark all entries in the feed as read.
+
+    :param HttpRequest request: HttpRequest object
+    :param int feed_pk: primary key of the Feed where to mark entries as read
+    """
+    mark_feed_as_read(feed_pk=feed_pk)
+
+    # noinspection PyArgumentList
+    return redirect(
+        request.POST.get(
+            key="redirect_url",
+            default=reverse_lazy("feeds:entry_list", kwargs={"mode": "all"})
+            + "?in_feed="
+            + str(feed_pk),
         )
     )
 
