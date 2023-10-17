@@ -5,6 +5,8 @@ from io import BytesIO
 import feedparser
 import requests
 from dateutil import parser as date_parser
+from dateutil import tz
+from django.conf import settings
 from feedparser import FeedParserDict
 
 from feeds.models import Entry, Feed, Folder, Tag
@@ -144,8 +146,8 @@ def entry_create(
     description: str | None,
     summary: str | None,
     content: str | None,
-    pub_date: datetime,
-    upd_date: datetime,
+    pub_date: datetime | None,
+    upd_date: datetime | None,
 ) -> Entry | None:
     """
     Create and return Entry instance using passed parameters.
@@ -156,7 +158,8 @@ def entry_create(
     # Some feeds will have no `pub_date`, but they usually have `upd_date` instead.
     # Because we heavily use `pub_date` for navigation, ensure that it is not None.
     if not pub_date:
-        pub_date = upd_date if upd_date else datetime.now()
+        app_tz = tz.gettz(settings.TIME_ZONE)
+        pub_date = upd_date if upd_date else datetime.now(tz=app_tz)
 
     return Entry.objects.create(
         feed=feed,
