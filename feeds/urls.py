@@ -7,6 +7,7 @@ from feeds.views import (
     FeedsSettingsView,
     FoldersSettingsView,
     entry_toggle_is_favorite_view,
+    feed_mark_as_read_view,
 )
 
 app_name = "feeds"
@@ -22,5 +23,10 @@ urlpatterns = [
         "entry/toggle/is_favorite/<int:entry_pk>/",
         entry_toggle_is_favorite_view,
         name="entry_toggle_is_favorite",
+    ),
+    path(
+        "feed/mark_as_read/<int:feed_pk>/",
+        feed_mark_as_read_view,
+        name="feed_mark_as_read",
     ),
 ]

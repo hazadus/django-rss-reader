@@ -31,7 +31,7 @@
     <div class="flex">
       <!-- "Mark all as read" button -->
       {% if in_feed and feed and feed.unread_entry_count %}
-        <form method="post" action="#" class="h-[24px]">
+        <form method="post" action="{% url 'feeds:feed_mark_as_read' feed.pk %}" class="h-[24px]">
           {% csrf_token %}
           <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
           <button type="submit">
