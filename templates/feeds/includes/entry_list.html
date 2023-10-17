@@ -6,22 +6,39 @@
       {% include "feeds/includes/icons/icon_home.html" with size="24" color="#6b7280" %}
     </a>
   </div>
-  <!-- Feed title -->
-  <div class="flex flex-col flex-1 justify-center">
-    <div class="block text-sm font-semibold text-gray-800 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-    {% if entries %}
-      {% if in_feed and feed %}
-        {{ feed }}
-      {% elif mode %}
-        {{ mode|capfirst }}
+  <!-- Feed title and buttons-->
+  <div class="flex items-center w-full px-1">
+    <!-- Feed title and number of entries -->
+    <div class="flex flex-col flex-1">
+      <!-- Feed title -->
+      <div class="block text-sm font-semibold text-gray-800 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+      {% if entries %}
+        {% if in_feed and feed %}
+          {{ feed }}
+        {% elif mode %}
+          {{ mode|capfirst }}
+        {% endif %}
       {% endif %}
-    {% endif %}
+      </div>
+      <!-- Number of entries in the feed -->
+      <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+      {% if entries %}
+        {{ entry_count }} entries{% if in_feed and feed %}, {{ feed.unread_entry_count }} unread{% endif %}
+      {% endif %}
+      </div>
     </div>
-    <!-- Number of entries in the feed -->
-    <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-    {% if entries %}
-      {{ entry_count }} entries{% if in_feed and feed %}, {{ feed.unread_entry_count }} unread{% endif %}
-    {% endif %}
+    <!-- Button(s) -->
+    <div class="flex">
+      <!-- "Mark all as read" button -->
+      {% if in_feed and feed and feed.unread_entry_count %}
+        <form method="post" action="#" class="h-[24px]">
+          {% csrf_token %}
+          <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+          <button type="submit">
+            {% include "feeds/includes/icons/icon_multiple_marked_circle.html" with size="24" color="#6b7280" %}
+          </button>
+        </form>
+      {% endif %}
     </div>
   </div>
 </div>
