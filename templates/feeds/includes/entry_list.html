@@ -20,7 +20,7 @@
     <!-- Number of entries in the feed -->
     <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
     {% if entries %}
-      {{ entry_count }} entries
+      {{ entry_count }} entries{% if in_feed and feed %}, {{ feed.unread_entry_count }} unread{% endif %}
     {% endif %}
     </div>
   </div>
