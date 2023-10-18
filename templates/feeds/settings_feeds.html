@@ -145,14 +145,12 @@
                   {% endif %}
                 </td>
               <td class="px-4 py-2">
-                <!-- "Delete feed" button -->
-                <form method="post" action="#" class="h-[24px]">
-                  {% csrf_token %}
-                  <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-                  <button type="submit">
+                <!-- "Delete feed" link -->
+                <a href="{% url 'feeds:delete_feed' feed.pk %}">
+                  <div>
                     {% include "feeds/includes/icons/icon_delete.html" with size=24 color="#6b7280" %}
-                  </button>
-                </form>
+                  </div>
+                </a>
               </td>
               </tr>
               {% endfor %}

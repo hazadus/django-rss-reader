@@ -8,7 +8,13 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.http import require_POST
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from django.views.generic.base import ContextMixin, TemplateView
 
 from feeds.forms import FeedCreateForm
@@ -277,6 +283,18 @@ class FeedUpdateView(
 
     def get_success_url(self):
         return reverse_lazy("feeds:update_feed", kwargs={"pk": self.get_object().pk})
+
+
+class FeedDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Feed
+    template_name = "layout_settings.html"
+    context_object_name = "feed"
+    success_url = reverse_lazy("feeds:settings_feeds")
+
+    def test_func(self):
+        """Only allow owner of the feed to delete it."""
+        feed = self.get_object()
+        return feed.user == self.request.user
 
 
 class FoldersSettingsView(LoginRequiredMixin, TemplateView):

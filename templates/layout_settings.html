@@ -33,6 +33,8 @@
         {% include "feeds/settings_folders.html" %}
     {% elif "/feeds/settings/feed/update/" in request.path %}
       {% include "feeds/feed_update.html" %}
+    {% elif "/feeds/settings/feed/delete/" in request.path %}
+      {% include "feeds/feed_delete.html" %}
     {% endif %}
   </div>
 {% endblock page %}

@@ -3,6 +3,7 @@ from django.urls import path
 from feeds.views import (
     EntryDetailView,
     EntryListView,
+    FeedDeleteView,
     FeedListView,
     FeedsSettingsView,
     FeedUpdateView,
@@ -27,6 +28,11 @@ urlpatterns = [
         "settings/feed/update/<int:pk>/",
         FeedUpdateView.as_view(),
         name="update_feed",
+    ),
+    path(
+        "settings/feed/delete/<int:pk>/",
+        FeedDeleteView.as_view(),
+        name="delete_feed",
     ),
     path(
         "settings/folders/",
