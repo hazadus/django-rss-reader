@@ -12,7 +12,7 @@
         </div>
       </a>
       <a href="{% url 'feeds:settings_feeds' %}">
-        <div class="py-2 px-6 font-semibold {% if request.path == "/feeds/settings/feeds/" %}text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
+        <div class="py-2 px-6 font-semibold {% if "/feeds/settings/feed" in request.path %}text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
           Feeds
         </div>
       </a>
@@ -31,6 +31,8 @@
         {% include "feeds/settings_feeds.html" %}
     {% elif request.path == "/feeds/settings/folders/"  %}
         {% include "feeds/settings_folders.html" %}
+    {% elif "/feeds/settings/feed/update/" in request.path %}
+      {% include "feeds/feed_update.html" %}
     {% endif %}
   </div>
 {% endblock page %}

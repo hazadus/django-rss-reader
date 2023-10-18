@@ -16,9 +16,7 @@
 
     {% if messages %}
       {% for message in messages %}
-        <div class="text-green-600 font-semibold py-2">
-          {{ message }}
-        </div>
+        {% include "alert.html" with message=message style="success" %}
       {% endfor %}
     {% endif %}
 
@@ -27,19 +25,19 @@
       <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
         <div class="sm:col-span-2">
           <label for="id_url" class="block mb-2 text-sm font-medium text-gray-900">
-            Feed URL
+            Feed URL *
           </label>
           <input type="url" name="url" id="id_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed URL, e.g. https://hazadus.ru/rss.xml" required="">
         </div>
         <div class="sm:col-span-2">
           <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">
-            Feed Title
+            Feed Title *
           </label>
           <input type="text" name="title" id="id_title" maxlength="256" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Enter Feed Title" required="">
         </div>
         <div class="sm:col-span-2">
           <label for="id_site_url" class="block mb-2 text-sm font-medium text-gray-900">
-            Site URL
+            Site URL *
           </label>
           <input type="url" name="site_url" id="id_site_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed Site URL, e.g. https://hazadus.ru/" required="">
         </div>
@@ -54,7 +52,7 @@
             Folder
           </label>
           <select name="folder" id="id_folder" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
-            <option value="" selected>---------</option>
+            <option value="" selected>-- None -- </option>
             {% for folder in folders %}
               <option value="{{ folder.pk }}">{{ folder.title }}</option>
             {% endfor %}
@@ -103,7 +101,7 @@
                 <th scope="col" class="px-4 py-3">Folder</th>
                 <th scope="col" class="px-4 py-3">Unread</th>
                 <th scope="col" class="px-4 py-3">Total</th>
-                <th scope="col" class="px-4 py-3">Last Update</th>
+                <th scope="col" class="px-4 py-3">Last Entry</th>
               </tr>
             </thead>
             <tbody>
@@ -115,7 +113,9 @@
                   {% else %}
                     <div class="h-8 w-8 mr-3 shrink-0"></div>
                   {% endif %}
-                  {{ feed.title }}
+                  <a href="{% url 'feeds:update_feed' feed.pk %}" class="hover:underline">
+                    {{ feed.title }}
+                  </a>
                 </th>
                 <td class="px-4 py-2">
                   {% if feed.folder %}
