@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.db.models import Count, QuerySet
 
-from feeds.models import Entry, Feed, Tag
+from feeds.models import Entry, Feed, Folder, Tag
 
 
 def get_entry_queryset(user, mode: str) -> QuerySet:
@@ -65,6 +65,10 @@ def get_next_entry(user, entry: Entry, queryset: QuerySet = Entry.objects.all())
 
 def get_all_feeds(user) -> QuerySet:
     return Feed.objects.filter(user=user).prefetch_related("entries")
+
+
+def get_all_folders(user) -> QuerySet:
+    return Folder.objects.filter(user=user).prefetch_related("feeds")
 
 
 def get_feed(pk: int) -> Feed:

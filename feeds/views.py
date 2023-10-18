@@ -12,9 +12,10 @@ from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.base import ContextMixin, TemplateView
 
 from feeds.forms import FeedCreateForm
-from feeds.models import Entry, Feed, Folder
+from feeds.models import Entry, Feed
 from feeds.selectors import (
     get_all_feeds,
+    get_all_folders,
     get_entry_queryset,
     get_feed,
     get_next_entry,
@@ -231,7 +232,8 @@ class FeedsSettingsView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["folders"] = Folder.objects.filter(user=self.request.user)
+        context["feeds"] = get_all_feeds(user=self.request.user)
+        context["folders"] = get_all_folders(user=self.request.user)
         return context
 
     def form_valid(self, form):
