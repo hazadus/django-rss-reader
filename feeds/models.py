@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -102,6 +104,15 @@ class Feed(models.Model):
         Number of unread entries in the Feed.
         """
         return self.entries.filter(is_read=False).count()
+
+    @property
+    def last_updated(self) -> datetime | None:
+        """
+        Return newest entry pub_date, or None if there's no entries.
+        """
+        if newest_entry := self.entries.order_by("-pub_date").first():
+            return newest_entry.pub_date
+        return None
 
 
 class Entry(models.Model):

@@ -1,0 +1,77 @@
+<div class="flex flex-col w-full">
+  <h3 class="p-1 font-semibold text-lg text-gray-900 border-b border-b-gray-300 w-full">
+    Update Feed – {{ feed }}
+  </h3>
+  <div class="mb-4 md:mb-8 p-4">
+    {% if request.method == "POST" %}
+      {% for field in form %}
+        {% if field.errors %}
+          <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <div>
+              <span class="font-medium">An error has occured – {{ field.label }}:</span>
+                <ul class="mt-1.5 ml-4 list-disc list-inside">
+                  {{ field.errors }}
+                </ul>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if messages %}
+      {% for message in messages %}
+        {% include "alert.html" with message=message style="success" %}
+      {% endfor %}
+    {% endif %}
+
+    <form action="{% url 'feeds:update_feed' feed.pk %}" method="post">
+      {% csrf_token %}
+      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="sm:col-span-2">
+          <label for="id_url" class="block mb-2 text-sm font-medium text-gray-900">
+            Feed URL *
+          </label>
+          <input value="{{ feed.url }}" type="url" name="url" id="id_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed URL, e.g. https://hazadus.ru/rss.xml" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">
+            Feed Title *
+          </label>
+          <input value="{{ feed.title }}" type="text" name="title" id="id_title" maxlength="256" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Enter Feed Title" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_site_url" class="block mb-2 text-sm font-medium text-gray-900">
+            Site URL *
+          </label>
+          <input value="{{ feed.site_url }}" type="url" name="site_url" id="id_site_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed Site URL, e.g. https://hazadus.ru/" required="">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_image_url" class="block mb-2 text-sm font-medium text-gray-900">
+            Feed Image URL
+          </label>
+          <input {% if feed.image_url %}value="{{ feed.image_url }}"{% endif %} type="url" name="image_url" id="id_image_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed Image URL">
+        </div>
+        <div class="sm:col-span-2">
+          <label for="id_folder" class="block mb-2 text-sm font-medium text-gray-900">
+            Folder
+          </label>
+          <select name="folder" id="id_folder" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+            <option value="">-- None -- </option>
+            {% for folder in folders %}
+              <option value="{{ folder.pk }}" {% if folder == feed.folder %}selected{% endif %}>{{ folder.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+        Update Feed
+      </button>
+      <a href="{% url 'feeds:delete_feed' feed.pk %}" class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-red-200 hover:bg-red-800">
+        Delete
+      </a>
+    </form>
+  </div>
+</div>

@@ -87,3 +87,21 @@ class FeedsSettingsViewTest(BaseFeedsViewsTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "You already have subscription")
         self.assertEqual(Feed.objects.filter(user=self.user, url=feed.url).count(), 1)
+
+    def test_settings_feeds_manage_feeds(self):
+        """
+        Test that all user's feeds are listed in "Manage Feeds" section on Settings/Feeds tab.
+        """
+        # Login
+        url = reverse("account_login")
+        self.client.post(
+            url, {"login": self.email, "password": self.password}, follow=True
+        )
+
+        feeds = Feed.objects.filter(user=self.user)
+
+        for feed in feeds:
+            with self.subTest(feed=feed):
+                url = reverse("feeds:settings_feeds")
+                response = self.client.get(url)
+                self.assertContains(response, feed.title)

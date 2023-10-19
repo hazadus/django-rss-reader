@@ -1,20 +1,27 @@
 import logging
 
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.http import require_POST
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from django.views.generic.base import ContextMixin, TemplateView
 
 from feeds.forms import FeedCreateForm
-from feeds.models import Entry, Feed, Folder
+from feeds.models import Entry, Feed
 from feeds.selectors import (
     get_all_feeds,
+    get_all_folders,
     get_entry_queryset,
     get_feed,
     get_next_entry,
@@ -214,14 +221,15 @@ def feed_mark_as_read_view(request: HttpRequest, feed_pk: int) -> HttpResponse:
     )
 
 
-class FeedsSettingsView(LoginRequiredMixin, CreateView):
+class FeedsSettingsView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """
-    Settings page - "Feeds" tab.
+    Settings page - "Feeds" tab - "Add New Feed" form and "Manage Feeds" list.
     """
 
     model = Feed
     form_class = FeedCreateForm
     template_name = "layout_settings.html"
+    success_message = "New feed was successfully created."
 
     def get_form(self, form_class=None):
         """
@@ -231,7 +239,8 @@ class FeedsSettingsView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["folders"] = Folder.objects.filter(user=self.request.user)
+        context["feeds"] = get_all_feeds(user=self.request.user)
+        context["folders"] = get_all_folders(user=self.request.user)
         return context
 
     def form_valid(self, form):
@@ -243,14 +252,49 @@ class FeedsSettingsView(LoginRequiredMixin, CreateView):
         feed.user = self.request.user
         feed.save()
 
-        messages.add_message(
-            self.request, messages.SUCCESS, "New feed was successfully created."
-        )
-
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy("feeds:settings_feeds")
+
+
+class FeedUpdateView(
+    LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView
+):
+    """
+    Update individual Feed.
+    """
+
+    model = Feed
+    fields = ["url", "title", "site_url", "image_url", "folder"]
+    template_name = "layout_settings.html"
+    context_object_name = "feed"
+    success_message = "Feed successfully updated!"
+
+    def test_func(self):
+        """Only allow owner of the feed to update it."""
+        feed = self.get_object()
+        return feed.user == self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["folders"] = get_all_folders(user=self.request.user)
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy("feeds:update_feed", kwargs={"pk": self.get_object().pk})
+
+
+class FeedDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Feed
+    template_name = "layout_settings.html"
+    context_object_name = "feed"
+    success_url = reverse_lazy("feeds:settings_feeds")
+
+    def test_func(self):
+        """Only allow owner of the feed to delete it."""
+        feed = self.get_object()
+        return feed.user == self.request.user
 
 
 class FoldersSettingsView(LoginRequiredMixin, TemplateView):
