@@ -4,7 +4,7 @@
     Your Profile
   </h3>
 
-  <div class="flex flex-col-reverse md:grid md:grid-cols-12">
+  <div class="flex flex-col-reverse px-2 md:px-0 md:grid md:grid-cols-12">
     <!-- Form -->
     <div class="pr-0 md:pr-2 md:col-span-9">
       {% if request.method == "POST" %}
@@ -65,16 +65,17 @@
           </div>
           <div class="sm:col-span-2">
             <label for="id_profile_image" class="block mb-2 text-sm font-medium text-gray-900">
-              Profile image:
+              Profile image
             </label>
             {% if user.profile_image %}
-              Current image: {{ user.profile_image.url }}
+              <div class="text-sm mb-1">
+              Current image:
+              <a href="{{ user.profile_image.url }}" class="text-blue-700 hover:underline mr-2">{{ user.profile_image.url }}</a>
               <input type="checkbox" name="profile_image-clear" id="profile_image-clear_id">
               <label for="profile_image-clear_id">Clear</label>
-              <br>
+              </div>
             {% endif %}
-            Change:
-            <input type="file" name="profile_image" accept="image/*" id="id_profile_image">
+            <input type="file" name="profile_image" accept="image/*" id="id_profile_image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
           </div>
         </div>
         <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
@@ -84,9 +85,9 @@
     </div>
 
     <!-- Profile picture -->
-    <div class="md:col-span-3 flex">
+    <div class="md:col-span-3 flex mb-2">
       {% if user.profile_image %}
-        <img src="{{ user.profile_image.url }}" class="w-64 h-64 rounded-full mx-auto">
+        <img src="{{ user.profile_image.url }}" class="w-64 h-64 rounded-full mx-auto" alt="{{ user.username }}">
       {% endif %}
     </div>
   </div>
