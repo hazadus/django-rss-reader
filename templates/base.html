@@ -14,8 +14,8 @@
 </head>
 
 <body class="bg-white">
-  {# NB: fixed `h-screen` for reader pages, `min-h-screen` for settings pages. #}
-  <div class="container flex mx-auto mt-0 shadow-md rounded-bl-lg rounded-br-lg {% if not "/feeds/settings/" in request.path %}h-screen{% else %}min-h-screen{% endif %}">
+  {# NB: fixed `h-screen` for reader pages, `min-h-screen` for profile and settings pages. #}
+  <div class="container flex mx-auto mt-0 shadow-md rounded-bl-lg rounded-br-lg {% if not "/feeds/settings/" in request.path and not "/users/profile" in request.path %}h-screen{% else %}min-h-screen{% endif %}">
     {% block content %}
     {% endblock content %}
     <script>

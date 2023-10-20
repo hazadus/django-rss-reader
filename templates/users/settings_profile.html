@@ -1,8 +1,93 @@
 <div class="flex flex-col w-full">
 
-  <h3 class="p-1 font-semibold text-lg text-gray-900 border-b border-b-gray-300 w-full">
-    {{ user.username }} – User Profile
+  <h3 class="p-1 mb-2 font-semibold text-lg text-gray-900 border-b border-b-gray-300 w-full">
+    Your Profile
   </h3>
-  <p class="p-4">🏗️ Under construction! 🚧</p>
 
+  <div class="flex flex-col-reverse md:grid md:grid-cols-12">
+    <!-- Form -->
+    <div class="pr-0 md:pr-2 md:col-span-9">
+      {% if request.method == "POST" %}
+        {% for field in form %}
+          {% if field.errors %}
+            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+              <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+              </svg>
+              <div>
+                <span class="font-medium">An error has occured – {{ field.label }}:</span>
+                  <ul class="mt-1.5 ml-4 list-disc list-inside">
+                    {{ field.errors }}
+                  </ul>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if messages %}
+        {% for message in messages %}
+          {% include "alert.html" with message=message style="success" %}
+        {% endfor %}
+      {% endif %}
+
+      <form action="{% url 'users:user_profile' user.pk %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <div class="sm:col-span-2">
+            <label for="id_username" class="block mb-2 text-sm font-medium text-gray-900">
+              Username
+            </label>
+            <input value="{{ user.username }}" type="text" name="username" id="id_username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+          </div>
+          <div class="sm:col-span-2">
+            <label for="id_first_name" class="block mb-2 text-sm font-medium text-gray-900">
+              First Name
+            </label>
+            <input value="{{ user.first_name }}" type="text" name="first_name" id="id_first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+          </div>
+          <div class="sm:col-span-2">
+            <label for="id_last_name" class="block mb-2 text-sm font-medium text-gray-900">
+              Last Name
+            </label>
+            <input value="{{ user.last_name }}" type="text" name="last_name" id="id_last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+          </div>
+          <div class="sm:col-span-2">
+            <span class="block mb-2 text-sm font-medium text-gray-900">
+              Email
+            </span>
+            <span class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 cursor-default">
+              {{ user.email }}
+            </span>
+            <span class="text-xs text-gray-500">
+              Email can't be changed.
+            </span>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="id_profile_image" class="block mb-2 text-sm font-medium text-gray-900">
+              Profile image:
+            </label>
+            {% if user.profile_image %}
+              Current image: {{ user.profile_image.url }}
+              <input type="checkbox" name="profile_image-clear" id="profile_image-clear_id">
+              <label for="profile_image-clear_id">Clear</label>
+              <br>
+            {% endif %}
+            Change:
+            <input type="file" name="profile_image" accept="image/*" id="id_profile_image">
+          </div>
+        </div>
+        <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+          Update Profile
+        </button>
+      </form>
+    </div>
+
+    <!-- Profile picture -->
+    <div class="md:col-span-3 flex">
+      {% if user.profile_image %}
+        <img src="{{ user.profile_image.url }}" class="w-64 h-64 rounded-full mx-auto">
+      {% endif %}
+    </div>
+  </div>
 </div>
