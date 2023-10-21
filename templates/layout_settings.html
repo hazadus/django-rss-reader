@@ -7,18 +7,27 @@
   <div class="border-b border-b-gray-300">
     <div class="container max-w-screen-lg mx-auto flex">
       <a href="{% url 'users:user_profile' user.pk %}">
-        <div class="py-2 px-6 font-semibold {% if "/users/profile/" in request.path %}text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
-          Profile
+        <div class="flex items-center py-2 px-3 {% if "/users/profile/" in request.path %}font-semibold text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
+          <div class="mr-1">
+            {% include "icons/icon_account.html" with size="16" color="#6b7280" %}
+          </div>
+          <span>Profile</span>
         </div>
       </a>
       <a href="{% url 'feeds:settings_feeds' %}">
-        <div class="py-2 px-6 font-semibold {% if "/feeds/settings/feed" in request.path %}text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
-          Feeds
+        <div class="flex items-center py-2 px-3 {% if "/feeds/settings/feed" in request.path %}font-semibold text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
+          <div class="mr-1">
+            {% include "icons/icon_feed.html" with size="16" color="#6b7280" %}
+          </div>
+          <span>Feeds</span>
         </div>
       </a>
       <a href="{% url 'feeds:settings_folders' %}">
-        <div class="py-2 px-6 font-semibold {% if request.path == "/feeds/settings/folders/" %}text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
-          Folders
+        <div class="flex items-center py-2 px-3 {% if request.path == "/feeds/settings/folders/" %}font-semibold text-gray-900 border-b-2 border-b-blue-500{% else %}text-gray-600 hover:bg-gray-100 hover:border-b-2 hover:border-b-gray-100{% endif %}">
+          <div class="mr-1">
+            {% include "icons/icon_folders.html" with size="16" color="#6b7280" %}
+          </div>
+          <span>Folders</span>
         </div>
       </a>
     </div>
