@@ -3,7 +3,7 @@
   <!-- Buttons (mobile only) -->
   <div class="flex md:hidden mx-2 h-[24px]">
     <a href="{% url 'feeds:feed_list' %}">
-      {% include "feeds/includes/icons/icon_home.html" with size="24" color="#6b7280" %}
+      {% include "icons/icon_home.html" with size="24" color="#6b7280" %}
     </a>
   </div>
   <!-- Feed title and buttons-->
@@ -35,7 +35,7 @@
           {% csrf_token %}
           <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
           <button type="submit">
-            {% include "feeds/includes/icons/icon_multiple_marked_circle.html" with size="24" color="#6b7280" %}
+            {% include "icons/icon_multiple_marked_circle.html" with size="24" color="#6b7280" %}
           </button>
         </form>
       {% endif %}

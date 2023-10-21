@@ -5,7 +5,7 @@
     <!-- "Home" (mobile only) -->
     <div class="flex md:hidden mx-2 h-[24px]">
       <a href="{% url 'feeds:feed_list' %}">
-        {% include "feeds/includes/icons/icon_home.html" with size="24" color="#6b7280" %}
+        {% include "icons/icon_home.html" with size="24" color="#6b7280" %}
       </a>
     </div>
 
@@ -14,7 +14,7 @@
       <!-- "Unread" - circle -->
       <div class="mx-2 h-[24px]">
         <a href="#">
-          {% include "feeds/includes/icons/icon_circle.html" with size="24" color="#6b7280" %}
+          {% include "icons/icon_circle.html" with size="24" color="#6b7280" %}
         </a>
       </div>
       <!-- "Favorite" - star -->
@@ -24,9 +24,9 @@
           <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
           <button type="submit">
             {% if entry.is_favorite %}
-              {% include "feeds/includes/icons/icon_star.html" with size="24" color="orange" %}
+              {% include "icons/icon_star.html" with size="24" color="orange" %}
             {% else %}
-              {% include "feeds/includes/icons/icon_star_outline.html" with size="24" color="#6b7280" %}
+              {% include "icons/icon_star_outline.html" with size="24" color="#6b7280" %}
             {% endif %}
           </button>
         </form>
@@ -34,13 +34,13 @@
       <!-- "Share" (only on mobile) -->
       <div class="mx-2 h-[24px] flex md:hidden">
         <button id="share-entry">
-          {% include "feeds/includes/icons/icon_share.html" with size="24" color="#6b7280" %}
+          {% include "icons/icon_share.html" with size="24" color="#6b7280" %}
         </button>
       </div>
       <!-- "Edit in Admin" - gear with pencil -->
       <div class="mx-2 h-[24px]">
         <a href="/admin/feeds/entry/{{ entry.pk }}/change/" target="_blank">
-          {% include "feeds/includes/icons/icon_gear_edit.html" with size="24" color="#6b7280" %}
+          {% include "icons/icon_gear_edit.html" with size="24" color="#6b7280" %}
         </a>
       </div>
     {% endif %}
@@ -127,7 +127,7 @@
       {% if previous_entry %}
         <a class="hover:underline" href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
           <div class="w-24 h-24 bg-gray-200 opacity-80 rounded-full p-2 mr-3 flex items-center justify-center">
-            {% include "feeds/includes/icons/icon_arrow_left.html" with size="48" color="#6b7280" %}
+            {% include "icons/icon_arrow_left.html" with size="48" color="#6b7280" %}
           </div>
         </a>
       {% endif %}
@@ -135,7 +135,7 @@
       {% if next_entry %}
         <a class="hover:underline" href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
           <div class="w-24 h-24 bg-gray-200 opacity-80 rounded-full p-2 flex items-center justify-center">
-            {% include "feeds/includes/icons/icon_arrow_right.html" with size="48" color="#6b7280" %}
+            {% include "icons/icon_arrow_right.html" with size="48" color="#6b7280" %}
           </div>
         </a>
       {% endif %}
