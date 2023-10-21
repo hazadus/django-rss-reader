@@ -34,8 +34,6 @@
     <a class="flex-1 text-sm py-1 mx-1 {% if mode == "all" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'all' %}">
       All
     </a>
-    <div class="text-xs p-1 rounded-lg bg-teal-600 text-white">{{ all_unread_count }}</div>
-    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ all_entries_count }}</div>
   </div>
   <div class="flex pl-1 items-center rounded-lg {% if mode == "today" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
     <div class="w-[16px]">
@@ -44,8 +42,12 @@
     <a class="flex-1 text-sm py-1 mx-1 {% if mode == "today" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'today' %}">
       Today
     </a>
-    <div class="text-xs p-1 rounded-lg bg-teal-600 text-white">{{ today_unread_count }}</div>
-    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ today_entries_count }}</div>
+    {% if today_unread_count %}
+      <div class="text-xs p-1 rounded-lg bg-teal-600 text-white">{{ today_unread_count }}</div>
+    {% endif %}
+    {% if today_entries_count %}
+      <div class="text-xs p-1 rounded-lg bg-blue-300">{{ today_entries_count }}</div>
+    {% endif %}
   </div>
   <div class="flex pl-1 items-center rounded-lg {% if mode == "unread" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
     <div class="w-[16px]">
@@ -54,7 +56,9 @@
     <a class="flex-1 text-sm py-1 mx-1 {% if mode == "unread" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'unread' %}">
       Unread
     </a>
-    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ unread_entries_count }}</div>
+    {% if unread_entries_count %}
+      <div class="text-xs p-1 rounded-lg bg-teal-600 text-white">{{ unread_entries_count }}</div>
+    {% endif %}
   </div>
   <div class="flex pl-1 items-center rounded-lg {% if mode == "read" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
     <div class="w-[16px]">
@@ -63,7 +67,6 @@
     <a class="flex-1 text-sm py-1 mx-1 {% if mode == "read" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'read' %}">
       Read
     </a>
-    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ read_entries_count }}</div>
   </div>
   <div class="flex pl-1 items-center rounded-lg {% if mode == "favorites" and not in_feed %}bg-blue-500 hover:bg-blue-600{% endif %}">
     <div class="flex w-[16px]">
@@ -72,7 +75,6 @@
     <a class="flex-1 text-sm py-1 mx-1 {% if mode == "favorites" and not in_feed %}text-white{% endif %}" href="{% url 'feeds:entry_list' 'favorites' %}">
       Favorites
     </a>
-    <div class="text-xs p-1 rounded-lg bg-blue-300">{{ favorites_entries_count }}</div>
   </div>
 
   <div class="mt-2 mb-2 text-sm text-gray-500 uppercase drop-shadow cursor-default">
@@ -88,7 +90,6 @@
       {% if item.unread_entry_count %}
         <div class="text-xs p-1 rounded-lg bg-teal-600 text-white">{{ item.unread_entry_count }}</div>
       {% endif %}
-      <div class="text-xs p-1 rounded-lg bg-blue-300">{{ item.entries.count }}</div>
     </div>
   {% endfor %}
 

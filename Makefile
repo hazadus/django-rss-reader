@@ -19,5 +19,10 @@ test:
 	python -m manage collectstatic --noinput
 	coverage run --source='.' -m manage test --timing --shuffle
 	coverage html
+prepare:
+	make format
+	make lint
+	make test
+	npx tailwindcss -i ./static/src/input.css -o ./static/styles.css
 run:
 	python -m manage runserver
