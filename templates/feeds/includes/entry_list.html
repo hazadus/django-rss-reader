@@ -27,17 +27,25 @@
       {% endif %}
       </div>
     </div>
-    <!-- Button(s) -->
-    <div class="flex">
-      <!-- "Mark all as read" button -->
-      {% if in_feed and feed and feed.unread_entry_count %}
-        <form method="post" action="{% url 'feeds:feed_mark_as_read' feed.pk %}" class="h-[24px]">
-          {% csrf_token %}
-          <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-          <button type="submit">
-            {% include "icons/icon_multiple_marked_circle.html" with size="24" color="#6b7280" %}
-          </button>
-        </form>
+    <!-- Buttons -->
+    <div class="flex shrink-0">
+      {% if in_feed and feed %}
+        {% if feed.unread_entry_count %}
+          <!-- "Mark all as read" button -->
+          <form class="h-[24px] mx-1" method="post" action="{% url 'feeds:feed_mark_as_read' feed.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+            <button type="submit">
+              {% include "icons/icon_multiple_marked_circle.html" with size="26" color="#6b7280" %}
+            </button>
+          </form>
+        {% endif %}
+        <!-- "Feed settings" button -->
+        <a href="{% url 'feeds:update_feed' feed.pk %}">
+          <div>
+            {% include "icons/icon_gear_edit.html" with size="24" color="#6b7280" %}
+          </div>
+        </a>
       {% endif %}
     </div>
   </div>
@@ -53,7 +61,7 @@
         >
           <!-- Feed image -->
           {% if item.feed.image_url %}
-            <img class="w-16 h-16 rounded-lg shrink-0" src="{{ item.feed.image_url }}" alt="{{ item.feed.title }}">
+            <img class="w-16 h-16 rounded-lg shrink-0 object-cover" src="{{ item.feed.image_url }}" alt="{{ item.feed.title }}">
           {% else %}
             <div class="w-16 h-16 rounded-lg shrink-0"></div>
           {% endif %}
