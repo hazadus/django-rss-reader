@@ -21,10 +21,24 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.10.2-slim-bullseye
 
+    services:
+      db:
+        image: postgres:15
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
 
       - name: Run Tests
         env:
           SECRET_KEY: "django-test-key"
-        run: docker compose up -d && docker exec web python -m manage test
+          DB_NAME: postgres
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          DB_HOST: db
+          DB_PORT: 5432
+        run: python -m manage collectstatic && python -m manage test
