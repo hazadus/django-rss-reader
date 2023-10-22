@@ -57,7 +57,13 @@ make dumpdata
 
 ## Deploy
 
-Create `.env` file with two variables: `SECRET_KEY` and `SENTRY_DSN`.
+Create `.env` file with the following variables:
+
+```bash
+SECRET_KEY=django-secret-key
+DEBUG=True
+SENTRY_DSN=sentry-dsn-only-in-production
+```
 
 ## References
 

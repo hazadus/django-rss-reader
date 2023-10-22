@@ -8,6 +8,22 @@ services:
       - .:/code
     environment:
       - "DEBUG=False"
+      - "DB_NAME=postgres"
+      - "DB_USER=postgres"
+      - "DB_PASSWORD=postgres"
+      - "DB_HOST=db"
+      - "DB_PORT=5432"
+    depends_on:
+      - db
+  db:
+    container_name: "db"
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/postgres:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
   nginx:
     container_name: "nginx"
     image: nginx:1.23-alpine

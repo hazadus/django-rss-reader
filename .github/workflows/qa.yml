@@ -21,6 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3.10.2-slim-bullseye
 
+    services:
+      db:
+        image: postgres:15
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+
     steps:
       - uses: actions/checkout@v2
 
@@ -30,4 +36,9 @@ jobs:
       - name: Run Tests
         env:
           SECRET_KEY: "django-test-key"
+          DB_NAME: postgres
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          DB_HOST: db
+          DB_PORT: 5432
         run: python -m manage collectstatic && python -m manage test
