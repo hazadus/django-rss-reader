@@ -56,6 +56,18 @@ FEED_URLS = [
     "https://www.macworld.com/feed",
     "https://surface-pro.ru/feed/",
     "http://disgustingmen.com/feed/",
+    "https://blog.rabbitmq.com/index.xml",
+    "https://wsvincent.com/feed.xml",
+    "https://blog.miguelgrinberg.com/feed",
+    "https://www.djangoproject.com/rss/weblog/",
+    "https://django-news.com/issues.rss",
+    "http://tonsky.me/blog/atom.xml",
+    "https://www.blog.pythonlibrary.org/feed/",
+    "https://pxlnv.com/feed",
+    "https://thesweetsetup.com/feed",
+    "https://www.macstories.net/feed/",
+    "https://inessential.com/xml/rss.xml",
+    "https://jacobian.org/feed/",
 ]
 
 

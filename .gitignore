@@ -162,3 +162,4 @@ cython_debug/
 # Django-related stuff
 staticfiles
 uploads
+docker/postgres
