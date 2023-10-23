@@ -81,7 +81,7 @@ def get_all_feeds(user) -> QuerySet:
     """
     queryset = (
         Feed.objects.filter(user=user)
-        .prefetch_related("entries")
+        # .prefetch_related("entries")
         .annotate(
             unread_entry_count=Count(
                 Case(
@@ -89,7 +89,7 @@ def get_all_feeds(user) -> QuerySet:
                     output_field=IntegerField(),
                 )
             )
-        )
+        ).annotate(total_entry_count=Count("entries"))
     )
 
     latest_entry_pub_date = Subquery(

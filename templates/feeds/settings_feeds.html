@@ -137,7 +137,7 @@
                       {{ feed.unread_entry_count }}
                     </div>
                   </td>
-                  <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ feed.entries.all.count }}</td>
+                  <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ feed.total_entry_count }}</td>
                   <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
                     {% if feed.latest_entry_pub_date %}
                       {{ feed.latest_entry_pub_date|timesince }} ago
