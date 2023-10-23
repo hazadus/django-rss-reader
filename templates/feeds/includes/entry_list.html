@@ -7,48 +7,50 @@
     </a>
   </div>
   <!-- Feed title and buttons-->
-  <div class="flex items-center w-full px-1">
-    <!-- Feed title and number of entries -->
-    <div class="flex flex-col flex-1">
-      <!-- Feed title -->
-      <div class="block text-sm font-semibold text-gray-800 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-      {% if entries %}
+  {% with feed.get_unread_entry_count as feed_unread_entry_count %}
+    <div class="flex items-center w-full px-1">
+      <!-- Feed title and number of entries -->
+      <div class="flex flex-col flex-1">
+        <!-- Feed title -->
+        <div class="block text-sm font-semibold text-gray-800 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+        {% if entries %}
+          {% if in_feed and feed %}
+            {{ feed }}
+          {% elif mode %}
+            {{ mode|capfirst }}
+          {% endif %}
+        {% endif %}
+        </div>
+        <!-- Number of entries in the feed -->
+        <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
+        {% if entries %}
+          {{ entry_count }} entries{% if in_feed and feed %}, {{ feed_unread_entry_count }} unread{% endif %}
+        {% endif %}
+        </div>
+      </div>
+      <!-- Buttons -->
+      <div class="flex shrink-0">
         {% if in_feed and feed %}
-          {{ feed }}
-        {% elif mode %}
-          {{ mode|capfirst }}
+          {% if feed_unread_entry_count %}
+            <!-- "Mark all as read" button -->
+            <form class="h-[24px] mx-1" method="post" action="{% url 'feeds:feed_mark_as_read' feed.pk %}">
+              {% csrf_token %}
+              <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+              <button type="submit">
+                {% include "icons/icon_multiple_marked_circle.html" with size="26" color="#6b7280" %}
+              </button>
+            </form>
+          {% endif %}
+          <!-- "Feed settings" button -->
+          <a href="{% url 'feeds:update_feed' feed.pk %}">
+            <div>
+              {% include "icons/icon_gear_edit.html" with size="24" color="#6b7280" %}
+            </div>
+          </a>
         {% endif %}
-      {% endif %}
-      </div>
-      <!-- Number of entries in the feed -->
-      <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-      {% if entries %}
-        {{ entry_count }} entries{% if in_feed and feed %}, {{ feed.unread_entry_count }} unread{% endif %}
-      {% endif %}
       </div>
     </div>
-    <!-- Buttons -->
-    <div class="flex shrink-0">
-      {% if in_feed and feed %}
-        {% if feed.unread_entry_count %}
-          <!-- "Mark all as read" button -->
-          <form class="h-[24px] mx-1" method="post" action="{% url 'feeds:feed_mark_as_read' feed.pk %}">
-            {% csrf_token %}
-            <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-            <button type="submit">
-              {% include "icons/icon_multiple_marked_circle.html" with size="26" color="#6b7280" %}
-            </button>
-          </form>
-        {% endif %}
-        <!-- "Feed settings" button -->
-        <a href="{% url 'feeds:update_feed' feed.pk %}">
-          <div>
-            {% include "icons/icon_gear_edit.html" with size="24" color="#6b7280" %}
-          </div>
-        </a>
-      {% endif %}
-    </div>
-  </div>
+  {% endwith %}
 </div>
 
 <!-- Entries column content (scrollable) -->
