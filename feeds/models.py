@@ -99,13 +99,6 @@ class Feed(models.Model):
         return self.title
 
     @property
-    def unread_entry_count(self) -> int:
-        """
-        Number of unread entries in the Feed.
-        """
-        return self.entries.filter(is_read=False).count()
-
-    @property
     def last_updated(self) -> datetime | None:
         """
         Return newest entry pub_date, or None if there's no entries.
