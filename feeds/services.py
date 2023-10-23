@@ -301,5 +301,4 @@ def toggle_entry_is_favorite(pk: int):
     :param int pk: primary key of the entry to toggle favorite status.
     """
     entry = Entry.objects.get(pk=pk)
-    entry.is_favorite = not entry.is_favorite
-    entry.save()
+    Entry.objects.filter(pk=pk).update(is_favorite=not entry.is_favorite)
