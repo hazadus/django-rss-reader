@@ -98,8 +98,7 @@ class Feed(models.Model):
     def __str__(self):
         return self.title
 
-    @property
-    def unread_entry_count(self) -> int:
+    def get_unread_entry_count(self) -> int:
         """
         Number of unread entries in the Feed.
         """

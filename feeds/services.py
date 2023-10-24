@@ -282,9 +282,7 @@ def mark_entry_as_read(pk: int):
 
     :param int pk: primary key of the entry to mark as read.
     """
-    entry = Entry.objects.get(pk=pk)
-    entry.is_read = True
-    entry.save()
+    Entry.objects.filter(pk=pk).update(is_read=True)
 
 
 def mark_feed_as_read(feed_pk: int):
@@ -293,9 +291,7 @@ def mark_feed_as_read(feed_pk: int):
 
     :param int feed_pk: primary key of the feed where to mark all entries as read.
     """
-    feed = Feed.objects.get(pk=feed_pk)
-    for entry in feed.entries.filter(is_read=False):
-        mark_entry_as_read(pk=entry.pk)
+    Entry.objects.filter(feed_id=feed_pk, is_read=False).update(is_read=True)
 
 
 def toggle_entry_is_favorite(pk: int):
@@ -305,5 +301,4 @@ def toggle_entry_is_favorite(pk: int):
     :param int pk: primary key of the entry to toggle favorite status.
     """
     entry = Entry.objects.get(pk=pk)
-    entry.is_favorite = not entry.is_favorite
-    entry.save()
+    Entry.objects.filter(pk=pk).update(is_favorite=not entry.is_favorite)

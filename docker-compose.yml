@@ -17,9 +17,7 @@ services:
       - db
   db:
     container_name: "db"
-    image: postgres:15
-    ports:
-      - "5432:5432"
+    image: postgres:13
     volumes:
       - ./docker/postgres:/var/lib/postgresql/data/
     environment:

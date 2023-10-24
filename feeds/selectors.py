@@ -1,6 +1,14 @@
 from datetime import datetime
 
-from django.db.models import Count, QuerySet
+from django.db.models import (
+    Case,
+    Count,
+    IntegerField,
+    OuterRef,
+    QuerySet,
+    Subquery,
+    When,
+)
 
 from feeds.models import Entry, Feed, Folder, Tag
 
@@ -64,7 +72,39 @@ def get_next_entry(user, entry: Entry, queryset: QuerySet = Entry.objects.all())
 
 
 def get_all_feeds(user) -> QuerySet:
-    return Feed.objects.filter(user=user).prefetch_related("entries")
+    """
+    Return all user's Feeds, annotated with:
+    - `unread_entry_count` - number of unread entries in the Feed.
+    - `latest_entry_pub_date` - pub_date of the newest entry in the feed.
+
+    Queryset will be ordered by "-latest_entry_pub_date".
+    """
+    queryset = (
+        Feed.objects.filter(user=user)
+        # .prefetch_related("entries")
+        .annotate(
+            unread_entry_count=Count(
+                Case(
+                    When(entries__is_read=False, then=1),
+                    output_field=IntegerField(),
+                )
+            )
+        ).annotate(total_entry_count=Count("entries"))
+    )
+
+    latest_entry_pub_date = Subquery(
+        Entry.objects.filter(
+            feed_id=OuterRef("id"),
+        )
+        .order_by("-pub_date")
+        .values("pub_date")[:1]
+    )
+
+    queryset = queryset.annotate(
+        latest_entry_pub_date=latest_entry_pub_date,
+    ).order_by("-latest_entry_pub_date")
+
+    return queryset
 
 
 def get_all_folders(user) -> QuerySet:

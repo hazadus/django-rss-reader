@@ -76,96 +76,98 @@
   <h3 class="p-1 font-semibold text-lg text-gray-900 border-b border-b-gray-300 w-full">
     Manage Feeds
   </h3>
-  <section class="bg-gray-50 py-3 sm:py-5">
-    <div class="px-1 mx-auto max-w-screen-2xl lg:px-12">
-      <div class="relative overflow-hidden bg-white shadow-md sm:rounded-lg">
-        <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
-          <div class="flex items-center flex-1 space-x-4">
-            <h5>
-              <span class="text-gray-500">All Feeds:</span>
-              <span>{{ feeds.all.count }}</span>
-            </h5>
+  {% with feeds.all.count as feeds_total_count %}
+    <section class="bg-gray-50 py-3 sm:py-5">
+      <div class="px-1 mx-auto max-w-screen-2xl lg:px-12">
+        <div class="relative overflow-hidden bg-white shadow-md sm:rounded-lg">
+          <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
+            <div class="flex items-center flex-1 space-x-4">
+              <h5>
+                <span class="text-gray-500">All Feeds:</span>
+                <span>{{ feeds_total_count }}</span>
+              </h5>
+            </div>
+            <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
+              <button type="button" disabled class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
+                <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>
+                Update all
+              </button>
+              <button type="button" disabled class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
+                <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                Export
+              </button>
+            </div>
           </div>
-          <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
-            <button type="button" disabled class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
-              <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>
-              Update all
-            </button>
-            <button type="button" disabled class="flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
-              <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-              </svg>
-              Export
-            </button>
-          </div>
-        </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-              <tr>
-                <th scope="col" class="px-4 py-3">Feed</th>
-                <th scope="col" class="px-4 py-3">Folder</th>
-                <th scope="col" class="px-4 py-3">Unread</th>
-                <th scope="col" class="px-4 py-3">Total</th>
-                <th scope="col" class="px-4 py-3">Last Entry</th>
-                <th scope="col" class="px-4 py-3">{# Button(s) #}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for feed in feeds %}
-              <tr class="border-b hover:bg-gray-100">
-                <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-                  {% if feed.image_url %}
-                    <img src="{{ feed.image_url }}" alt="Feed image" class="w-8 h-8 mr-3 object-cover">
-                  {% else %}
-                    <div class="h-8 w-8 mr-3 shrink-0"></div>
-                  {% endif %}
-                  <a href="{% url 'feeds:update_feed' feed.pk %}" class="hover:underline">
-                    {{ feed.title }}
-                  </a>
-                </th>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-4 py-3">Feed</th>
+                  <th scope="col" class="px-4 py-3">Folder</th>
+                  <th scope="col" class="px-4 py-3">Unread</th>
+                  <th scope="col" class="px-4 py-3">Total</th>
+                  <th scope="col" class="px-4 py-3">Last Entry</th>
+                  <th scope="col" class="px-4 py-3">{# Button(s) #}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for feed in feeds %}
+                <tr class="border-b hover:bg-gray-100">
+                  <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+                    {% if feed.image_url %}
+                      <img src="{{ feed.image_url }}" alt="Feed image" class="w-8 h-8 mr-3 object-cover">
+                    {% else %}
+                      <div class="h-8 w-8 mr-3 shrink-0"></div>
+                    {% endif %}
+                    <a href="{% url 'feeds:update_feed' feed.pk %}" class="hover:underline">
+                      {{ feed.title }}
+                    </a>
+                  </th>
+                  <td class="px-4 py-2">
+                    {% if feed.folder %}
+                      <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">{{ feed.folder.title }}</span>
+                    {% endif %}
+                  </td>
+                  <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+                    <div class="flex items-center">
+                      {{ feed.unread_entry_count }}
+                    </div>
+                  </td>
+                  <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ feed.total_entry_count }}</td>
+                  <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+                    {% if feed.latest_entry_pub_date %}
+                      {{ feed.latest_entry_pub_date|timesince }} ago
+                    {% else %}
+                      –
+                    {% endif %}
+                  </td>
                 <td class="px-4 py-2">
-                  {% if feed.folder %}
-                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded">{{ feed.folder.title }}</span>
-                  {% endif %}
+                  <!-- "Delete feed" link -->
+                  <a href="{% url 'feeds:delete_feed' feed.pk %}">
+                    <div>
+                      {% include "icons/icon_delete.html" with size=24 color="#6b7280" %}
+                    </div>
+                  </a>
                 </td>
-                <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-                  <div class="flex items-center">
-                    {{ feed.unread_entry_count }}
-                  </div>
-                </td>
-                <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ feed.entries.all.count }}</td>
-                <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-                  {% if feed.last_updated %}
-                    {{ feed.last_updated|timesince }} ago
-                  {% else %}
-                    –
-                  {% endif %}
-                </td>
-              <td class="px-4 py-2">
-                <!-- "Delete feed" link -->
-                <a href="{% url 'feeds:delete_feed' feed.pk %}">
-                  <div>
-                    {% include "icons/icon_delete.html" with size=24 color="#6b7280" %}
-                  </div>
-                </a>
-              </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
+            <span class="text-sm font-normal text-gray-500">
+              Showing
+              <span class="font-semibold text-gray-900">{{ feeds_total_count }}</span>
+              of
+              <span class="font-semibold text-gray-900">{{ feeds_total_count }}</span>
+            </span>
+          </nav>
         </div>
-        <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0" aria-label="Table navigation">
-          <span class="text-sm font-normal text-gray-500">
-            Showing
-            <span class="font-semibold text-gray-900">{{ feeds.all.count }}</span>
-            of
-            <span class="font-semibold text-gray-900">{{ feeds.all.count }}</span>
-          </span>
-        </nav>
       </div>
-    </div>
-  </section>
+    </section>
+  {% endwith %}
 </div>
