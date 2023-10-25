@@ -13,6 +13,7 @@ services:
       - "DB_PASSWORD=postgres"
       - "DB_HOST=db"
       - "DB_PORT=5432"
+      - "CELERY_BROKER_URL=amqp://rmuser:rmpassword@rabbitmq:5672//"
     depends_on:
       - db
   db:
@@ -22,6 +23,34 @@ services:
       - ./docker/postgres:/var/lib/postgresql/data/
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
+#    ports:
+#      - "5432:5432"
+  worker:
+    container_name: "worker"
+    build: .
+    volumes:
+      - .:/code
+    command: ['celery', '--workdir=/code', '-A', 'django_project', 'worker']
+    environment:
+      - "DEBUG=False"
+      - "DB_NAME=postgres"
+      - "DB_USER=postgres"
+      - "DB_PASSWORD=postgres"
+      - "DB_HOST=db"
+      - "DB_PORT=5432"
+      - "CELERY_BROKER_URL=amqp://rmuser:rmpassword@rabbitmq:5672//"
+  rabbitmq:
+    image: rabbitmq:3.10.7-management
+    container_name: "mq"
+    hostname: rabbitmq
+    volumes:
+      - ./docker/rabbitmq:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=rmuser
+      - RABBITMQ_DEFAULT_PASS=rmpassword
+#    ports:
+#      - "15672:15672"
+#      - "5672:5672"
   nginx:
     container_name: "nginx"
     image: nginx:1.23-alpine

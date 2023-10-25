@@ -8,11 +8,14 @@ Main branch is auto-deployed at http://rss.hazadus.ru/.
 
 ![Arc screenshot](./static/images/arc_screen_1.png)
 
-## Libraries Used
+## Libraries and Tools Used
 
 - [Django](https://docs.djangoproject.com/en/4.2/)
     - [django-allauth](https://pypi.org/project/django-allauth/): Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication.
     - [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/): Best debugging tool for Django.
+- [Celery](https://docs.celeryq.dev/en/stable/index.html): simple, flexible, and reliable distributed system to 
+  process vast amounts of messages, while providing operations with the tools required to maintain such a system.
+- [RabbitMQ](https://www.rabbitmq.com/): most widely deployed open source message broker.
 - Feed Parsing:
   - [feedparser](https://pythonhosted.org/feedparser/): Universal Feed Parser is a Python module for downloading and parsing syndicated feeds.
   - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/): Beautiful Soup is a library that makes it easy to scrape information from web pages.
@@ -31,7 +34,39 @@ Main branch is auto-deployed at http://rss.hazadus.ru/.
   - [coloredlogs](https://coloredlogs.readthedocs.io/en/latest/index.html): The coloredlogs package enables colored terminal output for Python’s logging module.
   - [coverage](https://pypi.org/project/coverage/): Coverage.py measures code coverage, typically during test execution.
 
-## Building Tailwind styles
+## Running in Dev Mode
+
+Create `.env` file with the following variables:
+
+```bash
+SECRET_KEY=django-secret-key
+DEBUG=True
+DB_NAME=postgres
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=localhost
+DB_PORT=5432CELERY_BROKER_URL=amqp://rmuser:rmpassword@localhost:5672//
+```
+
+Containers `db`, `worker`, `mq` should be up and running in background.
+
+Use `make run` to start the app.
+
+## Deploy
+
+Create `.env` file with the following variables:
+
+```bash
+SECRET_KEY=django-secret-key
+DEBUG=False
+SENTRY_DSN=sentry-dsn-only-in-production-(optional)
+```
+
+Use `docker compose up -d` to run the app.
+
+## Dev Notes
+
+### Building Tailwind styles
 
 ```bash
 npx tailwindcss -i ./static/src/input.css -o ./static/styles.css
@@ -39,7 +74,7 @@ npx tailwindcss -i ./static/src/input.css -o ./static/styles.css
 npx tailwindcss -i ./static/src/input.css -o ./static/styles.css --watch
 ```
 
-## Building fixtures for tests
+### Building fixtures for tests
 
 ```bash
 # Create fresh DB
@@ -53,16 +88,6 @@ python -m manage update_feeds
 #
 # Dump all data to fixtures
 make dumpdata
-```
-
-## Deploy
-
-Create `.env` file with the following variables:
-
-```bash
-SECRET_KEY=django-secret-key
-DEBUG=True
-SENTRY_DSN=sentry-dsn-only-in-production
 ```
 
 ## References

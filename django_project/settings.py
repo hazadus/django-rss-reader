@@ -251,3 +251,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy("feeds:feed_list")
 ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("account_login")
+
+# Celery
+
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
