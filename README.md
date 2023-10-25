@@ -48,7 +48,9 @@ DB_HOST=localhost
 DB_PORT=5432CELERY_BROKER_URL=amqp://rmuser:rmpassword@localhost:5672//
 ```
 
-Containers `db`, `worker`, `mq` should be up and running in background.
+Containers `db`, `mq` should be up and running in background.
+
+Use `celery -A django_project worker -E` to start the worker.
 
 Use `make run` to start the app.
 
