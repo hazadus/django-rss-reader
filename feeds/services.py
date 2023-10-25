@@ -101,6 +101,11 @@ def feed_subscribe(
         title = parsed_feed.channel.get("title")
         site_url = parsed_feed.channel.get("link")
 
+        # Try to get favicon from feed's site
+        favicon_url = None
+        if page_info := parse_page_info_from_url(url=site_url):
+            favicon_url = page_info["favicon_url"]
+
         image = parsed_feed.channel.get("image")
         image_url = image.get("href") if image else None
 
@@ -110,7 +115,7 @@ def feed_subscribe(
                 title=title,
                 feed_url=feed_url,
                 site_url=site_url,
-                image_url=image_url,
+                image_url=favicon_url or image_url or None,
             )
         else:
             logger.warning("Title and url not found in %s", feed_url)
