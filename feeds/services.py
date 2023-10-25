@@ -10,7 +10,7 @@ from django.conf import settings
 from feedparser import FeedParserDict
 
 from feeds.models import Entry, Feed, Folder, Tag
-from feeds.utils import parse_meta_from_url
+from feeds.utils import parse_page_info_from_url
 from users.models import CustomUser
 
 logger = logging.getLogger(__name__)
@@ -214,13 +214,13 @@ def entry_create_from_data_if_not_exists(feed: Feed, entry_data: dict) -> Entry 
             if entry_data.get("updated")
             else None
         )
-        meta_info = parse_meta_from_url(url=link)
+        page_info = parse_page_info_from_url(url=link)
         entry_instance = entry_create(
             feed=feed,
             title=title,
             url=link,
             author=entry_data.get("author", None),
-            image_url=meta_info["image_url"] if meta_info else None,
+            image_url=page_info["image_url"] if page_info else None,
             description=entry_data.get("description", None),
             summary=entry_data.get("summary", None),
             content=get_content_from_entry_data(entry_data=entry_data),

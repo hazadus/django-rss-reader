@@ -9,31 +9,6 @@ from bs4.element import Tag
 logger = logging.getLogger(__name__)
 
 
-def parse_meta_from_url(url: str) -> dict | None:
-    """
-    Parse meta tags from `url`.
-
-    :param str url: URL to parse meta tags from.
-    :return: `{"title": "...", "description": "...", "image_url": "..."}` on success, or None otherwise.
-    """
-    try:
-        response = requests.get(url, timeout=5.0)
-        html = BeautifulSoup(response.content, "html.parser")
-    except Exception as exc:
-        logger.exception(f"Failed to get content from {url}", exc_info=exc)
-        return None
-
-    title = html.title.string if html.title else "Unknown Title"
-    description = html.find("meta", property="og:description")
-    image_url = html.find("meta", property="og:image")
-
-    return {
-        "title": title if title else "No title set",
-        "description": description["content"] if description else "",
-        "image_url": image_url["content"] if image_url else "",
-    }
-
-
 def check_url_status_code(
     url: str, status_code: int = 200, timeout: float = 2.0
 ) -> bool:
