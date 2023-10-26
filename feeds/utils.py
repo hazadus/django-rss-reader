@@ -5,12 +5,13 @@ from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
+from urllib3.exceptions import ReadTimeoutError
 
 logger = logging.getLogger(__name__)
 
 
 def check_url_status_code(
-    url: str, status_code: int = 200, timeout: float = 2.0
+    url: str, status_code: int = 200, timeout: float = 5.0
 ) -> bool:
     """
     Try to GET page from `url` and check the status code.
@@ -22,7 +23,7 @@ def check_url_status_code(
     """
     try:
         response = requests.get(url, timeout=timeout)
-    except Exception as exc:
+    except ReadTimeoutError as exc:
         logger.exception(f"Failed to request.get from {url}", exc_info=exc)
         return False
 
