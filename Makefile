@@ -24,5 +24,7 @@ prepare:
 	make lint
 	make test
 	npx tailwindcss -i ./static/src/input.css -o ./static/styles.css
+worker:
+	celery -A django_project worker -E
 run:
 	python -m manage runserver

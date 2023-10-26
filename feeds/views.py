@@ -34,6 +34,7 @@ from feeds.services import (
     mark_feed_as_read,
     toggle_entry_is_favorite,
 )
+from feeds.tasks import parse_and_set_image_for_feed, update_feed
 
 logger = logging.getLogger(__name__)
 
@@ -251,6 +252,9 @@ class FeedsSettingsView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         # Associate new Feed with logged in user:
         feed.user = self.request.user
         feed.save()
+
+        parse_and_set_image_for_feed.delay(feed.pk)
+        update_feed.delay(feed.pk)
 
         return super().form_valid(form)
 
