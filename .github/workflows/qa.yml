@@ -41,4 +41,5 @@ jobs:
           DB_PASSWORD: postgres
           DB_HOST: db
           DB_PORT: 5432
+          CELERY_BROKER_URL: amqp://rmuser:rmpassword@rabbitmq:5672//
         run: python -m manage collectstatic && python -m manage test
