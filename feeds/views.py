@@ -34,7 +34,10 @@ from feeds.services import (
     mark_feed_as_read,
     toggle_entry_is_favorite,
 )
-from feeds.tasks import parse_and_set_image_for_feed, update_feed
+from feeds.tasks import (
+    parse_and_set_image_for_feed,
+    update_feed,
+)
 
 logger = logging.getLogger(__name__)
 
