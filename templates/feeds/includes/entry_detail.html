@@ -65,7 +65,9 @@
         {% endif %}
       </div>
       {% if entry.image_url %}
-        <img class="h-16" src="{{ entry.image_url }}" alt="{{ entry.title|truncatechars:16 }}">
+        <a href="{{ entry.image_url }}">
+          <img class="h-16" src="{{ entry.image_url }}" alt="{{ entry.title|truncatechars:16 }}">
+        </a>
       {% endif %}
     </div>
 

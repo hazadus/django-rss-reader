@@ -93,14 +93,22 @@
     </a>
   </div>
   {% for item in feeds %}
-    <div class="flex items-center text-xs whitespace-nowrap py-0.5 pl-2 max-w-32 flex-grow-0 rounded-lg {% if feed and item.pk == feed.pk %}bg-blue-500 hover:bg-blue-600 text-white{% endif %}">
-      <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ item.pk }}" class="flex-1 hover:underline block max-w-32 overflow-x-hidden overflow-ellipsis ">
-        {{ item.title }}
-      </a>
-      {% if item.unread_entry_count %}
-        <div class="text-xs p-1 rounded-lg bg-teal-600 text-white">{{ item.unread_entry_count }}</div>
-      {% endif %}
-    </div>
+    <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ item.pk }}">
+      <div class="flex items-center text-xs whitespace-nowrap py-0.5 max-w-32 flex-grow-0 rounded-lg {% if feed and item.pk == feed.pk %}bg-blue-500 hover:bg-blue-600 text-white{% endif %}">
+        <!-- Feed image -->
+        {% if item.image_url %}
+          <img class="w-5 h-5 rounded-lg shrink-0 object-cover" src="{{ item.image_url }}" alt="Icon">
+        {% else %}
+          <div class="w-5 h-5 rounded-lg shrink-0"></div>
+        {% endif %}
+        <div class="flex-1 ml-1 hover:underline block max-w-32 overflow-x-hidden overflow-ellipsis ">
+          {{ item.title }}
+        </div>
+        {% if item.unread_entry_count %}
+          <div class="text-xs px-1 py-0.5 rounded-lg bg-teal-600 text-white">{{ item.unread_entry_count }}</div>
+        {% endif %}
+      </div>
+    </a>
   {% endfor %}
 
   <div class="mt-2 mb-4 text-sm text-gray-500 uppercase drop-shadow cursor-default">
