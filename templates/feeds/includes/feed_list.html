@@ -87,16 +87,24 @@
     </div>
   </a>
 
-  <a href="{% url 'feeds:settings_feeds' %}">
-    <div class="flex items-center mt-2 mb-2 cursor-pointer">
-      <div class="text-sm text-gray-500 uppercase drop-shadow flex-1">
-        Feeds
+  <!-- "Feeds" header with icons -->
+  <div class="flex items-center mt-2 mb-2">
+    <div class="text-sm text-gray-500 uppercase drop-shadow flex-1 cursor-default">
+      Feeds
+    </div>
+    <!-- "Add feed" icon -->
+    <a href="{% url 'feeds:settings_feeds' %}#add">
+      <div class="shrink-0 mr-1 md:mr-0">
+        {% include "icons/icon_add_circle.html" with size="18" color="#6b7280" %}
       </div>
-      <div class="shrink-0">
+    </a>
+    <!-- "Manage Feeds" icon -->
+    <a href="{% url 'feeds:settings_feeds' %}#manage">
+      <div class="shrink-0 cursor-pointer">
         {% include "icons/icon_gear_edit.html" with size="18" color="#6b7280" %}
       </div>
-    </div>
-  </a>
+    </a>
+  </div>
   {% for item in feeds %}
     <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ item.pk }}">
       <div class="flex items-center text-xs whitespace-nowrap py-0.5 max-w-32 flex-grow-0 rounded-lg {% if feed and item.pk == feed.pk %}bg-blue-500 hover:bg-blue-600 text-white{% endif %}">
