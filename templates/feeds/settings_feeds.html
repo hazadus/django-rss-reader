@@ -133,11 +133,19 @@
                     {% endif %}
                   </td>
                   <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-                    <div class="flex items-center">
+                    {% if feed.unread_entry_count %}
                       {{ feed.unread_entry_count }}
-                    </div>
+                    {% else %}
+                      –
+                    {% endif %}
                   </td>
-                  <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ feed.total_entry_count }}</td>
+                  <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+                    {% if feed.total_entry_count %}
+                      <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ feed.pk }}" class="hover:underline">{{ feed.total_entry_count }}</a>
+                    {% else %}
+                      –
+                    {% endif %}
+                  </td>
                   <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
                     {% if feed.latest_entry_pub_date %}
                       {{ feed.latest_entry_pub_date|timesince }} ago
