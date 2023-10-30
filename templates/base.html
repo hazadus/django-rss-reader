@@ -10,7 +10,9 @@
   <title>RSS Reader</title>
 
   <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
-  <script async src="https://stats.hazadus.ru/script.js" data-website-id="c94e0204-7775-4695-9f51-34f16c1a3fd8"></script>
+  {% if not debug %}
+    <script async src="https://stats.hazadus.ru/script.js" data-website-id="c94e0204-7775-4695-9f51-34f16c1a3fd8"></script>
+  {% endif %}
 </head>
 
 <body class="bg-white">
