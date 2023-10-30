@@ -43,14 +43,14 @@
           <input value="{{ feed.title }}" type="text" name="title" id="id_title" maxlength="256" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Enter Feed Title" required="">
         </div>
         <div class="sm:col-span-2">
-          <label for="id_site_url" class="block mb-2 text-sm font-medium text-gray-900">
-            Site URL *
+          <label for="id_site_url" class="flex items-center mb-2 text-sm font-medium text-gray-900">
+            Site URL *&nbsp;&middot;&nbsp;<a href="{{ feed.site_url }}" target="_blank" class="text-blue-700 hover:underline">View</a><span class="inline-flex ml-1">{% include "icons/icon_external_link.html" with size=18 color="#6b7280" %}</span>
           </label>
           <input value="{{ feed.site_url }}" type="url" name="site_url" id="id_site_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed Site URL, e.g. https://hazadus.ru/" required="">
         </div>
         <div class="sm:col-span-2">
-          <label for="id_image_url" class="block mb-2 text-sm font-medium text-gray-900">
-            Feed Image URL
+          <label for="id_image_url" class="flex items-center mb-2 text-sm font-medium text-gray-900">
+            Feed Image URL{% if feed.image_url %}&nbsp;&middot;&nbsp;<a href="{{ feed.image_url }}" target="_blank" class="text-blue-700 hover:underline">View</a><span class="inline-flex ml-1">{% include "icons/icon_external_link.html" with size=18 color="#6b7280" %}</span>{% endif %}
           </label>
           <input {% if feed.image_url %}value="{{ feed.image_url }}"{% endif %} type="url" name="image_url" id="id_image_url" maxlength="1024" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Insert Feed Image URL">
         </div>
@@ -66,12 +66,21 @@
           </select>
         </div>
       </div>
-      <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
-        Update Feed
-      </button>
-      <a href="{% url 'feeds:delete_feed' feed.pk %}" class="inline-flex items-center px-5 py-2.5 mt-4 text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-red-200 hover:bg-red-800">
-        Delete
-      </a>
+      <div class="flex mt-4 ">
+        <div class="flex-1 ">
+          <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
+            Update Feed
+          </button>
+          <a href="{% url 'feeds:delete_feed' feed.pk %}" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-red-200 hover:bg-red-800">
+            Delete
+          </a>
+        </div>
+        <div class="shrink-0">
+          <a href="{% url 'feeds:entry_list' 'all' %}?in_feed={{ feed.pk }}" class="inline-flex text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            View Feed
+          </a>
+        </div>
+      </div>
     </form>
   </div>
 </div>
