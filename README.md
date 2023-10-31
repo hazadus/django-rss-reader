@@ -6,7 +6,7 @@ Inspired by amazing [NetNewsWire](https://netnewswire.com/) Mac/iOS app – the 
 
 Main branch is auto-deployed at http://rss.hazadus.ru/.
 
-![Arc screenshot](./static/images/arc_screen_1.png)
+![Arc screenshot](./static/images/arc_screen_2.png)
 
 ## Libraries and Tools Used
 
