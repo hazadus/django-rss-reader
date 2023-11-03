@@ -8,6 +8,7 @@ from feeds.views import (
     FeedsSettingsView,
     FeedUpdateView,
     FoldersSettingsView,
+    entry_export_favorites,
     entry_toggle_is_favorite_view,
     feed_mark_as_read_view,
 )
@@ -48,6 +49,11 @@ urlpatterns = [
         "entries/<str:mode>/<int:pk>/",
         EntryDetailView.as_view(),
         name="entry_detail",
+    ),
+    path(
+        "entries/export/favorites/",
+        entry_export_favorites,
+        name="entry_export_favorites",
     ),
     path(
         "entry/toggle/is_favorite/<int:entry_pk>/",

@@ -15,8 +15,11 @@ from feeds.models import Entry, Feed, Folder, Tag
 
 def get_entry_queryset(user, mode: str) -> QuerySet:
     """
-    Return Entry queryset for "mode", where mode is one of "Smart Feed" names,
+    Return Entry queryset for `user` and `mode`, where mode is one of "Smart Feed" names,
     i.e. all, today, unread, read, favorites.
+
+    :param user: `CustomUser` instance
+    :param str mode: all | today | unread | read | favorites
     """
     mode_querysets = {
         "all": Entry.objects.all(),
