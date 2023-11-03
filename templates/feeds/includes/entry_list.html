@@ -47,6 +47,15 @@
               {% include "icons/icon_gear_edit.html" with size="24" color="#6b7280" %}
             </div>
           </a>
+        {% elif mode %}
+          <!-- "Export favorites as Markdown file" button -->
+          {% if mode == "favorites" %}
+            <a href="{% url 'feeds:entry_export_favorites' %}">
+              <div>
+                {% include "icons/icon_markdown_file.html" with size="24" color="#6b7280" %}
+              </div>
+            </a>
+          {% endif %}
         {% endif %}
       </div>
     </div>

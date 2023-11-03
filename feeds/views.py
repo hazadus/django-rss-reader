@@ -178,6 +178,32 @@ class EntryDetailView(
 
 
 @login_required
+def entry_export_favorites(request: HttpRequest) -> HttpResponse:
+    """
+    Export user's favorite entries as Markdown file.
+    """
+    response = HttpResponse(content_type="text/plain")
+    response["Content-Disposition"] = "attachment; filename=favorites.md"
+
+    lines = ["# Your favorite entries from RSS feeds\n\n"]
+
+    for entry in get_entry_queryset(user=request.user, mode="favorites"):
+        lines.append(
+            "- [{title}]({url}) in [{feed_title}]({site_url}) on {pub_date}\n".format(
+                title=entry.title,
+                url=entry.url,
+                feed_title=entry.feed.title,
+                site_url=entry.feed.site_url,
+                pub_date=entry.pub_date.strftime("%d.%m.%Y"),
+            )
+        )
+
+    lines.append("\nCreated by [rss.hazadus.ru](https://rss.hazadus.ru/)")
+    response.writelines(lines)
+    return response
+
+
+@login_required
 @require_POST
 def entry_toggle_is_favorite_view(request: HttpRequest, entry_pk: int) -> HttpResponse:
     """
