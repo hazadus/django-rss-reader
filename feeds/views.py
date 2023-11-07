@@ -42,11 +42,14 @@ logger = logging.getLogger(__name__)
 class BaseFeedColumnView(ContextMixin, View):
     """
     Put data required for "Feeds" column into context:
+    - "folders" - all user's folders.
     - total number of entries in "Smart Feeds" (all, today, unread, read, favorites).
     """
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        context["folders"] = get_all_folders(user=self.request.user)
 
         context["all_entries_count"] = get_total_entry_count(
             user=self.request.user, mode="all"
