@@ -111,6 +111,9 @@ def get_all_feeds(user) -> QuerySet:
 
 
 def get_all_folders(user) -> QuerySet:
+    """
+    Return QuerySet with all user's folders.
+    """
     return Folder.objects.filter(user=user).prefetch_related("feeds")
 
 

@@ -26,6 +26,7 @@
 
 <!-- Feeds column content (scrollable) -->
 <div class="flex flex-col p-1 overflow-y-auto overflow-x-hidden hide-scrollbar">
+  <!-- "Smart Feeds" block -->
   <div class="mb-2 text-sm text-gray-500 uppercase drop-shadow cursor-default">
     Smart Feeds
   </div>
@@ -87,7 +88,41 @@
     </div>
   </a>
 
-  <!-- "Feeds" header with icons -->
+  <!-- "Folders" block: header with icons -->
+  <div class="flex items-center mt-2 mb-2">
+    <div class="text-sm text-gray-500 uppercase drop-shadow flex-1 cursor-default">
+      Folders
+    </div>
+    <!-- "Add folder" icon -->
+    <a href="#">
+      <div class="shrink-0 mr-1 md:mr-0">
+        {% include "icons/icon_add_circle.html" with size="18" color="#6b7280" %}
+      </div>
+    </a>
+    <!-- "Manage Folders" icon -->
+    <a href="#">
+      <div class="shrink-0 cursor-pointer">
+        {% include "icons/icon_gear_edit.html" with size="18" color="#6b7280" %}
+      </div>
+    </a>
+  </div>
+  {% for folder in folders %}
+    <a href="#">
+      <div class="flex items-center text-xs whitespace-nowrap py-0.5 max-w-32 flex-grow-0 rounded-lg {% if 0 %}bg-blue-500 hover:bg-blue-600 text-white{% endif %}">
+        <!-- Folder image -->
+        <div class="w-5 h-5 rounded-lg shrink-0"></div>
+        <div class="flex-1 ml-1 hover:underline block max-w-32 overflow-x-hidden overflow-ellipsis ">
+          {{ folder.title }}
+        </div>
+        <!-- Unread count badge: -->
+        {% if 1 %}
+          <div class="text-xs px-1 py-0.5 rounded-lg bg-teal-600 text-white">0</div>
+        {% endif %}
+      </div>
+    </a>
+  {% endfor %}
+
+  <!-- "Feeds" block: header with icons -->
   <div class="flex items-center mt-2 mb-2">
     <div class="text-sm text-gray-500 uppercase drop-shadow flex-1 cursor-default">
       Feeds

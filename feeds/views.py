@@ -41,7 +41,7 @@ logger = logging.getLogger(__name__)
 
 class BaseFeedColumnView(ContextMixin, View):
     """
-    Put into context data required for "Feeds" column:
+    Put data required for "Feeds" column into context:
     - total number of entries in "Smart Feeds" (all, today, unread, read, favorites).
     """
 
@@ -74,8 +74,9 @@ class BaseFeedColumnView(ContextMixin, View):
 
 class BaseEntryColumnView(ContextMixin, View):
     """
-    Put into context data required for "Entries" (and "Feeds) columns:
+    Put data required for "Entries" (and "Feeds) columns into context:
     - "mode"    - selected "Smart Feed" (all, today, unread, read, favorites).
+    - "folders" - all user's folders.
     - "feeds"   - all feeds query set (for "Feeds" column, because in `EntryListView` we won't
                   have it by default)
     - "in_feed" - `pk` of selected feed (if any).
@@ -85,6 +86,7 @@ class BaseEntryColumnView(ContextMixin, View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["mode"] = self.kwargs.get("mode", "all")
+        context["folders"] = get_all_folders(user=self.request.user)
         context["feeds"] = get_all_feeds(user=self.request.user)
 
         in_feed = self.request.GET.get("in_feed", None)
