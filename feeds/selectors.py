@@ -5,10 +5,10 @@ from django.db.models import (
     Count,
     IntegerField,
     OuterRef,
+    Q,
     QuerySet,
     Subquery,
     When,
-    Q,
 )
 
 from feeds.models import Entry, Feed, Folder, Tag
@@ -132,6 +132,10 @@ def get_all_folders(user) -> QuerySet:
 
 def get_feed(pk: int) -> Feed:
     return Feed.objects.get(pk=pk)
+
+
+def get_folder(pk: int) -> Folder:
+    return Folder.objects.get(pk=pk)
 
 
 def get_all_tags() -> QuerySet:

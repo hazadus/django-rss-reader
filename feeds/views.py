@@ -24,6 +24,7 @@ from feeds.selectors import (
     get_all_folders,
     get_entry_queryset,
     get_feed,
+    get_folder,
     get_next_entry,
     get_previous_entry,
     get_total_entry_count,
@@ -79,11 +80,13 @@ class BaseEntryColumnView(ContextMixin, View):
     """
     Put data required for "Entries" (and "Feeds) columns into context:
     - "mode"    - selected "Smart Feed" (all, today, unread, read, favorites).
-    - "folders" - all user's folders.
-    - "feeds"   - all feeds query set (for "Feeds" column, because in `EntryListView` we won't
+    - "folders" - all user's Folders.
+    - "feeds"   - all feeds QuerySet (for "Feeds" column, because in `EntryListView` we won't
                   have it by default)
-    - "in_feed" - `pk` of selected feed (if any).
-    - "feed"    - instance of selecred feed (if any).
+    - "in_feed" - `pk` of selected Feed (if any).
+    - "feed"    - instance of selecred Feed (if any).
+    - "in_folder" - `pk` of selected Folder (if any).
+    - "folder"    - instance of selecred Folder (if any).
     """
 
     def get_context_data(self, **kwargs):
@@ -96,6 +99,12 @@ class BaseEntryColumnView(ContextMixin, View):
         if in_feed:
             context["in_feed"] = in_feed
             context["feed"] = get_feed(pk=in_feed)
+
+        in_folder = self.request.GET.get("in_folder", None)
+        if in_folder:
+            context["in_folder"] = in_folder
+            context["folder"] = get_folder(pk=in_folder)
+
         return context
 
 
