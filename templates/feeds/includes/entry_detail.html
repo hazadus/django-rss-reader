@@ -99,14 +99,14 @@
         <ul>
           <li>
             {% if previous_entry %}
-              Previous: <a class="hover:underline" href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ previous_entry }}</a>
+              Previous: <a class="hover:underline" href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% elif in_folder %}?in_folder={{ in_folder }}{% endif %}">{{ previous_entry }}</a>
             {% else %}
               No previous entry
             {% endif %}
           </li>
           <li>
             {% if next_entry %}
-              Next: <a class="hover:underline" href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">{{ next_entry }}</a>
+              Next: <a class="hover:underline" href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% elif in_folder %}?in_folder={{ in_folder }}{% endif %}">{{ next_entry }}</a>
             {% else %}
               No next entry
             {% endif %}
@@ -127,7 +127,7 @@
     <!-- "Floating" buttons (mobile only) -->
     <div class="fixed bottom-5 left-5 flex md:hidden">
       {% if previous_entry %}
-        <a class="hover:underline" href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
+        <a class="hover:underline" href="{% url 'feeds:entry_detail' mode previous_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% elif in_folder %}?in_folder={{ in_folder }}{% endif %}">
           <div class="w-24 h-24 bg-gray-200 opacity-80 rounded-full p-2 mr-3 flex items-center justify-center">
             {% include "icons/icon_arrow_left.html" with size="48" color="#6b7280" %}
           </div>
@@ -135,7 +135,7 @@
       {% endif %}
 
       {% if next_entry %}
-        <a class="hover:underline" href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
+        <a class="hover:underline" href="{% url 'feeds:entry_detail' mode next_entry.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% elif in_folder %}?in_folder={{ in_folder }}{% endif %}">
           <div class="w-24 h-24 bg-gray-200 opacity-80 rounded-full p-2 flex items-center justify-center">
             {% include "icons/icon_arrow_right.html" with size="48" color="#6b7280" %}
           </div>
