@@ -16,6 +16,8 @@
         {% if entries %}
           {% if in_feed and feed %}
             {{ feed }}
+          {% elif in_folder and folder %}
+            {{ folder }}
           {% elif mode %}
             {{ mode|capfirst }}
           {% endif %}
@@ -23,8 +25,12 @@
         </div>
         <!-- Number of entries in the feed -->
         <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-        {% if entries %}
-          {{ entry_count }} entries{% if in_feed and feed %}, {{ feed_unread_entry_count }} unread{% endif %}
+        {% if entries and not in_feed and not in_folder %}
+          {{ entry_count }} entries
+        {% elif entries and in_feed %}
+          {{ entry_count }} entries, {{ feed_unread_entry_count }} unread
+        {% elif entries and in_folder and folder %}
+          {{ entry_count }} entries, {{ folder.get_unread_entry_count }} unread
         {% endif %}
         </div>
       </div>
@@ -66,7 +72,7 @@
 <div class="flex flex-col flex-1 overflow-y-auto overflow-x-hidden border-r border-r-gray-300 {% if not entries %}justify-center{% endif %}">
   {% if entries %}
     {% for item in entries %}
-      <a href="{% url 'feeds:entry_detail' mode item.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% endif %}">
+      <a href="{% url 'feeds:entry_detail' mode item.pk %}{% if in_feed %}?in_feed={{ in_feed }}{% elif in_folder %}?in_folder={{ in_folder }}{% endif %}">
         <div class="flex m-1 rounded-lg h-24 max-h-24 items-center {% if item.pk == entry.pk %}bg-blue-500 hover:bg-blue-600{% else %}bg-gray-100 hover:bg-gray-200{% endif %} {% if not item.is_read %}border-l-4 border-teal-600 pl-1{% else %}pl-2{% endif %}"
           {% if item.pk == entry.pk %}id="selected-entry"{% endif %}
         >
@@ -96,7 +102,7 @@
     {% endfor %}
   {% else %}
     <div class="mx-auto rounded-lg p-4 bg-gray-100">
-      Select a feed to view.
+      Select a feed or folder to view.
     </div>
   {% endif %}
 </div>

@@ -24,6 +24,7 @@ from feeds.selectors import (
     get_all_folders,
     get_entry_queryset,
     get_feed,
+    get_folder,
     get_next_entry,
     get_previous_entry,
     get_total_entry_count,
@@ -41,12 +42,15 @@ logger = logging.getLogger(__name__)
 
 class BaseFeedColumnView(ContextMixin, View):
     """
-    Put into context data required for "Feeds" column:
+    Put data required for "Feeds" column into context:
+    - "folders" - all user's folders.
     - total number of entries in "Smart Feeds" (all, today, unread, read, favorites).
     """
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        context["folders"] = get_all_folders(user=self.request.user)
 
         context["all_entries_count"] = get_total_entry_count(
             user=self.request.user, mode="all"
@@ -74,23 +78,33 @@ class BaseFeedColumnView(ContextMixin, View):
 
 class BaseEntryColumnView(ContextMixin, View):
     """
-    Put into context data required for "Entries" (and "Feeds) columns:
+    Put data required for "Entries" (and "Feeds) columns into context:
     - "mode"    - selected "Smart Feed" (all, today, unread, read, favorites).
-    - "feeds"   - all feeds query set (for "Feeds" column, because in `EntryListView` we won't
+    - "folders" - all user's Folders.
+    - "feeds"   - all feeds QuerySet (for "Feeds" column, because in `EntryListView` we won't
                   have it by default)
-    - "in_feed" - `pk` of selected feed (if any).
-    - "feed"    - instance of selecred feed (if any).
+    - "in_feed" - `pk` of selected Feed (if any).
+    - "feed"    - instance of selecred Feed (if any).
+    - "in_folder" - `pk` of selected Folder (if any).
+    - "folder"    - instance of selecred Folder (if any).
     """
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["mode"] = self.kwargs.get("mode", "all")
+        context["folders"] = get_all_folders(user=self.request.user)
         context["feeds"] = get_all_feeds(user=self.request.user)
 
         in_feed = self.request.GET.get("in_feed", None)
         if in_feed:
             context["in_feed"] = in_feed
             context["feed"] = get_feed(pk=in_feed)
+
+        in_folder = self.request.GET.get("in_folder", None)
+        if in_folder:
+            context["in_folder"] = in_folder
+            context["folder"] = get_folder(pk=in_folder)
+
         return context
 
 
@@ -114,7 +128,7 @@ class EntryListView(
     Represents two columns of the UI "Entries" and "Feeds".
     """
 
-    paginate_by = 100
+    paginate_by = 15
     model = Entry
     template_name = "feeds/layout.html"
     context_object_name = "entries"
@@ -125,6 +139,9 @@ class EntryListView(
 
         if in_feed := self.request.GET.get("in_feed", None):
             queryset = queryset.filter(feed=in_feed)
+
+        if in_folder := self.request.GET.get("in_folder", None):
+            queryset = queryset.filter(feed__folder=in_folder)
 
         return queryset.select_related("feed").prefetch_related("tags")
 
@@ -161,6 +178,8 @@ class EntryDetailView(
 
         if context.get("feed", None):
             entry_queryset = entry_queryset.filter(feed=context.get("feed"))
+        elif context.get("folder", None):
+            entry_queryset = entry_queryset.filter(feed__folder=context.get("folder"))
 
         # NB: `all()` is workaround for queryset caching
         context["entry_count"] = entry_queryset.all().count()

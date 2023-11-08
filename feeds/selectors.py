@@ -5,6 +5,7 @@ from django.db.models import (
     Count,
     IntegerField,
     OuterRef,
+    Q,
     QuerySet,
     Subquery,
     When,
@@ -111,11 +112,30 @@ def get_all_feeds(user) -> QuerySet:
 
 
 def get_all_folders(user) -> QuerySet:
-    return Folder.objects.filter(user=user).prefetch_related("feeds")
+    """
+    Return QuerySet with all user's Folders, annotated with:
+    - `unread_entry_count` - number of unread Entries in Feeds included in this Folder.
+    """
+    queryset = (
+        Folder.objects.filter(user=user)
+        .annotate(
+            unread_entry_count=Count(
+                "feeds__entries",
+                filter=Q(feeds__entries__is_read=False),
+            )
+        )
+        .order_by("title")
+        .prefetch_related("feeds")
+    )
+    return queryset
 
 
 def get_feed(pk: int) -> Feed:
     return Feed.objects.get(pk=pk)
+
+
+def get_folder(pk: int) -> Folder:
+    return Folder.objects.get(pk=pk)
 
 
 def get_all_tags() -> QuerySet:
