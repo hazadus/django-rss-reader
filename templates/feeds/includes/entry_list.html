@@ -25,8 +25,12 @@
         </div>
         <!-- Number of entries in the feed -->
         <div class="block text-xs text-gray-600 whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-        {% if entries %}
-          {{ entry_count }} entries{% if in_feed and feed %}, {{ feed_unread_entry_count }} unread{% endif %}
+        {% if entries and not in_feed and not in_folder %}
+          {{ entry_count }} entries
+        {% elif entries and in_feed %}
+          {{ entry_count }} entries, {{ feed_unread_entry_count }} unread
+        {% elif entries and in_folder and folder %}
+          {{ entry_count }} entries, {{ folder.get_unread_entry_count }} unread
         {% endif %}
         </div>
       </div>

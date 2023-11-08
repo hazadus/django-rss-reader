@@ -49,6 +49,12 @@ class Folder(models.Model):
     def __str__(self):
         return self.title
 
+    def get_unread_entry_count(self):
+        """
+        Number of unread entries in the Folder.
+        """
+        return Entry.objects.filter(feed__folder_id=self.pk, is_read=False).count()
+
 
 class Feed(models.Model):
     """
