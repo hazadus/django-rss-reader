@@ -128,7 +128,7 @@ class EntryListView(
     Represents two columns of the UI "Entries" and "Feeds".
     """
 
-    paginate_by = 100
+    paginate_by = 15
     model = Entry
     template_name = "feeds/layout.html"
     context_object_name = "entries"
@@ -139,6 +139,9 @@ class EntryListView(
 
         if in_feed := self.request.GET.get("in_feed", None):
             queryset = queryset.filter(feed=in_feed)
+
+        if in_folder := self.request.GET.get("in_folder", None):
+            queryset = queryset.filter(feed__folder=in_folder)
 
         return queryset.select_related("feed").prefetch_related("tags")
 
@@ -175,6 +178,8 @@ class EntryDetailView(
 
         if context.get("feed", None):
             entry_queryset = entry_queryset.filter(feed=context.get("feed"))
+        elif context.get("folder", None):
+            entry_queryset = entry_queryset.filter(feed__folder=context.get("folder"))
 
         # NB: `all()` is workaround for queryset caching
         context["entry_count"] = entry_queryset.all().count()
