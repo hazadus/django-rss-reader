@@ -124,6 +124,7 @@ def get_all_folders(user) -> QuerySet:
                 filter=Q(feeds__entries__is_read=False),
             )
         )
+        .order_by("title")
         .prefetch_related("feeds")
     )
     return queryset
