@@ -9,8 +9,9 @@ from dateutil import tz
 from django.conf import settings
 from feedparser import FeedParserDict
 
+from feeds.exceptions import CantGetFeedFromURL, CantSubscribeToFeed, FeedAlreadyExists
 from feeds.models import Entry, Feed, Folder, Tag
-from feeds.utils import parse_page_info_from_url
+from feeds.utils import CantGetPageInfoFromURL, parse_page_info_from_url
 from users.models import CustomUser
 
 logger = logging.getLogger(__name__)
@@ -24,50 +25,58 @@ def update_all_feeds() -> None:
     logger.info("Feeds to update: %s", feeds.count())
 
     # Call feed_update() for each feed
-    for feed in feeds:
-        feed_update(feed)
+    [feed_update(feed) for feed in feeds]
 
 
 def feed_subscribe(
     user: CustomUser,
     feed_url: str,
-) -> Feed | None:
+) -> Feed:
     """
-    Read feed data from `feed_url`, then create `Feed` instance for the `user`,
+    Read and parse feed data from `feed_url`, then create `Feed` instance for the `user`,
     if `user` does not already have one with the same `feed_url`.
 
     :param CustomUser user: user instance to create feed for.
     :param str feed_url: URL of the feed.
-    :return: `Feed` if it was created, `None` otherwise (if user already has `Feed` with `feed_url` or there was an
-            error.
+    :return: new `Feed` instance
+    :raises CantSubscribeToFeed: in case of any error, or if `user` is already subscribed to the `feed_url`.
     """
-    feed_instance = None
-    parsed_feed = _get_parsed_feed_from_url(feed_url)
 
-    if parsed_feed:
-        title = parsed_feed.channel.get("title")
-        site_url = parsed_feed.channel.get("link")
+    try:
+        parsed_feed = _get_parsed_feed_from_url(feed_url)
+    except CantGetFeedFromURL:
+        logger.error("Can't get feed data from URL %s", feed_url)
+        raise CantSubscribeToFeed
 
-        # Try to get favicon from feed's site
-        favicon_url = None
-        if page_info := parse_page_info_from_url(url=site_url):
-            favicon_url = page_info["favicon_url"]
+    title = parsed_feed.channel.get("title")
+    site_url = parsed_feed.channel.get("link")
 
-        image = parsed_feed.channel.get("image")
-        image_url = image.get("href") if image else None
+    # Try to get favicon from feed's site
+    favicon_url = None
+    try:
+        page_info = parse_page_info_from_url(url=site_url)
+        favicon_url = page_info["favicon_url"]
+    except CantGetPageInfoFromURL:
+        logger.warning("Can't get page info for URL %s", site_url)
 
-        if title and site_url:
-            feed_instance = feed_create(
-                user=user,
-                title=title,
-                feed_url=feed_url,
-                site_url=site_url,
-                image_url=favicon_url or image_url or None,
-            )
-        else:
-            logger.warning("Title and url not found in %s", feed_url)
+    image = parsed_feed.channel.get("image")
+    image_url = image.get("href") if image else None
 
-    return feed_instance
+    if not title and site_url:
+        logger.error("Title and url not found in %s", feed_url)
+        raise CantSubscribeToFeed
+
+    try:
+        feed_instance = feed_create(
+            user=user,
+            title=title,
+            feed_url=feed_url,
+            site_url=site_url,
+            image_url=favicon_url or image_url or None,
+        )
+        return feed_instance
+    except FeedAlreadyExists:
+        raise CantSubscribeToFeed
 
 
 def feed_create(
@@ -77,9 +86,9 @@ def feed_create(
     site_url: str,
     image_url: str | None = None,
     folder: Folder | None = None,
-) -> Feed | None:
+) -> Feed:
     """
-    Create Feed instance for `user`, if there's no feed with this `feed_url` for this user already.
+    Create Feed instance for `user`, if there's no feed with `feed_url` for this user already.
 
     :param CustomUser user: user instance to create feed for.
     :param str title: title of the feed.
@@ -87,25 +96,23 @@ def feed_create(
     :param str site_url: URL of the feed's web site.
     :param str image_url: URL of the feed's image (icon).
     :param Folder folder: folder to put the feed into.
-    :return: `Feed` if it was created, `None` otherwise (if user already has `Feed` with `feed_url` or there was an
-            error.
+    :return: new `Feed` instance.
+    :raises FeedAlreadyExists: if `user` is already subscribed to the `feed_url`.
     """
     feed_exists = Feed.objects.filter(user=user, url=feed_url).exists()
 
     if feed_exists:
         logger.warning("%s already subscribed to %s", user, feed_url)
-        feed = None
-    else:
-        feed = Feed.objects.create(
-            user=user,
-            title=title,
-            url=feed_url,
-            site_url=site_url,
-            image_url=image_url,
-            folder=folder,
-        )
+        raise FeedAlreadyExists
 
-    return feed
+    return Feed.objects.create(
+        user=user,
+        title=title,
+        url=feed_url,
+        site_url=site_url,
+        image_url=image_url,
+        folder=folder,
+    )
 
 
 def entry_create(
@@ -205,25 +212,26 @@ def feed_update(feed: Feed) -> None:
     logger.info(" -- Created %s new Entries in %s", new_entry_count, feed.title)
 
 
-def _get_parsed_feed_from_url(url: str) -> FeedParserDict | None:
+def _get_parsed_feed_from_url(url: str) -> FeedParserDict:
     """
     Read feed data using `requests` with timeout, then parse content from it
     using `feedparser`.
 
     :param str url: url to parse feed from.
     :return: parsed feed as `FeedParserDict` or `None`.
+    :raises CantGetFeedFromURL: in case of any error.
     """
     try:
         response = requests.get(url, timeout=5.0)
     except requests.exceptions.ConnectTimeout:
         logger.warning("Timeout when connecting to %s", url)
-        return None
+        raise CantGetFeedFromURL
     except requests.exceptions.ReadTimeout:
         logger.warning("Timeout when reading RSS %s", url)
-        return None
+        raise CantGetFeedFromURL
     except requests.exceptions.ConnectionError:
         logger.warning("Failed to resolve %s", url)
-        return None
+        raise CantGetFeedFromURL
 
     # Put it to memory stream object
     content = BytesIO(response.content)

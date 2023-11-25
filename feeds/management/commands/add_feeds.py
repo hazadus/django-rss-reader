@@ -3,7 +3,7 @@ import time
 
 from django.core.management.base import BaseCommand
 
-from feeds.services import feed_subscribe
+from feeds.services import CantSubscribeToFeed, feed_subscribe
 from users.models import CustomUser
 
 logger = logging.getLogger(__name__)
@@ -93,11 +93,14 @@ class Command(BaseCommand):
         start_time = time.time()
         total_feeds = 0
         logger.info("Creating feed subscriptions for '%s'", user)
+
         for feed_url in FEED_URLS:
-            feed_instance = feed_subscribe(user=user, feed_url=feed_url)
-            if feed_instance:
+            try:
+                feed_instance = feed_subscribe(user=user, feed_url=feed_url)
                 total_feeds += 1
                 logger.info("Created subscription to feed: %s", feed_instance)
+            except CantSubscribeToFeed:
+                logger.warning("Can't subscribe to feed URL %s", feed_url)
 
         logger.info("Total feed subscriptions created: %s", total_feeds)
         logger.info("--- Completed in: %s seconds ---" % (time.time() - start_time))

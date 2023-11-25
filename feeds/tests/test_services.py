@@ -5,7 +5,13 @@ from django.conf import settings
 from django.test import TestCase
 
 from feeds.models import Entry, Feed, Folder, Tag
-from feeds.services import _tag_get_or_create, entry_create, entry_exists, feed_create
+from feeds.services import (
+    FeedAlreadyExists,
+    _tag_get_or_create,
+    entry_create,
+    entry_exists,
+    feed_create,
+)
 from users.models import CustomUser
 
 
@@ -52,14 +58,14 @@ class ServicesTest(TestCase):
         feed = Feed.objects.first()
 
         # Try to create same feed for the same user
-        new_feed = feed_create(
-            user=feed.user,
-            title=feed.title,
-            feed_url=feed.url,
-            site_url=feed.site_url,
-        )
+        with self.assertRaises(FeedAlreadyExists):
+            feed_create(
+                user=feed.user,
+                title=feed.title,
+                feed_url=feed.url,
+                site_url=feed.site_url,
+            )
 
-        self.assertEqual(new_feed, None)
         self.assertEqual(Feed.objects.filter(user=feed.user, url=feed.url).count(), 1)
 
     def test_tag_get_or_create_creates(self):
