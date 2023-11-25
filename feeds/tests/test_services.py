@@ -5,7 +5,7 @@ from django.conf import settings
 from django.test import TestCase
 
 from feeds.models import Entry, Feed, Folder, Tag
-from feeds.services import entry_create, entry_exists, feed_create, tag_get_or_create
+from feeds.services import _tag_get_or_create, entry_create, entry_exists, feed_create
 from users.models import CustomUser
 
 
@@ -69,7 +69,7 @@ class ServicesTest(TestCase):
         and in the end of the title) must be removed, text must be capitalized.
         """
         title = "  New Tag Title, For Tests  "
-        tag = tag_get_or_create(title=title)
+        tag = _tag_get_or_create(title=title)
         self.assertEqual(
             tag.title, title.replace(",", "").lstrip().rstrip().capitalize()
         )
@@ -81,7 +81,7 @@ class ServicesTest(TestCase):
         and in the end of the title) are removed, and text is capitalized.
         """
         tag = Tag.objects.first()
-        tag_returned = tag_get_or_create(
+        tag_returned = _tag_get_or_create(
             title=" {title},  ".format(
                 title=tag.title,
             )
