@@ -14,3 +14,9 @@ class FeedAlreadyExists(Exception):
     """User is already subscribed to the feed."""
 
     pass
+
+
+class CantGetFeedInfoFromURL(Exception):
+    """Can't retrieve mandatory feed info from URL."""
+
+    pass

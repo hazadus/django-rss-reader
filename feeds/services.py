@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 from io import BytesIO
+from typing import NamedTuple
 
 import feedparser
 import requests
@@ -9,10 +10,26 @@ from dateutil import tz
 from django.conf import settings
 from feedparser import FeedParserDict
 
-from feeds.exceptions import CantGetFeedFromURL, CantSubscribeToFeed, FeedAlreadyExists
+from feeds.exceptions import (
+    CantGetFeedFromURL,
+    CantGetFeedInfoFromURL,
+    CantSubscribeToFeed,
+    FeedAlreadyExists,
+)
 from feeds.models import Entry, Feed, Folder, Tag
 from feeds.utils import CantGetPageInfoFromURL, parse_page_info_from_url
 from users.models import CustomUser
+
+
+class FeedInfo(NamedTuple):
+    """Feed info needed to created Feed instance."""
+
+    title: str
+    feed_url: str
+    site_url: str
+    image_url: str | None
+    favicon_url: str | None
+
 
 logger = logging.getLogger(__name__)
 
@@ -41,15 +58,46 @@ def feed_subscribe(
     :return: new `Feed` instance
     :raises CantSubscribeToFeed: in case of any error, or if `user` is already subscribed to the `feed_url`.
     """
+    if user_subscribed_to_feed(user, feed_url):
+        raise CantSubscribeToFeed
 
+    try:
+        feed_info: FeedInfo = _get_feed_info_from_url(feed_url)
+    except CantGetFeedInfoFromURL:
+        logger.error("Can't retrieve mandatory feed info from URL %s", feed_url)
+        raise CantSubscribeToFeed
+
+    return feed_create(
+        user=user,
+        title=feed_info.title,
+        feed_url=feed_info.feed_url,
+        site_url=feed_info.site_url,
+        image_url=feed_info.favicon_url or feed_info.image_url or None,
+    )
+
+
+def _get_feed_info_from_url(feed_url: str) -> FeedInfo:
+    """
+    Get data and parse mandatory feed info, required to create Feed instance, from `feed_url`.
+
+    :param feed_url: URL to parse feed info from.
+    :return: `FeedInfo` instance with mandatory feed info.
+    :raises CantGetFeedInfoFromURL: in case mandatory feed info can't be retrieved.
+    """
     try:
         parsed_feed = _get_parsed_feed_from_url(feed_url)
     except CantGetFeedFromURL:
         logger.error("Can't get feed data from URL %s", feed_url)
-        raise CantSubscribeToFeed
+        raise CantGetFeedInfoFromURL
 
     title = parsed_feed.channel.get("title")
     site_url = parsed_feed.channel.get("link")
+    image = parsed_feed.channel.get("image")
+    image_url = image.get("href") if image else None
+
+    if not title and site_url:
+        logger.error("Title and URL not found in %s", feed_url)
+        raise CantGetFeedInfoFromURL
 
     # Try to get favicon from feed's site
     favicon_url = None
@@ -59,24 +107,13 @@ def feed_subscribe(
     except CantGetPageInfoFromURL:
         logger.warning("Can't get page info for URL %s", site_url)
 
-    image = parsed_feed.channel.get("image")
-    image_url = image.get("href") if image else None
-
-    if not title and site_url:
-        logger.error("Title and url not found in %s", feed_url)
-        raise CantSubscribeToFeed
-
-    try:
-        feed_instance = feed_create(
-            user=user,
-            title=title,
-            feed_url=feed_url,
-            site_url=site_url,
-            image_url=favicon_url or image_url or None,
-        )
-        return feed_instance
-    except FeedAlreadyExists:
-        raise CantSubscribeToFeed
+    return FeedInfo(
+        title=title,
+        feed_url=feed_url,
+        site_url=site_url,
+        image_url=image_url,
+        favicon_url=favicon_url,
+    )
 
 
 def feed_create(
@@ -174,6 +211,17 @@ def toggle_entry_is_favorite(pk: int) -> None:
 
 def entry_exists(feed: Feed, url: str) -> bool:
     return Entry.objects.filter(feed=feed, url=url).exists()
+
+
+def user_subscribed_to_feed(user: CustomUser, feed_url: str) -> bool:
+    """
+    Check if `user` is already subscribed to `feed_url`.
+
+    :param user: User to check for subscription.
+    :param feed_url: feed URL to check for subscription.
+    :return: True if `user` is already subscribed to `feed_url`, False otherwise.
+    """
+    return Feed.objects.filter(user=user, url=feed_url).exists()
 
 
 def mark_feed_as_read(feed_pk: int) -> None:
