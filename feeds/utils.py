@@ -139,6 +139,7 @@ def parse_page_info_from_url(url: str) -> dict:
              or None otherwise.
     :raises CantGetPageInfoFromURL: in case of any error.
     """
+    # TODO: refactor return type to custom, e.g. PageInfo
     try:
         response = requests.get(url, timeout=5.0)
     except Exception as exc:
