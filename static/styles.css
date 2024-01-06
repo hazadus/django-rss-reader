@@ -2939,7 +2939,17 @@ video {
 }
 
 @media (min-width: 1280px) {
+  .xl\:h-24 {
+    height: 6rem;
+  }
+
   .xl\:p-0 {
     padding: 0px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:h-32 {
+    height: 8rem;
   }
 }
