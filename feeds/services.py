@@ -1,5 +1,7 @@
 import logging
+from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from datetime import datetime
+from functools import partial
 from io import BytesIO
 from typing import NamedTuple
 
@@ -76,7 +78,7 @@ def feed_subscribe(
     )
 
 
-def _get_feed_info_from_url(feed_url: str) -> FeedInfo:
+def _get_feed_info_from_url(feed_url: str) -> FeedInfo:  # noqa: C901
     """
     Get data and parse mandatory feed info, required to create Feed instance, from `feed_url`.
 
@@ -233,7 +235,7 @@ def mark_feed_as_read(feed_pk: int) -> None:
     Entry.objects.filter(feed_id=feed_pk, is_read=False).update(is_read=True)
 
 
-def feed_update(feed: Feed) -> None:
+def feed_update(feed: Feed) -> None:  # noqa: C901
     """
     Fetch entries for the feed using `feedparser`, then create new Entry instance for each fetched entry
     if there's no entry with the same link already.
@@ -252,12 +254,29 @@ def feed_update(feed: Feed) -> None:
 
     # For each entry in feed_content.entries, try to get Entry from the database by `url`
     # If not exists, create one.
-    new_entry_count = 0
-    for entry_data in entries:
-        if _entry_create_from_data_if_not_exists(feed=feed, entry_data=entry_data):
-            new_entry_count += 1
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        tasks: list[Future] = []
+        future_to_url: dict[Future, str] = {}
+        task = partial(_entry_create_from_data_if_not_exists, feed)
 
-    logger.info(" -- Created %s new Entries in %s", new_entry_count, feed.title)
+        for entry_data in entries:
+            future = executor.submit(task, entry_data)
+            tasks.append(future)
+            future_to_url[future] = entry_data.get("link")
+
+        new_entry_count = 0
+        for future in as_completed(tasks):
+            try:
+                res = future.result()
+                new_entry_count = new_entry_count + 1 if res else new_entry_count
+            except Exception as ex:
+                logger.exception(
+                    "An error has occured while trying to create entry fron link=%s",
+                    future_to_url[future],
+                    exc_info=ex,
+                )
+
+        logger.info(" -- Created %s new Entries in %s", new_entry_count, feed.title)
 
 
 def _get_parsed_feed_from_url(url: str) -> FeedParserDict:
