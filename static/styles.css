@@ -1950,6 +1950,10 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
 .pl-1 {
   padding-left: 0.25rem;
 }
@@ -1960,6 +1964,10 @@ video {
 
 .pr-0 {
   padding-right: 0px;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
 }
 
 .text-left {
