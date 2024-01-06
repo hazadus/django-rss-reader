@@ -312,9 +312,6 @@ def _entry_create_from_data_if_not_exists(feed: Feed, entry_data: dict) -> Entry
 
     :return: created `Entry` or `None`
     """
-    # TODO: split data parsing to separate function
-    # TODO: introduce new data type, e.g. EntryData (all stuff required to create Entry instance)
-    # TODO: introduce new data type, e.g. TagInfo (required to create Tag instance)
     entry_instance = None
     title = entry_data.get("title")
     link = entry_data.get("link")
