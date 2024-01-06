@@ -10,6 +10,12 @@ from urllib3.exceptions import ReadTimeoutError
 logger = logging.getLogger(__name__)
 
 
+class CantGetPageInfoFromURL(Exception):
+    """Some error has occured while trying to get page meta info and favicon."""
+
+    pass
+
+
 def check_url_status_code(
     url: str, status_code: int = 200, timeout: float = 5.0
 ) -> bool:
@@ -124,21 +130,22 @@ def parse_page_meta(html: BeautifulSoup, host_url: str) -> dict:
     }
 
 
-def parse_page_info_from_url(url: str) -> dict | None:
+def parse_page_info_from_url(url: str) -> dict:
     """
     Parse meta info and favicon URL from `url`.
 
     :param str url: URL to parse meta tags and favicon link from.
     :return: `{"title": "...", "description": "...", "image_url": "...", "favicon_url": "..."}` on success,
              or None otherwise.
+    :raises CantGetPageInfoFromURL: in case of any error.
     """
-    html = None
     try:
         response = requests.get(url, timeout=5.0)
-        html = BeautifulSoup(response.content, "html.parser")
     except Exception as exc:
         logger.exception(f"Failed to get content from {url}", exc_info=exc)
-        return None
+        raise CantGetPageInfoFromURL
+
+    html = BeautifulSoup(response.content, "html.parser")
 
     # We need host URL to build full link to favicon or image in case it is set as relative path.
     parsed_uri = urlparse(url)
