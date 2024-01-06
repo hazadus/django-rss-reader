@@ -100,6 +100,12 @@
         </div>
       </a>
     {% endfor %}
+    <!-- NB: hardcoded number of entries in view, gotta refactor. -->
+    {% if entry_count > 15 %}
+      <div class="mx-auto mt-2 mb-4 text-sm">
+        Showing 15 latest entries of {{ entry_count }}
+      </div>
+    {% endif %}
   {% else %}
     <div class="mx-auto rounded-lg p-4 bg-gray-100">
       Select a feed or folder to view.

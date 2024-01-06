@@ -165,7 +165,7 @@ class EntryDetailView(
 
     def get(self, request, *args, **kwargs):
         """
-        Merk entry as "read" when user opens the page.
+        Mark entry as "read" when user opens the page.
         """
         mark_entry_as_read(pk=self.get_object().pk)
         return super().get(request, *args, **kwargs)
@@ -183,7 +183,8 @@ class EntryDetailView(
 
         # NB: `all()` is workaround for queryset caching
         context["entry_count"] = entry_queryset.all().count()
-        context["entries"] = entry_queryset.prefetch_related("feed")
+        # Limit number of entries here (gotta implement some kind of pagination later)
+        context["entries"] = entry_queryset.prefetch_related("feed")[:15]
 
         # Stuff specific for detailed entry view
         entry = self.get_object()
