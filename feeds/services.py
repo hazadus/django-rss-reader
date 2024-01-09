@@ -243,7 +243,17 @@ def feed_update(feed: Feed) -> None:  # noqa: C901
     :param Feed feed: feed to update.
     """
     logger.info("Updating feed: %s", feed)
-    feed_content = _get_parsed_feed_from_url(feed.url)
+
+    try:
+        feed_content = _get_parsed_feed_from_url(feed.url)
+    except CantGetFeedFromURL as ex:
+        logger.exception(
+            "An error has occured while trying to get parsed feed from URL %s",
+            feed.url,
+            exc_info=ex,
+        )
+        return
+
     entries = feed_content.entries if feed_content else None
 
     if not entries:
