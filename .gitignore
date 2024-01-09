@@ -164,3 +164,6 @@ staticfiles
 uploads
 docker/postgres
 docker/rabbitmq
+
+# Node-related stuff
+node_modules/

@@ -14,7 +14,7 @@ coloredlogs==15.0.1
 coverage==7.3.2
 cryptography==41.0.4
 defusedxml==0.7.1
-Django==4.2.5
+Django==5.0.1
 django-allauth==0.57.0
 django-debug-toolbar==4.2.0
 environs==9.5.0
