@@ -30,7 +30,41 @@ DEBUG = env.bool("DEBUG", False)
 if SENTRY_DSN := env.str("SENTRY_DSN", None):
     import sentry_sdk
 
-    sentry_sdk.init(dsn=SENTRY_DSN, traces_sample_rate=0.5)
+    def sentry_before_send(event: dict, hint: dict) -> dict | None:
+        """
+        Filters Sentry events before sending.
+
+        This function filters out handled exceptions and logged errors.
+        By doing this we will only receive unhandled exceptions on Sentry.
+
+        :param dict event: The event dictionary containing exception data.
+        :param dict hint: Additional information about the event, including
+                the original exception.
+        :return: The modified event dictionary, or None if the event should be
+                ignored.
+        """
+
+        # Ignore logged errors
+        if "logger" in event:
+            return None
+
+        # Ignore handled exceptions
+        exceptions = event.get("exception", {}).get("values", [])
+        if exceptions:
+            exc = exceptions[-1]
+            mechanism = exc.get("mechanism")
+
+            if mechanism:
+                if mechanism.get("handled"):
+                    return None
+
+        return event
+
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        traces_sample_rate=0.5,
+        before_send=sentry_before_send,
+    )
 
 LOGGING = {
     "version": 1,

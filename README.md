@@ -104,6 +104,7 @@ make dumpdata
   `navigator.share()` will only work when app is served via HTTPS.
 - [Django - Understand cached attributes](https://docs.djangoproject.com/en/4.2/topics/db/optimization/#understand-cached-attributes): Long story short – use `all()` on queryset whenever you 
   need to avoid queryset caching to get correct `count()` results. Took me half a day to figure this out.
+- [Capturing Only Unhandled Exceptions with Sentry in Python](https://jkfran.com/capturing-unhandled-exceptions-sentry-python/)
 
 ## Repo Activity 
 
