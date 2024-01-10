@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG", False)
 
-if SENTRY_DSN := env.str("SENTRY_DSN", None):
+if SENTRY_DSN := env.str("SENTRY_DSN", None):  # noqa: C901
     import sentry_sdk
 
     def sentry_before_send(event: dict, hint: dict) -> dict | None:
