@@ -17,7 +17,7 @@ Main branch is auto-deployed at http://rss.hazadus.ru/.
   process vast amounts of messages, while providing operations with the tools required to maintain such a system.
 - [RabbitMQ](https://www.rabbitmq.com/): most widely deployed open source message broker.
 - Feed Parsing:
-  - [feedparser](https://pythonhosted.org/feedparser/): Universal Feed Parser is a Python module for downloading and parsing syndicated feeds.
+  - [feedparser](https://feedparser.readthedocs.io/en/latest/): Universal Feed Parser is a Python module for downloading and parsing syndicated feeds.
   - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/): Beautiful Soup is a library that makes it easy to scrape information from web pages.
   - [dateutil](https://pypi.org/project/python-dateutil/): The dateutil module provides powerful extensions to the 
     standard datetime module, available in Python.
@@ -105,6 +105,7 @@ make dumpdata
 - [Django - Understand cached attributes](https://docs.djangoproject.com/en/4.2/topics/db/optimization/#understand-cached-attributes): Long story short – use `all()` on queryset whenever you 
   need to avoid queryset caching to get correct `count()` results. Took me half a day to figure this out.
 - [Capturing Only Unhandled Exceptions with Sentry in Python](https://jkfran.com/capturing-unhandled-exceptions-sentry-python/)
+- [Respectfully Requesting RSS Feeds with Python](https://brntn.me/blog/respectfully-requesting-rss-feeds/)
 
 ## Repo Activity 
 

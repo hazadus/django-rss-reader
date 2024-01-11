@@ -299,7 +299,9 @@ def _get_parsed_feed_from_url(url: str) -> FeedParserDict:
     :raises CantGetFeedFromURL: in case of any error.
     """
     try:
-        response = requests.get(url, timeout=5.0)
+        # NB: `User-Agent` must be set, or some feeds will reject us.
+        headers = {"User-Agent": "RSS Reader/0.1 (+https://rss.hazadus.ru/)"}
+        response = requests.get(url, timeout=5.0, headers=headers)
     except requests.exceptions.ConnectTimeout:
         logger.warning("Timeout when connecting to %s", url)
         raise CantGetFeedFromURL
