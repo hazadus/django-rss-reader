@@ -2,6 +2,7 @@ version: "3.9"
 services:
   web:
     container_name: "web"
+    restart: unless-stopped
     build: .
     command: gunicorn django_project.wsgi -b 0.0.0.0:8000
     volumes:
@@ -19,6 +20,7 @@ services:
   db:
     container_name: "db"
     image: postgres:13
+    restart: unless-stopped
     command: postgres -c 'max_connections=200'
     volumes:
       - ./docker/postgres:/var/lib/postgresql/data/
@@ -28,6 +30,7 @@ services:
 #      - "5432:5432"
   worker:
     container_name: "worker"
+    restart: unless-stopped
     build: .
     volumes:
       - .:/code
@@ -41,8 +44,9 @@ services:
       - "DB_PORT=5432"
       - "CELERY_BROKER_URL=amqp://rmuser:rmpassword@rabbitmq:5672//"
   rabbitmq:
-    image: rabbitmq:3.10.7-management
     container_name: "mq"
+    image: rabbitmq:3.10.7-management
+    restart: unless-stopped
     hostname: rabbitmq
     volumes:
       - ./docker/rabbitmq:/var/lib/rabbitmq
@@ -55,6 +59,7 @@ services:
   nginx:
     container_name: "nginx"
     image: nginx:1.23-alpine
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -64,4 +69,3 @@ services:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt/archive/rss.hazadus.ru/:/certs
       - ./uploads:/uploads
-    restart: always
