@@ -264,7 +264,7 @@ def feed_update(feed: Feed) -> None:  # noqa: C901
 
     # For each entry in feed_content.entries, try to get Entry from the database by `url`
     # If not exists, create one.
-    with ThreadPoolExecutor(max_workers=20) as executor:
+    with ThreadPoolExecutor(max_workers=settings.FEED_UPDATE_MAX_WORKERS) as executor:
         tasks: list[Future] = []
         future_to_url: dict[Future, str] = {}
         task = partial(_entry_create_from_data_if_not_exists, feed)

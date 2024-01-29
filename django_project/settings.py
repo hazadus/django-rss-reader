@@ -289,3 +289,6 @@ ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy("account_login")
 # Celery
 
 CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+
+# Number of threads in `services.feed_update()`:
+FEED_UPDATE_MAX_WORKERS = env.int("FEED_UPDATE_MAX_WORKERS", 2)
